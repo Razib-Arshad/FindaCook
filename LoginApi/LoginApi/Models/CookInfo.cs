@@ -4,9 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LoginApi.Models
 {
-    public class CookInfo : ApplicationUser
+    public class CookInfo
     {
         // Personal Information
+        public string CookInfoId { get; set; }
+        public string Email {  get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string ContactNumber { get; set; }

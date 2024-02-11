@@ -84,14 +84,12 @@ namespace LoginApi.Controllers
         [HttpPost("RegisterCook")]
         public async Task<ActionResult> RegisterCook(CookInfoViewModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 // Additional logic to create CookInfo
                 var cookInfo = new CookInfo
                 {
-                    UserName = model.Username,
                     Email = model.Email,
-                    UserPassword = model.Password,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     ContactNumber = model.ContactNumber,
@@ -109,27 +107,12 @@ namespace LoginApi.Controllers
                     ServicesProvided = model.ServicesProvided
                 };
 
-                var user = new ApplicationUser
-                {
-                    UserName = cookInfo.UserName,
-                    Email = cookInfo.Email,
-                    UserPassword = cookInfo.UserPassword
-                };
-
-                IdentityResult? result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    _context.CookInfos.Add(cookInfo);
-                    await _context.SaveChangesAsync();
-                    // Continue with existing logic if needed
-                    return Ok("User registered as a cook successfully");
-                }
-                else
-                {
-                    return BadRequest(result.Errors);
-                }
+                _context.CookInfos.Add(cookInfo);
+                await _context.SaveChangesAsync();
+                return Ok("User registered as a cook successfully");
             }
+            
+            
             return BadRequest("Invalid Request");
         }
 
