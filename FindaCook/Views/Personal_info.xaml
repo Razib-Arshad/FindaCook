@@ -34,18 +34,6 @@
                 <Entry Placeholder="Enter Whatsapp Contact Number" Text="{Binding WhatsappNumber}"/>
             </StackLayout>
 
-            <!-- Email -->
-            <StackLayout Orientation="Horizontal" Margin="10,20,10,10">
-                <Label Text="Email:" VerticalOptions="Center" WidthRequest="120" FontSize="15" />
-                <Entry Placeholder="Enter Email" Text="{Binding Email}"/>
-            </StackLayout>
-
-            <!-- Password -->
-            <StackLayout Orientation="Horizontal" Margin="10,20,10,10">
-                <Label Text="Password:" VerticalOptions="Center" WidthRequest="120" FontSize="15" />
-                <Entry Placeholder="Enter Password" Text="{Binding Password}" IsPassword="True"/>
-            </StackLayout>
-
             <!-- Current Address -->
             <StackLayout Orientation="Horizontal" Margin="10,20,10,10">
                 <Label Text="Current Address:" VerticalOptions="Center" WidthRequest="120" FontSize="15"/>

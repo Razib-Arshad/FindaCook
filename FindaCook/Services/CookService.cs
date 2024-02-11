@@ -114,13 +114,12 @@ namespace FindaCook.Services
                     string apiUrl = "https://localhost:7224/api/UserCook/RegisterCook";
                     client.BaseAddress = new Uri(apiUrl);
 
+                    var Email = Preferences.Get("UserEmail", string.Empty);
+
                     // Create a JSON object to send in the request body
                     var registrationCookData = new
                     {
-                        username = $"{p.FirstName.ToLower()}{p.LastName.ToLower()}",
-                        email = p.Email,
-                        password = p.Password,
-                        confirmPassword = p.Password,
+                        email = Email,
                         firstName = p.FirstName,
                         lastName = p.LastName,
                         contactNumber = p.ContactNumber,
@@ -132,12 +131,10 @@ namespace FindaCook.Services
                         degree = q.Degree,
                         certificates = q.Certificates,
                         culinarySchoolName = q.SchoolName,
-                        experienceYears = int.Parse(prof.Experience),
-                        skillsAndSpecialties = string.Join(", ", prof.Skills),
+                        experienceYears = prof.Experience,
+                        skillsAndSpecialties = prof.Skills,
                         signatureDishes = prof.SignatureDishes,
-                        servicesProvided = string.Join(", ", prof.Services)
-
-
+                        servicesProvided = prof.Services
 
                     };
                     

@@ -54,9 +54,7 @@ namespace FindaCook.Maui.ViewModels
            
             if (string.IsNullOrEmpty(FirstName) || string.IsNullOrEmpty(LastName))
             {
-               
-
-
+              
                 await App.Current.MainPage.DisplayAlert("Error", "Invalid input", "OK");
                 return;
             }
@@ -66,8 +64,6 @@ namespace FindaCook.Maui.ViewModels
                 person.LastName = LastName;
                 person.ContactNumber = ContactNumber;
                 person.WhatsappNumber = WhatsappNumber;
-                person.Email = Email;
-                person.Password = Password;
                 person.CurrentAddress = CurrentAddress;
                 person.PermanentAddress = PermanentAddress;
                 person.EligibleToWork = EligibleToWork;

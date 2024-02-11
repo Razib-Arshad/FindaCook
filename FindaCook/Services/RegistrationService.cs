@@ -22,15 +22,15 @@ namespace FindaCook.Services
                 using (var client = new HttpClient())
                 {
                     // Construct the registration URL
-                    string apiUrl = "https://localhost:7224/api/User/Register";
+                    string apiUrl = "https://localhost:7224/api/UserCook/Register";
                     client.BaseAddress = new Uri(apiUrl);
 
                     // Create a JSON object to send in the request body
                     var registrationData = new
                     {
                         UserName = name,
-                        UserEmail = email,
-                        UserPassword = password,
+                        Email = email,
+                        Password = password,
                         ConfirmPassword = retypePassword
                     };
 

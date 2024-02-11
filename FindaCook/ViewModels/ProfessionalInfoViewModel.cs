@@ -30,7 +30,7 @@ namespace FindaCook.ViewModels
         }
 
         [ObservableProperty]
-        private string _experience;
+        private int _experience;
 
         [ObservableProperty]
         private string _signatureDishes;
@@ -84,8 +84,11 @@ namespace FindaCook.ViewModels
                 _cookingWorkshops ? "Cooking Workshops" : ""
             };
 
-            _model.Skills = selectedSkills;
-            _model.Services = selectedServices;
+            var skillsString = string.Join(", ", selectedSkills);
+            var servicesString = string.Join(", ", selectedServices);
+
+            _model.Skills = skillsString;
+            _model.Services = servicesString;
             _model.Experience = _experience;
             _model.SignatureDishes = _signatureDishes;
            

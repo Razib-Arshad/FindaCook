@@ -11,7 +11,6 @@ namespace FindaCook.Models
         public string? CurrentAddress { get; set; }
         public string? PermanentAddress { get; set; }
         public bool EligibleToWork { get; set; }
-        public string? Email { get; set; }
-        public string? Password { get; set; }
+        
     }
 }
