@@ -89,8 +89,7 @@ namespace FindaCook.ViewModels
 
             _model.Skills = skillsString;
             _model.Services = servicesString;
-            _model.Experience = _experience;
-            _model.SignatureDishes = _signatureDishes;
+
            
 
 

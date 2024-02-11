@@ -8,12 +8,12 @@ namespace FindaCook.Models
 {
     public class ProfessionalInfoModel
     {
+
         public int Experience { get; set; }
         public string SignatureDishes { get; set; }
         public string Skills { get; set; }
         public string Services { get; set; }
 
-        
-
+ 
     }
 }

@@ -114,6 +114,7 @@ namespace FindaCook.Services
                     string apiUrl = "https://localhost:7224/api/UserCook/RegisterCook";
                     client.BaseAddress = new Uri(apiUrl);
 
+
                     var Email = Preferences.Get("UserEmail", string.Empty);
 
                     // Create a JSON object to send in the request body
@@ -134,8 +135,7 @@ namespace FindaCook.Services
                         experienceYears = prof.Experience,
                         skillsAndSpecialties = prof.Skills,
                         signatureDishes = prof.SignatureDishes,
-                        servicesProvided = prof.Services
-
+                        servicesProvided = prof.Services,
                     };
                     
                     // Serialize the object to JSON
