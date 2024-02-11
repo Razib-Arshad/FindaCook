@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:FindaCook.Models"
+             xmlns:vm="clr-namespace:FindaCook.Maui.ViewModels"
+             x:DataType="vm:HomePageViewModel" 
+             x:Class="FindaCook.Views.HomePage"
+             BackgroundColor="white">
+
+    <ContentPage.BindingContext>
+        <vm:HomePageViewModel />
+    </ContentPage.BindingContext>
+
+    
+    <ScrollView>
+        <StackLayout>
+            <!-- Header Section -->
+            <StackLayout BackgroundColor="#3498db" Padding="20,40,20,20" VerticalOptions="Start">
+                <Label Text="Welcome, Tooba Sandleen!" FontSize="24" TextColor="White" HorizontalOptions="CenterAndExpand"/>
+                <Label Text="Discover talented cooks in your area." FontSize="16" TextColor="White" HorizontalOptions="CenterAndExpand"/>
+            </StackLayout>
+
+            <!-- Main Content Section -->
+            <StackLayout Padding="20" Spacing="20">
+                <!-- Unique Service Section using CarouselView -->
+                <CarouselView HeightRequest="200" IndicatorView="indicatorView">
+                    <CarouselView.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Home Chef</x:String>
+                            <x:String>Catering</x:String>
+                            <x:String>Deliverable</x:String>
+                        </x:Array>
+                    </CarouselView.ItemsSource>
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BackgroundColor="Gray" CornerRadius="0" HeightRequest="100" Margin="10">
+                                <Label Text="{Binding .}" FontSize="18" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                            </Frame>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+                <IndicatorView x:Name="indicatorView" IndicatorColor="White" SelectedIndicatorColor="#3498db" VerticalOptions="End" HorizontalOptions="CenterAndExpand"/>
+                <!--<ListView ItemsSource="{Binding _cooks}" BackgroundColor="Black">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                              
+                              
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>-->
+                <!--<CollectionView ItemsSource="{Binding Cooks}">
+    <CollectionView.ItemTemplate>
+        <DataTemplate>
+            <StackLayout>
+                <Label Text="{Binding FirstName}" TextColor="Green" />
+                <Label Text="{Binding PermanentAddress}" TextColor="Blue" />
+            </StackLayout>
+        </DataTemplate>
+    </CollectionView.ItemTemplate>
+</CollectionView>-->
+
+                <CollectionView ItemsSource="{Binding Cooks}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                
+                                <Label Grid.Column="1"
+                                   Text="{Binding FirstName}"
+                                   FontAttributes="Bold" />
+                                <Label Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="{Binding PermanentAddress}"
+                                   FontAttributes="Italic"
+                                   VerticalOptions="End" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+              
+                </CollectionView>
+
+
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

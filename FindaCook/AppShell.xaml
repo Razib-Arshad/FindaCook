@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="FindaCook.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:FindaCook"
+    Shell.FlyoutBehavior="Disabled">
+
+
+
+    <TabBar>
+
+        <Tab Title="Home" Icon="home.png">
+            <ShellContent
+                Title="Chat"
+                ContentTemplate="{DataTemplate local:Login}"
+                Route="HomePage"
+            />
+        </Tab>
+        <Tab Title="Chat" Icon="chat.png">
+            <ShellContent
+                Title="Chat"
+                ContentTemplate="{DataTemplate local:Login}"
+                Route="Login"
+                />
+        </Tab>
+        <Tab Title="Search" Icon="chat.png">
+            <ShellContent
+                Title="Chat"
+                ContentTemplate="{DataTemplate local:SearchPage}"
+                Route="SearchPage"
+                />
+        </Tab>
+        <Tab Title="Categories" Icon="file.png">
+            <ShellContent
+                Title=""
+                ContentTemplate="{DataTemplate local:Categories}"
+                Route="Categories"
+                />
+        </Tab>
+        <Tab Title="Account" Icon="profile.png">
+            <ShellContent
+                Title=""
+                ContentTemplate="{DataTemplate local:UserAccountPage}"
+                Route="UserAccountPage"
+                />
+        </Tab>
+
+    </TabBar>
+</Shell>

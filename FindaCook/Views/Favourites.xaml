@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FindaCook.Favourites"
+             Title="Favourites"
+             >
+
+    <StackLayout Padding="10">
+        <!-- Favourites Heading -->
+        <Label Text="Favourites" HorizontalOptions="Center" FontSize="40" FontAttributes="Bold" Margin="0,20"/>
+
+        <!-- First Favourite Profile -->
+        <Grid Margin="0,10">
+            <!-- Display Picture of the Cook -->
+            <Image Source="Images/profile.png" BackgroundColor="Black" Aspect="AspectFill" HeightRequest="100" WidthRequest="100" HorizontalOptions="Start" VerticalOptions="Center"/>
+
+            <StackLayout Margin="110,0,0,0">
+                <!-- Name of the Cook -->
+                <Label Text="Cook's Name" FontSize="Large" FontAttributes="Bold" Margin="0,15"/>
+                <!-- Other Description -->
+                <Label Text="Other Description" FontSize="Small" Margin="0,5,0,0"/>
+            </StackLayout>
+
+            <StackLayout Margin="0,70,0,0" HorizontalOptions="End">
+                <!-- Star Icon -->
+                <Image Source="Images/star.png" HeightRequest="20" WidthRequest="20" Margin="0,0,0,5"/>
+                <!-- Rating of the Profile -->
+                <!-- Replace "YOUR_RATING" with the actual rating value or binding -->
+                <Label Text="4.3" FontSize="Small"/> 
+            </StackLayout>
+        </Grid>
+
+        <!-- First Favourite Profile -->
+        <Grid Margin="0,10">
+            <!-- Display Picture of the Cook -->
+            <Image Source="Images/profile.png" BackgroundColor="Black" Aspect="AspectFill" HeightRequest="100" WidthRequest="100" HorizontalOptions="Start" VerticalOptions="Center"/>
+
+            <StackLayout Margin="110,0,0,0">
+                <!-- Name of the Cook -->
+                <Label Text="Cook's Name" FontSize="Large" FontAttributes="Bold" Margin="0,15"/>
+                <!-- Other Description -->
+                <Label Text="Other Description" FontSize="Small" Margin="0,5,0,0"/>
+            </StackLayout>
+
+            <StackLayout Margin="0,70,0,0" HorizontalOptions="End">
+                <!-- Star Icon -->
+                <Image Source="Images/star.png" HeightRequest="20" WidthRequest="20" Margin="0,0,0,5"/>
+                <!-- Rating of the Profile -->
+                <!-- Replace "YOUR_RATING" with the actual rating value or binding -->
+                <Label Text="4.3" FontSize="Small"/>
+            </StackLayout>
+        </Grid>
+        
+        <!-- First Favourite Profile -->
+        <Grid Margin="0,10">
+            <!-- Display Picture of the Cook -->
+            <Image Source="Images/profile.png" BackgroundColor="Black" Aspect="AspectFill" HeightRequest="100" WidthRequest="100" HorizontalOptions="Start" VerticalOptions="Center"/>
+
+            <StackLayout Margin="110,0,0,0">
+                <!-- Name of the Cook -->
+                <Label Text="Cook's Name" FontSize="Large" FontAttributes="Bold" Margin="0,15"/>
+                <!-- Other Description -->
+                <Label Text="Other Description" FontSize="Small" Margin="0,5,0,0"/>
+            </StackLayout>
+
+            <StackLayout Margin="0,70,0,0" HorizontalOptions="End">
+                <!-- Star Icon -->
+                <Image Source="Images/star.png" HeightRequest="20" WidthRequest="20" Margin="0,0,0,5"/>
+                <!-- Rating of the Profile -->
+                <!-- Replace "YOUR_RATING" with the actual rating value or binding -->
+                <Label Text="4.3" FontSize="Small"/> 
+            </StackLayout>
+        </Grid>
+    </StackLayout>
+</ContentPage>

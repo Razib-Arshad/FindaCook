@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FindaCook.ChangeProfilePage"
+             Title="ChangeProfilePage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="User Profile" HorizontalOptions="CenterAndExpand" FontSize="Title" Margin="0,10,0,0" />
+
+                <!-- Profile Image -->
+                <Image x:Name="ProfileImage" Source="profile.png" BackgroundColor="black" 
+                       HeightRequest="100" WidthRequest="100" Aspect="AspectFill" />
+
+                <Button Text="Change Profile Picture" Clicked="ChangeProfilePictureButton_Clicked" Margin="10,10,0,10" WidthRequest="180" />
+
+                <Label Text="Name" Margin="10,10,0,10" FontSize="18"/>
+                <Entry x:Name="NameEntry" Placeholder="Enter your name" Margin="10,0,0,10" />
+
+                <Label Text="Phone Number" Margin="10,10,0,10" FontSize="18"/>
+                <Entry x:Name="PhoneEntry" Placeholder="Enter your phone number" Keyboard="Telephone" Margin="10,0,0,10" />
+
+                <Label Text="Address" Margin="10,10,0,10" FontSize="18"/>
+                <Editor x:Name="AddressEditor" Placeholder="Enter your address" Margin="10,0,0,10" />
+
+                <Button Text="Change Password" Clicked="ChangePasswordButton_Clicked" Margin="10,10,0,10" FontSize="18" WidthRequest="200"/>
+
+                <Button Text="Save Changes" Clicked="SaveChangesButton_Clicked" Margin="10,10,0,10"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
