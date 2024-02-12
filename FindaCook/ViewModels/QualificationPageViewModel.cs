@@ -4,19 +4,23 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls;
 using FindaCook.Models;
 using System.Windows.Input;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace FindaCook.ViewModels
 {
     public partial class QualificationPageViewModel : ObservableObject
     {
-        private QualificationInfo _qualificationInfo;
+        QualificationInfo qualificationInfo;
         private bool _isQualificationVisible;
-        private Person person;
+        Person person;
 
         public QualificationPageViewModel(Person person)
         {
             this.person = person;
-            _qualificationInfo = new QualificationInfo();
+
+
+
+            qualificationInfo = new QualificationInfo();
             YesCommand = new Command(OnYesClicked);
             NoCommand = new Command(OnNoClicked);
             NextCommand = new AsyncRelayCommand(OnNextClicked);
@@ -52,7 +56,7 @@ namespace FindaCook.ViewModels
             if (IsQualificationVisible)
             {
                 // Validate the input fields
-                if (string.IsNullOrEmpty(Degree) || string.IsNullOrEmpty(Certificates) || string.IsNullOrEmpty(SchoolName))
+                if (string.IsNullOrEmpty(_degree) || string.IsNullOrEmpty(_certificates) || string.IsNullOrEmpty(SchoolName))
                 {
                     // Display an alert if any of the fields are empty
                     await App.Current.MainPage.DisplayAlert("Validation Error", "Please fill in all the qualification details.", "OK");
@@ -60,10 +64,10 @@ namespace FindaCook.ViewModels
                 }
 
                 // Set qualification information in the QualificationInfo object
-                _qualificationInfo.Degree = Degree;
-                _qualificationInfo.Certificates = Certificates;
-                _qualificationInfo.SchoolName = SchoolName;
-                await App.Current.MainPage.Navigation.PushAsync(new professional_info(person, _qualificationInfo));
+                qualificationInfo.Degree = _degree;
+                qualificationInfo.Certificates = _certificates;
+                qualificationInfo.SchoolName = _schoolName;
+                await App.Current.MainPage.Navigation.PushAsync(new professional_info(person, qualificationInfo));
 
             }
 
@@ -72,10 +76,12 @@ namespace FindaCook.ViewModels
 
         private async void OnNoClicked()
         {
-            _qualificationInfo.Degree = "";
-            _qualificationInfo.Certificates = "";
-            _qualificationInfo.SchoolName = "";
-            await App.Current.MainPage.Navigation.PushAsync(new professional_info(person, _qualificationInfo));
+            qualificationInfo.Degree = "";
+            qualificationInfo.Certificates = "";
+            qualificationInfo.SchoolName = "";
+           
+            await App.Current.MainPage.Navigation.PushAsync(new professional_info(person, qualificationInfo));
+            
         }
     }
 }
