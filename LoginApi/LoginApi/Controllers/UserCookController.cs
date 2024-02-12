@@ -90,6 +90,7 @@ namespace LoginApi.Controllers
                 var cookInfo = new CookInfo
                 {
                     Email = model.Email,
+                    UserPassword=model.UserPassword,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     ContactNumber = model.ContactNumber,

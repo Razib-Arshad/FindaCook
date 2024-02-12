@@ -9,6 +9,9 @@ namespace LoginApi.ViewModels
         [EmailAddress]
         public string Email { get; set; }
 
+        [Required]
+        public string UserPassword {  get; set; }
+
         // Personal Information
         [Required(ErrorMessage = "FirstName is required.")]
         public string FirstName { get; set; }
