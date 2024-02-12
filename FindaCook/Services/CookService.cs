@@ -116,11 +116,13 @@ namespace FindaCook.Services
 
 
                     var Email = Preferences.Get("UserEmail", string.Empty);
+                    var Password = Preferences.Get("UserPassword", string.Empty);
 
                     // Create a JSON object to send in the request body
                     var registrationCookData = new
                     {
                         email = Email,
+                        password= Password,
                         firstName = p.FirstName,
                         lastName = p.LastName,
                         contactNumber = p.ContactNumber,

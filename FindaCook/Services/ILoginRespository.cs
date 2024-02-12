@@ -1,5 +1,4 @@
 ﻿
-
 using FindaCook.Maui.Models;
 
 namespace FindaCook.Maui.Models

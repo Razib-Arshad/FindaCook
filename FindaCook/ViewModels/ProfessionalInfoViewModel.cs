@@ -13,10 +13,10 @@ namespace FindaCook.ViewModels
     public partial class ProfessionalInfoViewModel : ObservableObject
     {
 
-        private QualificationInfo qualificationInfo;
+        QualificationInfo qualificationInfo;
      
-        private Person person;
-        private ProfessionalInfoModel _model;
+        Person person;
+        ProfessionalInfoModel _model;
         private readonly ICookRespository register_cook = new CookService();
 
         public ProfessionalInfoViewModel(Person perosn,QualificationInfo qual)
@@ -87,6 +87,8 @@ namespace FindaCook.ViewModels
             var skillsString = string.Join(", ", selectedSkills);
             var servicesString = string.Join(", ", selectedServices);
 
+            _model.Experience = _experience;
+            _model.SignatureDishes = _signatureDishes;
             _model.Skills = skillsString;
             _model.Services = servicesString;
 

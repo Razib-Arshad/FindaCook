@@ -33,12 +33,6 @@ namespace FindaCook.Maui.ViewModels
         private string _whatsappNumber;
 
         [ObservableProperty]
-        private string _email;
-
-        [ObservableProperty]
-        private string _password;
-
-        [ObservableProperty]
         private string _currentAddress;
 
         [ObservableProperty]
@@ -49,24 +43,26 @@ namespace FindaCook.Maui.ViewModels
 
         public AsyncRelayCommand NextCommand { get; }
 
+        
         private async Task OnSubmitClicked()
         {
            
-            if (string.IsNullOrEmpty(FirstName) || string.IsNullOrEmpty(LastName))
+            if (string.IsNullOrEmpty(_firstName) || string.IsNullOrEmpty(_lastName))
             {
                 await App.Current.MainPage.DisplayAlert("Error", "Invalid input", "OK");
                 return;
             }
             else
             {
-                person.FirstName = FirstName;
-                person.LastName = LastName;
-                person.ContactNumber = ContactNumber;
-                person.WhatsappNumber = WhatsappNumber;
+                
+                person.FirstName = _firstName;
+                person.LastName = _lastName;
+                person.ContactNumber = _contactNumber;
+                person.WhatsappNumber = _whatsappNumber;
 
-                person.CurrentAddress = CurrentAddress;
-                person.PermanentAddress = PermanentAddress;
-                person.EligibleToWork = EligibleToWork;
+                person.CurrentAddress = _currentAddress;
+                person.PermanentAddress = _permanentAddress;
+                person.EligibleToWork = _eligibleToWork;
 
                 // Navigate to the next page and pass the Person object
                 await App.Current.MainPage.Navigation.PushAsync(new QualificationPage(person));

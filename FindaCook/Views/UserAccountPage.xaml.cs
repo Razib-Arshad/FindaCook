@@ -4,7 +4,7 @@ public partial class UserAccountPage : ContentPage
 {
 	public UserAccountPage()
 	{
-		InitializeComponent();
+        InitializeComponent();
 	}
     private async void RegisterCook_Button_Clicked(object sender, EventArgs e)
     {
