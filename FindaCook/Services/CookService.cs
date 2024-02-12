@@ -122,7 +122,7 @@ namespace FindaCook.Services
                     var registrationCookData = new
                     {
                         Email = Email,
-                        Password= Password,
+                        UserPassword= Password,
                         FirstName = p.FirstName,
                         LastName = p.LastName,
                         ContactNumber = p.ContactNumber,

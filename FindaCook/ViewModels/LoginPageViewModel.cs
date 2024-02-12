@@ -37,7 +37,7 @@ namespace FindaCook.Maui.ViewModels
             {
                 // Navigate to the next page upon successful sign-in
                 
-                await App.Current.MainPage.Navigation.PushAsync(new Personal_info());
+                await App.Current.MainPage.Navigation.PushAsync(new Categories());
             }
             else
             {
@@ -45,7 +45,7 @@ namespace FindaCook.Maui.ViewModels
                 string errorMessage =  "An error occurred during sign-in.";
 
                 await App.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
-                await App.Current.MainPage.Navigation.PushAsync(new HomePage());
+                //await App.Current.MainPage.Navigation.PushAsync(new HomePage());
 
             }
         }

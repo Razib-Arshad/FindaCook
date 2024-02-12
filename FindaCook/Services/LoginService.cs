@@ -43,24 +43,29 @@ namespace FindaCook.Services
                         string rawContent = await response.Content.ReadAsStringAsync();
                         Console.WriteLine($"Raw Content: {rawContent}");
 
-                        User user = await response.Content.ReadFromJsonAsync<User>();
-
-                        Preferences.Set("UserEmail", email);
-                        Preferences.Set("UserPassword", password);
-
-
-                        /*if (!string.IsNullOrEmpty(userEmail))
+                        var options = new JsonSerializerOptions
                         {
-                            // Use the userEmail for your API calls
-                        }*/
+                            PropertyNameCaseInsensitive = true,
+                        };
 
-                        // Ensure that the MainPage is set only in a Xamarin.Forms context
-                        //if (Application.Current != null && Application.Current.MainPage != null)
-                        //{
-                        //    Application.Current.MainPage = new Personal_info();
-                        //}
+                        LoginResponse loginResponse = JsonSerializer.Deserialize<LoginResponse>(rawContent, options); 
 
-                        return user;
+                        if (loginResponse != null)
+                        {
+                            User user = loginResponse.User;
+
+                            string token = loginResponse.Token;
+                            string message = loginResponse.Message;
+
+                            Preferences.Set("UserEmail", user.UserEmail);
+                            Preferences.Set("UserID", user.Id);
+                            Preferences.Set("UserName", user.UserName);
+                            Preferences.Set("UserPassword", password);
+
+                            Preferences.Set("Token", token);
+
+                            return user;
+                        }
                     }
                     else
                     {
