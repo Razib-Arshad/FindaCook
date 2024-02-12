@@ -10,24 +10,14 @@ namespace FindaCook
         public App()
         {
             InitializeComponent();
-<<<<<<< HEAD
-
-            //var loginPageViewModel = new LoginPageViewModel();
-            //MainPage = new NavigationPage(new Login(loginPageViewModel));
-
-            //MainPage = new NavigationPage(new Login());
-            //MainPage = new AppShell();
-            MainPage = new NavigationPage(new Categories());
-
-=======
 
             var loginPageViewModel = new LoginPageViewModel();
             MainPage = new NavigationPage(new Login(loginPageViewModel));
 
             //MainPage = new NavigationPage(new Login());
             //MainPage = new AppShell();
+            //  MainPage = new NavigationPage(new Categories());
 
->>>>>>> 370c77b7f834ddb769208b9e8c90f572c1ff0fb2
         }
     }
 }

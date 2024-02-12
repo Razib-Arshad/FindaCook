@@ -121,23 +121,23 @@ namespace FindaCook.Services
                     // Create a JSON object to send in the request body
                     var registrationCookData = new
                     {
-                        email = Email,
-                        password= Password,
-                        firstName = p.FirstName,
-                        lastName = p.LastName,
-                        contactNumber = p.ContactNumber,
-                        whatsappNumber = p.WhatsappNumber,
-                        currentAddress = p.CurrentAddress,
-                        permanentAddress = p.PermanentAddress,
-                        eligibleToWork = p.EligibleToWork,
-                        hasCulinaryDegree = !string.IsNullOrEmpty(q.Degree), // Check if the degree is provided
-                        degree = q.Degree,
-                        certificates = q.Certificates,
-                        culinarySchoolName = q.SchoolName,
-                        experienceYears = prof.Experience,
-                        skillsAndSpecialties = prof.Skills,
-                        signatureDishes = prof.SignatureDishes,
-                        servicesProvided = prof.Services,
+                        Email = Email,
+                        Password= Password,
+                        FirstName = p.FirstName,
+                        LastName = p.LastName,
+                        ContactNumber = p.ContactNumber,
+                        WhatsappNumber = p.WhatsappNumber,
+                        CurrentAddress = p.CurrentAddress,
+                        PermanentAddress = p.PermanentAddress,
+                        EligibleToWork = p.EligibleToWork,
+                        HasCulinaryDegree = !string.IsNullOrEmpty(q.Degree), // Check if the degree is provided
+                        Degree = q.Degree,
+                        Certificates = q.Certificates,
+                        CulinarySchoolName = q.SchoolName,
+                        ExperienceYears = prof.Experience,
+                        SkillsAndSpecialties = prof.Skills,
+                        SignatureDishes = prof.SignatureDishes,
+                        ServicesProvided = prof.Services,
                     };
                     
                     // Serialize the object to JSON

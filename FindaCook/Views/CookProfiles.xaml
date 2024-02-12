@@ -5,9 +5,18 @@
              xmlns:viewmodel="clr-namespace:FindaCook.ViewModels"
              x:Class="FindaCook.Views.CookProfiles"
              x:DataType="viewmodel:CookProfileViewModel"
-             Title="CookProfiles" >
+             Title="CookProfiles">
 
-
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Margin" Value="0,5,0,5" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="0,10,0,10" />
+        </Style>
+    </ContentPage.Resources>
 
     <VerticalStackLayout>
         <Label 
@@ -15,7 +24,6 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
-       
         <Label Text="Sample Cook Profile" FontAttributes="Bold" Margin="0,20,0,0" />
         <Label Text="{Binding FirstName}" />
         <Label Text="{Binding LastName}" />
@@ -29,5 +37,9 @@
         <Label Text="{Binding Degree}" />
         <Label Text="{Binding Certificates}" />
         <Label Text="{Binding EligibleToWork, StringFormat='Eligible To Work: {0}'}" />
+
+        <!-- Buttons -->
+        <Button Text="Add to Favorite" Command="{Binding AddToFavoritesCommand}" />
+        <Button Text="Order" Command="{Binding OrderCommand}" />
     </VerticalStackLayout>
 </ContentPage>

@@ -5,10 +5,6 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using Microsoft.Maui.Storage;
-<<<<<<< HEAD
-=======
-
->>>>>>> 370c77b7f834ddb769208b9e8c90f572c1ff0fb2
 
 namespace FindaCook.Services
 {
@@ -49,13 +45,9 @@ namespace FindaCook.Services
 
                         User user = await response.Content.ReadFromJsonAsync<User>();
 
-<<<<<<< HEAD
-                        Preferences.Set("UserEmail", user.UserEmail);
-=======
                         Preferences.Set("UserEmail", email);
                         Preferences.Set("UserPassword", password);
 
->>>>>>> 370c77b7f834ddb769208b9e8c90f572c1ff0fb2
 
                         /*if (!string.IsNullOrEmpty(userEmail))
                         {
@@ -63,18 +55,10 @@ namespace FindaCook.Services
                         }*/
 
                         // Ensure that the MainPage is set only in a Xamarin.Forms context
-<<<<<<< HEAD
-                        if (Application.Current != null && Application.Current.MainPage != null)
-                        {
-                            Application.Current.MainPage = new Personal_info();
-                        }
-=======
                         //if (Application.Current != null && Application.Current.MainPage != null)
                         //{
                         //    Application.Current.MainPage = new Personal_info();
-
                         //}
->>>>>>> 370c77b7f834ddb769208b9e8c90f572c1ff0fb2
 
                         return user;
                     }

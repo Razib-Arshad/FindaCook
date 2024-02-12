@@ -1,5 +1,7 @@
 ﻿using FindaCook.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System.Windows.Input;
 
 namespace FindaCook.ViewModels
 {
@@ -9,6 +11,8 @@ namespace FindaCook.ViewModels
 
         public CookProfileViewModel(CookProfile cookProfile)
         {
+            AddToFavoritesCommand = new RelayCommand(AddToFavorites);
+            OrderCommand = new RelayCommand(() => Task.Run(OrderAsync));
             _cookProfile = cookProfile;
         }
 
@@ -41,5 +45,21 @@ namespace FindaCook.ViewModels
         public string? Certificates => CookProfile.Certificates;
 
         public string? EligibleToWork => CookProfile.EligibleToWork.ToString().ToUpper();
+
+        // Commands for binding to buttons
+        public ICommand AddToFavoritesCommand { get; }
+        public ICommand OrderCommand { get; }
+
+        // Command implementations
+        private void AddToFavorites()
+        {
+           
+
+        }
+
+        private async Task OrderAsync()
+        {
+            await App.Current.MainPage.Navigation.PushAsync(new UserHomePage());
+        }
     }
 }
