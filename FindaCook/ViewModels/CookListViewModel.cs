@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using FindaCook.Models;
+using FindaCook.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,6 +18,9 @@ namespace FindaCook.ViewModels
         public CookListViewModel(ObservableCollection<CookProfile> cooks)
         {
             _cooks = cooks;
+            CookTappedCommand = new RelayCommand<CookProfile>(NavigateToCookDetails);
+
+
         }
 
         public ObservableCollection<CookProfile> Cooks
@@ -43,8 +48,19 @@ namespace FindaCook.ViewModels
             set => SetProperty(ref _ExperienceYears, value);
         }
 
+        
+       
 
+        public IRelayCommand<CookProfile> CookTappedCommand { get; }
 
+        private async void NavigateToCookDetails(CookProfile selectedCook)
+        {
+            await App.Current.MainPage.Navigation.PushAsync(new CookProfiles(selectedCook));
+
+            //var selectedCookViewModel = new CookProfileViewModel(selectedCook);
+            //await Shell.Current.GoToAsync($"//cookdetails", false); // Navigate without a history entry
+
+        }
 
 
     }

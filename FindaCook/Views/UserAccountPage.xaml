@@ -22,11 +22,8 @@
                 </VerticalStackLayout>
             </HorizontalStackLayout>
             <HorizontalStackLayout>
-<<<<<<< HEAD
+
                 <Button Text="Register as a Cook" Clicked="RegisterCook_Button_Clicked" LineBreakMode="WordWrap" WidthRequest="160" HeightRequest="160" HorizontalOptions="Center" FontSize="22" Margin="30,20,10,20"  BackgroundColor="RoyalBlue"/>
-=======
-                <Button Text="Become a Seller" Clicked="RegisterCook_Button_Clicked" LineBreakMode="WordWrap" WidthRequest="160" HeightRequest="160" HorizontalOptions="Center" FontSize="22" Margin="30,20,10,20"  BackgroundColor="RoyalBlue"/>
->>>>>>> 817c5030796fd7c2983d6ceb52e742998fed081d
                 <Button Text="Account" Clicked="Account_Button_Clicked" WidthRequest="160" HeightRequest="160"  HorizontalOptions="Center" FontSize="22" Margin="30,20,10,20"  BackgroundColor="RoyalBlue"/>
 
             </HorizontalStackLayout>

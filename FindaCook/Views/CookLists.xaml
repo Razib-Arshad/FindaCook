@@ -21,18 +21,23 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0"
-                         Text="{Binding FirstName}"
-                         FontAttributes="Bold" />
+                     Text="{Binding FirstName}"
+                     FontAttributes="Bold">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CookListViewModel}}, Path=CookTappedCommand}" CommandParameter="{Binding .}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
                     <Label Grid.Column="1"
-                         Grid.Row="0"
-                         Text="{Binding SkillsAndSpecialties}"
-                         FontAttributes="Italic" />
+                     Grid.Row="0"
+                     Text="{Binding SkillsAndSpecialties}"
+                     FontAttributes="Italic" />
 
                     <Label Grid.Column="0"
-                         Grid.Row="1"
-                         Text="{Binding ExperienceYears, StringFormat='Experience: {0} years'}"
-                         FontAttributes="Italic"
-                         VerticalOptions="End" />
+                     Grid.Row="1"
+                     Text="{Binding ExperienceYears, StringFormat='Experience: {0} years'}"
+                     FontAttributes="Italic"
+                     VerticalOptions="End" />
                 </Grid>
             </DataTemplate>
         </CollectionView.ItemTemplate>

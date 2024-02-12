@@ -11,11 +11,6 @@ namespace FindaCook.Models
         public string? CurrentAddress { get; set; }
         public string? PermanentAddress { get; set; }
         public bool EligibleToWork { get; set; }
-<<<<<<< HEAD
         
-=======
-        public string? Email { get; set; }
-        public string? Password { get; set; }
->>>>>>> 817c5030796fd7c2983d6ceb52e742998fed081d
     }
 }

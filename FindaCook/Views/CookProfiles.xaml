@@ -1,0 +1,33 @@
+<!-- CookProfiles.xaml -->
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:FindaCook.ViewModels"
+             x:Class="FindaCook.Views.CookProfiles"
+             x:DataType="viewmodel:CookProfileViewModel"
+             Title="CookProfiles" >
+
+
+
+    <VerticalStackLayout>
+        <Label 
+            Text="Welcome to .NET MAUI!"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+       
+        <Label Text="Sample Cook Profile" FontAttributes="Bold" Margin="0,20,0,0" />
+        <Label Text="{Binding FirstName}" />
+        <Label Text="{Binding LastName}" />
+        <Label Text="{Binding Email}" />
+        <Label Text="{Binding SkillsAndSpecialties}" />
+        <Label Text="{Binding SignatureDishes}" />
+        <Label Text="{Binding ServicesProvided}" />
+        <Label Text="{Binding ExperienceYears, StringFormat='Experience: {0} years'}" />
+        <Label Text="{Binding CulinarySchoolName}" />
+        <Label Text="{Binding HasCulinaryDegree, StringFormat='Has Culinary Degree: {0}'}" />
+        <Label Text="{Binding Degree}" />
+        <Label Text="{Binding Certificates}" />
+        <Label Text="{Binding EligibleToWork, StringFormat='Eligible To Work: {0}'}" />
+    </VerticalStackLayout>
+</ContentPage>
