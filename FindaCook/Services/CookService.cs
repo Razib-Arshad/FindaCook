@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
@@ -15,45 +16,6 @@ namespace FindaCook.Services
     public class CookService : ICookRespository
     {
 
-
-
-        //public async Task<ICollection<CookProfile>> GetCookByCategory(string cat)
-        //{
-        //    try
-        //    {
-        //        using (var client = new HttpClient())
-        //        {
-        //        // Construct the URL for getting cooks by category
-
-        //            string apiUrl = $"https://localhost:7224/api/UserCook/search/bycategory?category={cat}";
-
-        //            // Send the GET request
-        //            HttpResponseMessage response = await client.GetAsync(apiUrl);
-
-        //            if (response.IsSuccessStatusCode)
-        //            {
-        //                List<CookProfile> cooks = await response.Content.ReadFromJsonAsync<List<CookProfile>>();
-        //                return cooks;
-        //            }
-        //            else
-        //            {
-        //                // If the request is not successful, handle the error
-        //                string errorMessage = await response.Content.ReadAsStringAsync();
-        //                throw new Exception($"Error getting cooks by category: {errorMessage}");
-        //            }
-        //        }
-        //    }
-        //    catch (HttpRequestException ex)
-        //    {
-        //        throw new Exception($"Network error: {ex.Message}");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Handle other exceptions
-        //        // Log the exception or perform additional actions
-        //        throw new Exception($"An error occurred: {ex.Message}");
-        //    }
-        //}
         public async Task<ICollection<CookProfile>> GetCookByCategory(string cat)
         {
             try
@@ -100,7 +62,6 @@ namespace FindaCook.Services
                 throw new Exception($"An error occurred: {ex.Message}");
             }
         }
-
 
         public async Task<RegistrationResultClass> RegisterCook(Person p, QualificationInfo q, ProfessionalInfoModel prof)
         {
@@ -174,5 +135,56 @@ namespace FindaCook.Services
                 return new RegistrationResultClass { Success = false, ErrorMessage = $"An error occurred: {ex.Message}" };
             }
         }
+
+        public async Task<bool> SendOrder(Orders order)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    // Construct the order sending URL
+                    string apiUrl = "https://localhost:7224/api/Order/SendOrder";
+                    client.BaseAddress = new Uri(apiUrl);
+
+        
+
+                    // Create a JSON object to send in the request body
+                    var orderData = new
+                    {
+                        Service = order.SelectedService,
+                        Description = order.Description,
+                        ContactNumber = order.ContactNumber,
+                        Address = order.Address,
+                        Price = order.Price,
+                        Date = order.SelectedDate.Add(order.SelectedTime), // Combine date and time
+                    };
+
+                    // Serialize the object to JSON
+                    string jsonData = System.Text.Json.JsonSerializer.Serialize(orderData);
+
+                    // Create a StringContent with the JSON data and set Content-Type
+                    var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                    // Send the POST request with the JSON data in the body
+                    HttpResponseMessage response = await client.PostAsync(apiUrl, content);
+
+                    // Check if the order sending was successful
+                    return response.IsSuccessStatusCode;
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                // Handle network-related errors
+                // Log the exception or perform additional actions
+                return false;
+            }
+            catch (Exception ex)
+            {
+                // Handle other exceptions
+                // Log the exception or perform additional actions
+                return false;
+            }
+        }
+
     }
 }

@@ -82,9 +82,5 @@ namespace FindaCook.Models
         public List<CookProfile> Data { get; set; }
     }
 
-    public class Category
-    {
-        public string Name { get; set; }
-    }
 
 }
