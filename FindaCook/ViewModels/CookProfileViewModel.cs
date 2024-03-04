@@ -2,16 +2,18 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Windows.Input;
+using FindaCook.Services;
 
 namespace FindaCook.ViewModels
 {
     public class CookProfileViewModel : ObservableObject
     {
         private CookProfile _cookProfile;
+        readonly ICookRespository _CookRepository = new CookService();
 
         public CookProfileViewModel(CookProfile cookProfile)
         {
-            AddToFavoritesCommand = new RelayCommand(AddToFavorites);
+            AddToFavoritesCommand = new AsyncRelayCommand(AddToFavoritesAsync);
             OrderCommand = new RelayCommand(() => Task.Run(OrderAsync));
             _cookProfile = cookProfile;
         }
@@ -51,11 +53,23 @@ namespace FindaCook.ViewModels
         public ICommand OrderCommand { get; }
 
         // Command implementations
-        private void AddToFavorites()
+        public async Task AddToFavoritesAsync()
         {
-           
+            var cookName = CookProfile.FirstName + " " + CookProfile.LastName;
+            var result = await _CookRepository.AddToFavorites(cookName);
 
+            if (result)
+            {
+                // Successfully added to favorites
+                // Update the UI or notify the user as needed
+            }
+            else
+            {
+                // Failed to add to favorites
+                // Handle the failure case, show an error message, etc.
+            }
         }
+
 
         private async Task OrderAsync()
         {

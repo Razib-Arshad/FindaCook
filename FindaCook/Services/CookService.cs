@@ -15,6 +15,39 @@ namespace FindaCook.Services
 {
     public class CookService : ICookRespository
     {
+        public async Task<bool> AddToFavorites(string cookName)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    string apiUrl = "https://localhost:7224/api/favorites/add";
+                    client.BaseAddress = new Uri(apiUrl);
+
+                    // Assuming you have a user identifier to associate with the favorite cook
+                    var userId = Preferences.Get("UserID", string.Empty);
+
+                    var favoriteData = new
+                    {
+                        UserId = userId,
+                        CookName = cookName
+                    };
+
+                    string jsonData = System.Text.Json.JsonSerializer.Serialize(favoriteData);
+                    var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                    HttpResponseMessage response = await client.PostAsync(apiUrl, content);
+
+                    return response.IsSuccessStatusCode;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or perform additional actions
+                return false;
+            }
+        }
+    
 
         public async Task<ICollection<CookProfile>> GetCookByCategory(string cat)
         {
@@ -36,9 +69,6 @@ namespace FindaCook.Services
                         var dataContainer = JsonConvert.DeserializeObject<DataContainer>(contentString);
 
                         List<CookProfile> cooks = dataContainer.Data;
-
-                        
-
 
                         return cooks;
                     }
@@ -67,7 +97,7 @@ namespace FindaCook.Services
         {
             try
             {
-              
+
 
                 using (var client = new HttpClient())
                 {
@@ -83,7 +113,7 @@ namespace FindaCook.Services
                     var registrationCookData = new
                     {
                         Email = Email,
-                        UserPassword= Password,
+                        UserPassword = Password,
                         FirstName = p.FirstName,
                         LastName = p.LastName,
                         ContactNumber = p.ContactNumber,
@@ -100,7 +130,7 @@ namespace FindaCook.Services
                         SignatureDishes = prof.SignatureDishes,
                         ServicesProvided = prof.Services,
                     };
-                    
+
                     // Serialize the object to JSON
                     string jsonData = System.Text.Json.JsonSerializer.Serialize(registrationCookData);
 
@@ -143,15 +173,19 @@ namespace FindaCook.Services
                 using (var client = new HttpClient())
                 {
                     // Construct the order sending URL
-                    string apiUrl = "https://localhost:7224/api/Order/SendOrder";
+                    string apiUrl = "https://localhost:7224/api/request/post";
                     client.BaseAddress = new Uri(apiUrl);
 
-        
+                    var UserId = Preferences.Get("UserID", string.Empty);
+
+                    var cook = GetCookByCategory("chinese");
 
                     // Create a JSON object to send in the request body
                     var orderData = new
                     {
-                        Service = order.SelectedService,
+                        UserId = UserId,
+                        CookInfoId = cook.Id,
+                        //Service = order.SelectedService,
                         Description = order.Description,
                         ContactNumber = order.ContactNumber,
                         Address = order.Address,
@@ -176,13 +210,13 @@ namespace FindaCook.Services
             {
                 // Handle network-related errors
                 // Log the exception or perform additional actions
-                return false;
+                throw new Exception($"An error occurred: {ex.Message}");
             }
             catch (Exception ex)
             {
                 // Handle other exceptions
                 // Log the exception or perform additional actions
-                return false;
+                throw new Exception($"An error occurred: {ex.Message}");
             }
         }
 

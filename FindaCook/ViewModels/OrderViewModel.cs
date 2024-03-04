@@ -80,8 +80,16 @@ namespace FindaCook.ViewModels
                     SelectedDate,
                     SelectedTime
                 );
-            await _CookRepository.SendOrder(orderDetails);
-  
+            var result = await _CookRepository.SendOrder(orderDetails);
+
+            if (result != null)
+            {
+            }
+            else
+            {
+
+            }
+
         }
     }
 }
