@@ -15,25 +15,24 @@ namespace FindaCook.Services
 {
     public class CookService : ICookRespository
     {
-        public async Task<bool> AddToFavorites(string cookName)
+        public async Task<bool> AddToFavorites(string cookName, CookProfile cookProfile)
         {
             try
             {
                 using (var client = new HttpClient())
                 {
-                    string apiUrl = "https://localhost:7224/api/favorites/add";
-                    client.BaseAddress = new Uri(apiUrl);
+                    string apiUrl = "https://localhost:7224/api/Favourites/favourite/post";
 
-                    // Assuming you have a user identifier to associate with the favorite cook
                     var userId = Preferences.Get("UserID", string.Empty);
 
-                    var favoriteData = new
+                    var favouriteData = new
                     {
                         UserId = userId,
-                        CookName = cookName
+                        CookInfoId = cookProfile.Id
                     };
 
-                    string jsonData = System.Text.Json.JsonSerializer.Serialize(favoriteData);
+
+                    string jsonData = System.Text.Json.JsonSerializer.Serialize(favouriteData);
                     var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
                     HttpResponseMessage response = await client.PostAsync(apiUrl, content);
@@ -47,7 +46,7 @@ namespace FindaCook.Services
                 return false;
             }
         }
-    
+
 
         public async Task<ICollection<CookProfile>> GetCookByCategory(string cat)
         {

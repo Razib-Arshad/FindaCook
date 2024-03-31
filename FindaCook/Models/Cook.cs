@@ -40,6 +40,8 @@ namespace FindaCook.Models
     }
     public class CookProfile
     {
+        [JsonProperty("Id")]
+        public string Id { get; set; }
         [JsonProperty("firstName")]
         public string FirstName { get; set; }
 

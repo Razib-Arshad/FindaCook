@@ -14,7 +14,9 @@ namespace FindaCook.ViewModels
         public CookProfileViewModel(CookProfile cookProfile)
         {
             AddToFavoritesCommand = new AsyncRelayCommand(AddToFavoritesAsync);
-            OrderCommand = new RelayCommand(() => Task.Run(OrderAsync));
+            
+            OrderCommand = new AsyncRelayCommand(OrderAsync); // Use AsyncRelayCommand here
+
             _cookProfile = cookProfile;
         }
 
@@ -56,7 +58,7 @@ namespace FindaCook.ViewModels
         public async Task AddToFavoritesAsync()
         {
             var cookName = CookProfile.FirstName + " " + CookProfile.LastName;
-            var result = await _CookRepository.AddToFavorites(cookName);
+            var result = await _CookRepository.AddToFavorites(cookName,_cookProfile);
 
             if (result)
             {
@@ -71,9 +73,11 @@ namespace FindaCook.ViewModels
         }
 
 
-        private async Task OrderAsync()
+        public async Task OrderAsync()
         {
-            await App.Current.MainPage.Navigation.PushAsync(new UserHomePage());
+            var orderPage = new Order(); 
+            await App.Current.MainPage.Navigation.PushAsync(orderPage);
         }
+
     }
 }
