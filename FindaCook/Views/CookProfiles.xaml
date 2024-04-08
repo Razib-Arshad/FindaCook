@@ -19,10 +19,7 @@
     </ContentPage.Resources>
 
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+ 
 
         <Label Text="Sample Cook Profile" FontAttributes="Bold" Margin="0,20,0,0" />
         <Label Text="{Binding FirstName}" />

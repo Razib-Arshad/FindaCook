@@ -13,7 +13,7 @@ namespace FindaCook
 
             var loginPageViewModel = new LoginPageViewModel();
             MainPage = new NavigationPage(new Login(loginPageViewModel));
-
+           
             //MainPage = new NavigationPage(new Login());
             //MainPage = new AppShell();
             //MainPage = new NavigationPage(new Order());

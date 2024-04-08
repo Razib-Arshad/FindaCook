@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 
 namespace FindaCook.Models
 {
@@ -30,4 +31,22 @@ namespace FindaCook.Models
             return SelectedDate.Add(SelectedTime);
         }
     }
+    public partial class ClientOrder : ObservableObject
+        {
+            [ObservableProperty]
+            private string itemCount;
+
+            [ObservableProperty]
+            private string itemName;
+
+            [ObservableProperty]
+            private string itemPrice;
+        }
+    
+
+
+
+
+
+
 }
