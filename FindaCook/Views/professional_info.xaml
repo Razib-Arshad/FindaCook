@@ -4,75 +4,83 @@
              xmlns:local="clr-namespace:FindaCook.ViewModels"
              x:Class="FindaCook.professional_info"
              x:DataType="local:ProfessionalInfoViewModel"
-             Title="professional_info">
+             Title="professional_info"
+               BackgroundImageSource="bg1.jpg">
 
 
-    <ScrollView>
-        <StackLayout>
-            <Label Text="Professional Background" HorizontalOptions="Center" FontSize="Large" Margin="0,20,0,10"/>
 
-            <!-- Experience -->
-            <Label Text="Experience:" Margin="20,20,0,10" FontSize="20"/>
-            <Entry Placeholder="Years of Cooking Experience" BackgroundColor="LightGrey" PlaceholderColor="White" Margin="20,0,20,10" Text="{Binding Experience}"/>
+    <Grid>
 
-            <!-- Skills and Specialties -->
-            <Label Text="Skills and Specialties:" Margin="10,20,0,10" FontSize="18"/>
-            <VerticalStackLayout>
-                <HorizontalStackLayout Margin="20,0,20,10">
-                    <CheckBox  x:Name="ChineseCheckBox" IsChecked="{Binding ChineseFood}"/>
-                    <Label Margin="5">Chinese Food</Label>
-                </HorizontalStackLayout>
+        <BoxView Color="Black" Opacity="0.5" Margin="10,20, 10, 10" CornerRadius="20" />
 
-                <HorizontalStackLayout Margin="20,0,20,10">
-                    <CheckBox  x:Name="ContinentalCheckBox" IsChecked="{Binding ContinentalFood}"/>
-                    <Label Margin="5">Continental Food</Label>
-                </HorizontalStackLayout>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="Professional Background" FontSize="28" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" Margin="0,20,0,20" TextColor="White" FontFamily="Times New Roman"/>
 
-                <HorizontalStackLayout Margin="20,0,20,10">
-                    <CheckBox  x:Name="ThaiCheckBox" IsChecked="{Binding ThaiFood}"/>
-                    <Label Margin="5">Thai Food</Label>
-                </HorizontalStackLayout >
+                <!-- Experience -->
+                <Label Text="Experience:" Margin="20,20,0,10" FontFamily="Times New Roman" FontSize="20"/>
+                <Entry Placeholder="Years of Cooking Experience"   Margin="20,0,20,10" Text="{Binding Experience}"/>
 
-                <HorizontalStackLayout Margin="20,0,20,10">
-                    <CheckBox  x:Name="ItalianCheckBox" IsChecked="{Binding ItalianFood}"/>
-                    <Label Margin="5">Italian Food</Label>
-                </HorizontalStackLayout>
+                <!-- Skills and Specialties -->
+                <Label Text="Skills and Specialties:" Margin="10,20,0,10" FontSize="18"/>
+                <VerticalStackLayout>
+                    <HorizontalStackLayout Margin="20,0,20,10">
+                        <CheckBox  x:Name="ChineseCheckBox" IsChecked="{Binding ChineseFood}"/>
+                        <Label Margin="5" FontFamily="Times New Roman">Chinese Food</Label >
+                    </HorizontalStackLayout>
 
-                <HorizontalStackLayout Margin="20,0,20,10">
-                    <CheckBox  x:Name="DesiCheckBox" IsChecked="{Binding DesiFood}"/>
-                    <Label Margin="5">Desi Food</Label>
-                </HorizontalStackLayout>
+                    <HorizontalStackLayout Margin="20,0,20,10">
+                        <CheckBox  x:Name="ContinentalCheckBox" IsChecked="{Binding ContinentalFood}"/>
+                        <Label Margin="5" FontFamily="Times New Roman">Continental Food</Label>
+                    </HorizontalStackLayout>
 
-                <HorizontalStackLayout Margin="20,0,20,10">
-                    <CheckBox  x:Name="FastCheckBox" IsChecked="{Binding FastFood}"/>
-                    <Label Margin="5">Fast Food</Label>
-                </HorizontalStackLayout>
-            </VerticalStackLayout>
+                    <HorizontalStackLayout Margin="20,0,20,10">
+                        <CheckBox  x:Name="ThaiCheckBox" IsChecked="{Binding ThaiFood}"/>
+                        <Label Margin="5" FontFamily="Times New Roman">Thai Food</Label>
+                    </HorizontalStackLayout >
 
-            <!-- Signature Dishes -->
-            <Label Text="Signature Dishes (if any):" Margin="10,20,0,10" FontSize="18"/>
-            <Entry Placeholder="Enter Signature Dishes" Margin="20,10,10,10" PlaceholderColor="White" BackgroundColor="LightGray" Text="{Binding SignatureDishes}"/>
+                    <HorizontalStackLayout Margin="20,0,20,10">
+                        <CheckBox  x:Name="ItalianCheckBox" IsChecked="{Binding ItalianFood}"/>
+                        <Label Margin="5" FontFamily="Times New Roman">Italian Food</Label>
+                    </HorizontalStackLayout>
 
-            <!-- Services -->
-            <Label Text="Services You Can Provide:" Margin="10,20,0,10" FontSize="18"/>
-            <VerticalStackLayout>
-                <HorizontalStackLayout Margin="20,0,20,10">
-                    <CheckBox  x:Name="InHouseChefCheckBox" IsChecked="{Binding InHouseChefServices}"/>
-                    <Label Margin="5">In-House Chef Services</Label>
-                </HorizontalStackLayout>
+                    <HorizontalStackLayout Margin="20,0,20,10">
+                        <CheckBox  x:Name="DesiCheckBox" IsChecked="{Binding DesiFood}"/>
+                        <Label Margin="5" FontFamily="Times New Roman">Desi Food</Label>
+                    </HorizontalStackLayout>
 
-                <HorizontalStackLayout Margin="20,0,20,10">
-                    <CheckBox  x:Name="CookingClassesCheckBox"  IsChecked="{Binding CookingClasses}"/>
-                    <Label Margin="5">Cooking Classes</Label>
-                </HorizontalStackLayout>
+                    <HorizontalStackLayout Margin="20,0,20,10">
+                        <CheckBox  x:Name="FastCheckBox" IsChecked="{Binding FastFood}"/>
+                        <Label Margin="5" FontFamily="Times New Roman">Fast Food</Label>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
 
-                <HorizontalStackLayout Margin="20,0,20,10">
-                    <CheckBox  x:Name="CookingWorkshopsCheckBox"  IsChecked="{Binding CookingWorkshops}"/>
-                    <Label Margin="5">Cooking Workshop</Label>
-                </HorizontalStackLayout>
-            </VerticalStackLayout>
+                <!-- Signature Dishes -->
+                <Label Text="Signature Dishes (if any):" Margin="10,20,0,10" FontSize="20" FontFamily="Times New Roman"/>
+                <Entry Placeholder="Enter Signature Dishes" Margin="20,10,10,10"  Text="{Binding SignatureDishes}"/>
 
-            <Button Text="Next" Command="{Binding NextCommand}" Margin="0,20,0,0"/>
-        </StackLayout>
-    </ScrollView>
+                <!-- Services -->
+                <Label Text="Services You Can Provide:" Margin="10,20,0,10" FontSize="20" FontFamily="Times New Roman"/>
+                <VerticalStackLayout>
+                    <HorizontalStackLayout Margin="20,0,20,10">
+                        <CheckBox  x:Name="InHouseChefCheckBox" IsChecked="{Binding InHouseChefServices}"/>
+                        <Label Margin="5" FontFamily="Times New Roman">In-House Chef Services</Label>
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Margin="20,0,20,10">
+                        <CheckBox  x:Name="CookingClassesCheckBox"  IsChecked="{Binding CookingClasses}"/>
+                        <Label Margin="5" FontFamily="Times New Roman">Cooking Classes</Label>
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Margin="20,0,20,10">
+                        <CheckBox  x:Name="CookingWorkshopsCheckBox"  IsChecked="{Binding CookingWorkshops}"/>
+                        <Label Margin="5" FontFamily="Times New Roman">Cooking Workshop</Label>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <Button Text="Next" Command="{Binding NextCommand}"  TextColor="White" FontSize="20" Margin="0,20,0,0"  BackgroundColor="Orange" CornerRadius="30" WidthRequest="300" FontFamily="Times New Roman"/>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>
+

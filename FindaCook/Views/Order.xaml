@@ -4,9 +4,10 @@
              xmlns:viewModels="clr-namespace:FindaCook.ViewModels" 
              x:DataType="viewModels:OrderViewModel"
              x:Class="FindaCook.Order"
-             x:Name="OrderPage">
+             x:Name="OrderPage"
+             BackgroundImageSource="bg1.jpg">
 
-  
+
     <Grid>
         <!-- Transparent Black Box Overlay -->
         <BoxView Color="Black" Opacity="0.5" Margin="10,20,10,10" CornerRadius="20" />

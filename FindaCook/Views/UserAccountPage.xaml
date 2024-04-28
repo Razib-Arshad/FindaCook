@@ -2,46 +2,45 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FindaCook.UserAccountPage"
-             Title="">
-    <ScrollView>
-        <VerticalStackLayout>
-            <HorizontalStackLayout>
-                <Frame
-            WidthRequest="100"
-            HeightRequest="100"
-            CornerRadius="80"
-            Padding="10"
-            Margin="30,10"
-            >
+             Title="Account"
+             BackgroundImageSource="bg1.jpg">
 
-                </Frame>
+
+    <ScrollView>
+        <StackLayout>
+            <StackLayout>
+                <Image Source="profile.png"  WidthRequest="100" HeightRequest="100" Aspect="AspectFill" />
+
 
                 <VerticalStackLayout>
-                    <Label FontSize="22" Margin="0,20,10,10">Razib Arshad</Label>
-                    <Label FontSize="16" Margin="0,0,10,10">razib.arshad@gmail.com</Label>
+                    <Label FontSize="22" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontFamily="Times New Roman">Razib Arshad</Label>
+                    <Label FontSize="16" Margin="30,0,10,10" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontFamily="Times New Roman">razib.arshad@gmail.com</Label>
                 </VerticalStackLayout>
-            </HorizontalStackLayout>
-            <HorizontalStackLayout>
+            </StackLayout>
 
-                <Button Text="Register as a Cook" Clicked="RegisterCook_Button_Clicked" LineBreakMode="WordWrap" WidthRequest="160" HeightRequest="160" HorizontalOptions="Center" FontSize="22" Margin="30,20,10,20"  BackgroundColor="RoyalBlue"/>
-
-                <Button Text="Account" Clicked="Account_Button_Clicked" WidthRequest="160" HeightRequest="160"  HorizontalOptions="Center" FontSize="22" Margin="30,20,10,20"  BackgroundColor="RoyalBlue"/>
-
-            </HorizontalStackLayout>
-            <HorizontalStackLayout>
-                <Button Text="Favourites" Clicked="FavouritesButton_Clicked" LineBreakMode="WordWrap"  WidthRequest="160" HeightRequest="160"  HorizontalOptions='Center' FontSize="22" Margin="30,0,10,0"  BackgroundColor="RoyalBlue"/>
-                <Button Text="Order History" LineBreakMode="WordWrap" WidthRequest="160" HeightRequest="160" HorizontalOptions="Center" FontSize="22" Margin="30,0,10,0"  BackgroundColor="RoyalBlue"/>
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Button Text="Register as a Cook" Clicked="RegisterCook_Button_Clicked"  HorizontalOptions="Center" FontSize="22" Margin="0,20,10,20" 
+                        BackgroundColor="Orange" TextColor="White" FontFamily="Times New Roman"/>
+                <Button Text="Account" Clicked="Account_Button_Clicked"  HorizontalOptions="Center" FontSize="22" Margin="30,20,10,20"  BackgroundColor="Orange" TextColor="White" WidthRequest="230" FontFamily="Times New Roman"/>
 
             </HorizontalStackLayout>
-            
-            <Button Text="Terms and Policy"  LineBreakMode="WordWrap"  WidthRequest="160" HeightRequest="160" HorizontalOptions="Center" FontSize="22" Margin="30,20,10,0"  BackgroundColor="RoyalBlue"/>
-                
-            
-            <Button Text="Logout"  LineBreakMode="WordWrap"  WidthRequest="100" HeightRequest="50" TextColor="Black" BorderColor="Black" BackgroundColor="LightYellow" CornerRadius="50" BorderWidth="3"  HorizontalOptions='Center' FontSize="22" Margin="30,20,10,0" />
 
-            
-        </VerticalStackLayout>
-        
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Button Text="Favourites" Clicked="FavouritesButton_Clicked"   HorizontalOptions="Center" FontSize="22" Margin="0,20,0,20"  BackgroundColor="Orange" TextColor="White"  WidthRequest="200" FontFamily="Times New Roman"/>
+                <Button Text="Order History"  HorizontalOptions="Center" FontSize="22" Margin="30,20,10,20"  BackgroundColor="Orange" TextColor="White"  WidthRequest="230" FontFamily="Times New Roman"/>
+
+            </HorizontalStackLayout>
+
+            <Button Text="Terms and Policy"  LineBreakMode="WordWrap"   TextColor="White" HorizontalOptions="Center" FontSize="22" Margin="30,20,10,0"  BackgroundColor="Orange"  WidthRequest="230" FontFamily="Times New Roman"/>
+
+
+            <Button Text="Logout"  WidthRequest="105" HeightRequest="60" TextColor="White"  BackgroundColor="Orange" CornerRadius="50" BorderWidth="3"  HorizontalOptions='Center' FontSize="22" Margin="30,20,10,0" FontFamily="Times New Roman" />
+
+
+        </StackLayout>
+
     </ScrollView>
-    
+
+
+
 </ContentPage>
