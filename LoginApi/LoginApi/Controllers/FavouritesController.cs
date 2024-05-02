@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LoginApi.Models;
 using Azure;
+using Microsoft.Extensions.Configuration.UserSecrets;
 
 namespace LoginApi.Controllers
 {
@@ -101,13 +102,19 @@ namespace LoginApi.Controllers
         // POST: api/Favourites
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("favourite/post")]
-        public async Task<ActionResult<Favourite>> PostFavourite(Favourite favourite)
+        public async Task<ActionResult<Favourite>> PostFavourite(FavouriteModel favourite)
         {
           if (_context.Favourites == null)
           {
                 return NotFound(new { StatusCode = 400, Message = "Entity set 'AppDbContext.Favourite'  is null." });
           }
-            _context.Favourites.Add(favourite);
+            var fav = new Favourite
+            {
+                UserId = favourite.UserId,
+                CookInfoId = favourite.CookInfoId,
+
+            };
+            _context.Favourites.Add(fav);
             await _context.SaveChangesAsync();
 
             var response = new

@@ -9,53 +9,55 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = LoginApi
 build_property.RootNamespace = LoginApi
-build_property.ProjectDir = D:\ToobaFYP\LoginApi\LoginApi\
+build_property.ProjectDir = C:\razibFYP\LoginApi\LoginApi\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\ToobaFYP\LoginApi\LoginApi
+build_property.MSBuildProjectDirectory = C:\razibFYP\LoginApi\LoginApi
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/ToobaFYP/LoginApi/LoginApi/Views/Favourites/Create.cshtml]
+[C:/razibFYP/LoginApi/LoginApi/Views/Favourites/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmF2b3VyaXRlc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ToobaFYP/LoginApi/LoginApi/Views/Favourites/Delete.cshtml]
+[C:/razibFYP/LoginApi/LoginApi/Views/Favourites/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmF2b3VyaXRlc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ToobaFYP/LoginApi/LoginApi/Views/Favourites/Details.cshtml]
+[C:/razibFYP/LoginApi/LoginApi/Views/Favourites/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmF2b3VyaXRlc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ToobaFYP/LoginApi/LoginApi/Views/Favourites/Edit.cshtml]
+[C:/razibFYP/LoginApi/LoginApi/Views/Favourites/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmF2b3VyaXRlc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ToobaFYP/LoginApi/LoginApi/Views/Favourites/Index.cshtml]
+[C:/razibFYP/LoginApi/LoginApi/Views/Favourites/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmF2b3VyaXRlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ToobaFYP/LoginApi/LoginApi/Views/OrderRequests/Create.cshtml]
+[C:/razibFYP/LoginApi/LoginApi/Views/OrderRequests/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJSZXF1ZXN0c1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ToobaFYP/LoginApi/LoginApi/Views/OrderRequests/Delete.cshtml]
+[C:/razibFYP/LoginApi/LoginApi/Views/OrderRequests/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJSZXF1ZXN0c1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ToobaFYP/LoginApi/LoginApi/Views/OrderRequests/Details.cshtml]
+[C:/razibFYP/LoginApi/LoginApi/Views/OrderRequests/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJSZXF1ZXN0c1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ToobaFYP/LoginApi/LoginApi/Views/OrderRequests/Edit.cshtml]
+[C:/razibFYP/LoginApi/LoginApi/Views/OrderRequests/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJSZXF1ZXN0c1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ToobaFYP/LoginApi/LoginApi/Views/OrderRequests/Index.cshtml]
+[C:/razibFYP/LoginApi/LoginApi/Views/OrderRequests/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJSZXF1ZXN0c1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ToobaFYP/LoginApi/LoginApi/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/razibFYP/LoginApi/LoginApi/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

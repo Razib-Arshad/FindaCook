@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LoginApi.Models;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace LoginApi.Controllers
 {
@@ -37,6 +38,34 @@ namespace LoginApi.Controllers
             };
             return Ok(response);
              
+        }
+
+        // GET: api/OrderRequests/user/5 
+        [HttpGet("request/getUserRequest/{id}")]
+        public async Task<ActionResult<OrderRequest>> GetOrderRequest(string id)
+        {
+            if (_context.OrderRequest == null)
+            {
+                return NotFound(new { StatusCode = 400, Message = "Entity set 'AppDbContext.OrderRequest'  is null." });
+            }
+
+            // Query the database for order requests associated with the specified user ID
+            var orderRequests = await _context.OrderRequest
+                .Where(o => o.UserId == id)
+                .ToListAsync();
+
+            if (orderRequests == null || !orderRequests.Any())
+            {
+                return NotFound(new { StatusCode = 404, Message = "No order requests found for the specified user." });
+            }
+
+            var response = new
+            {
+                StatusCode = 200,
+                Message = "Order requests retrieved successfully",
+                Data = orderRequests
+            };
+            return Ok(response);
         }
 
         // GET: api/OrderRequests/5
@@ -102,20 +131,30 @@ namespace LoginApi.Controllers
         // POST: api/OrderRequests
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("request/post")]
-        public async Task<ActionResult<OrderRequest>> PostOrderRequest(OrderRequest orderRequest)
+        public async Task<ActionResult<OrderRequest>> PostOrderRequest(OrderRequestModel orderRequest)
         {
           if (_context.OrderRequest == null)
           {
                 return NotFound(new { StatusCode = 400, Message = "Entity set 'AppDbContext.OrderRequest'  is null." });
           }
-            _context.OrderRequest.Add(orderRequest);
+            var request = new OrderRequest { 
+                Desc= orderRequest.Desc,
+                Date = orderRequest.Date,
+                Price= orderRequest.Price,
+                UserContact= orderRequest.UserContact,
+                UserAddress= orderRequest.UserAddress,
+                Status= orderRequest.Status,
+                UserId= orderRequest.UserId,
+                CookInfoId= orderRequest.CookInfoId,    
+            };
+            _context.OrderRequest.Add(request);
             await _context.SaveChangesAsync();
 
             var response = new
             {
                 StatusCode = 200,
                 Message = "post order request successfully",
-                Data = orderRequest
+                Data = request
             };
             return Ok(response);
         }

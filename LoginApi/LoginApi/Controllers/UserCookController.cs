@@ -438,6 +438,7 @@ namespace LoginApi.Controllers
                 .Where(c => c.SkillsAndSpecialties.Contains(category))
                  .Select(c => new
                  {
+                     c.Id,
                      c.FirstName,
                      c.LastName,
                      c.Email,
