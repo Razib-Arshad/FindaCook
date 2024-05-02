@@ -5,7 +5,7 @@
              xmlns:local="clr-namespace:FindaCook"
              x:DataType="viewmodel:LoginPageViewModel" 
              x:Class="FindaCook.Login"
-             Title="Login"
+             
               BackgroundImageSource="bg1.jpg">
 
 

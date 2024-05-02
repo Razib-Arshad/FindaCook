@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:FindaCook.ViewModels" 
              x:DataType="viewModels:OrderViewModel"
-             x:Class="FindaCook.Order"
+             x:Class="FindaCook.Views.Order"
              x:Name="OrderPage"
              BackgroundImageSource="bg1.jpg">
 

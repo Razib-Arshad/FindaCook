@@ -3,7 +3,7 @@
     x:Class="FindaCook.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:FindaCook"
+    xmlns:local="clr-namespace:FindaCook.Views"
     Shell.FlyoutBehavior="Disabled">
 
 
@@ -12,38 +12,48 @@
 
         <Tab Title="Home" Icon="home.png">
             <ShellContent
-                Title="Chat"
-                ContentTemplate="{DataTemplate local:Login}"
-                Route="HomePage"
-            />
+           Title="Chat"
+           ContentTemplate="{DataTemplate local:HomePage}"
+           Route="HomePage" />
         </Tab>
-        <Tab Title="Chat" Icon="chat.png">
+      
+        <Tab Title="CookProfiles" Icon="chat.png">
             <ShellContent
-                Title="Chat"
-                ContentTemplate="{DataTemplate local:Login}"
-                Route="Login"
-                />
+           Title="CookProfiles"
+           ContentTemplate="{DataTemplate local:CookProfiles}"
+           Route="CookProfiles"
+           />
         </Tab>
+
+        <Tab Title="Order" Icon="chat.png">
+            <ShellContent
+    Title="Order"
+    ContentTemplate="{DataTemplate local:Order}"
+    Route="Order"
+    />
+        </Tab>
+
+
         <Tab Title="Search" Icon="chat.png">
             <ShellContent
-                Title="Chat"
-                ContentTemplate="{DataTemplate local:SearchPage}"
-                Route="SearchPage"
-                />
+           Title="Chat"
+           ContentTemplate="{DataTemplate local:SearchPage}"
+           Route="SearchPage"
+           />
         </Tab>
         <Tab Title="Categories" Icon="file.png">
             <ShellContent
-                Title=""
-                ContentTemplate="{DataTemplate local:Categories}"
-                Route="Categories"
-                />
+           Title="Categories"
+           ContentTemplate="{DataTemplate local:Categories}"
+           Route="Categories"
+           />
         </Tab>
         <Tab Title="Account" Icon="profile.png">
             <ShellContent
-                Title=""
-                ContentTemplate="{DataTemplate local:UserAccountPage}"
-                Route="UserAccountPage"
-                />
+           Title="Account"
+           ContentTemplate="{DataTemplate local:UserAccountPage}"
+           Route="UserAccountPage"
+           />
         </Tab>
 
     </TabBar>

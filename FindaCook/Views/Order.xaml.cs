@@ -2,7 +2,7 @@
 
 using FindaCook.ViewModels;
 
-namespace FindaCook;
+namespace FindaCook.Views;
 
 public partial class Order : ContentPage
 {
