@@ -75,7 +75,10 @@ namespace FindaCook.ViewModels
 
         public async Task OrderAsync()
         {
-            var orderPage = new Order(); 
+            
+            var orderPage = new Order();
+            orderPage.BindingContext = new OrderViewModel(_cookProfile.Id);
+
             await App.Current.MainPage.Navigation.PushAsync(orderPage);
         }
 
