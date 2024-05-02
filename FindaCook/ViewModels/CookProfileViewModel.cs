@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Windows.Input;
 using FindaCook.Services;
+using FindaCook.Views;
 
 namespace FindaCook.ViewModels
 {

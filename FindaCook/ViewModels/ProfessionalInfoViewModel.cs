@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.Input;
 using FindaCook.Models;
 using FindaCook.Views;
 using FindaCook.Services;
+using FindaCook.Maui.ViewModels;
 
 namespace FindaCook.ViewModels
 {
@@ -102,8 +103,9 @@ namespace FindaCook.ViewModels
 
             if (success != null)
             {
-                // Navigate to the next page upon successful submission
-                await Application.Current.MainPage.Navigation.PushAsync(new HomePage());
+
+                var loginPageViewModel = new LoginPageViewModel();
+                await Application.Current.MainPage.Navigation.PushAsync(new Login(loginPageViewModel));
             }
             else
             {

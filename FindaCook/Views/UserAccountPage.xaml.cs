@@ -1,4 +1,4 @@
-namespace FindaCook;
+namespace FindaCook.Views;
 
 public partial class UserAccountPage : ContentPage
 {
