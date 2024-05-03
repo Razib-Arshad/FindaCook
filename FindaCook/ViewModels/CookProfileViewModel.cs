@@ -59,19 +59,20 @@ namespace FindaCook.ViewModels
         public async Task AddToFavoritesAsync()
         {
             var cookName = CookProfile.FirstName + " " + CookProfile.LastName;
-            var result = await _CookRepository.AddToFavorites(cookName,_cookProfile);
+            var result = await _CookRepository.AddToFavorites(cookName, _cookProfile);
 
             if (result)
             {
                 // Successfully added to favorites
-                // Update the UI or notify the user as needed
+                await App.Current.MainPage.DisplayAlert("Success", $"{cookName} has been added to your favorites.", "OK");
             }
             else
             {
                 // Failed to add to favorites
-                // Handle the failure case, show an error message, etc.
+                await App.Current.MainPage.DisplayAlert("Error", "Failed to add to favorites. Please try again.", "OK");
             }
         }
+
 
 
         public async Task OrderAsync()

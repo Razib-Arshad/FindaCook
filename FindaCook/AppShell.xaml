@@ -17,13 +17,7 @@
            Route="HomePage" />
         </Tab>
       
-        <Tab Title="CookProfiles" Icon="chat.png">
-            <ShellContent
-           Title="CookProfiles"
-           ContentTemplate="{DataTemplate local:CookProfiles}"
-           Route="CookProfiles"
-           />
-        </Tab>
+        
 
         <Tab Title="Order" Icon="chat.png">
             <ShellContent

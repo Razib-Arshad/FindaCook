@@ -36,8 +36,13 @@ namespace FindaCook.Maui.ViewModels
             if (result != null)
             {
                 // Navigate to the next page upon successful sign-in
-                
-                await App.Current.MainPage.Navigation.PushAsync(new AppShell());
+
+                var appShell = new AppShell();  // New root shell/navigation
+                App.Current.MainPage = appShell;
+
+
+
+                //await App.Current.MainPage.Navigation.PushAsync(new AppShell());
             }
             else
             {
