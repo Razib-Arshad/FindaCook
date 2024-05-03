@@ -92,12 +92,19 @@ namespace FindaCook.ViewModels
 
             if (result != null)
             {
+                string message = "Order Placed Successfully!";
+                await App.Current.MainPage.DisplayAlert("Status", message, "OK");
+
+                var appShell = new AppShell();  // New root shell/navigation
+                App.Current.MainPage = appShell;
 
 
             }
             else
             {
+                string errorMessage = "Order can't be placed! Please Try again";
 
+                await App.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
             }
 
         }

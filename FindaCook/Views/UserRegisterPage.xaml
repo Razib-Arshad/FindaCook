@@ -4,19 +4,26 @@
              x:Class="FindaCook.UserRegisterPage"
              xmlns:viewmodel="clr-namespace:FindaCook.Maui.ViewModels"
              x:DataType="viewmodel:UserRegistrationPageViewModel"
-             Title="Register">
-    <ScrollView>
-    <StackLayout Padding="20">
-        <Label Text="Register" FontSize="28" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" Margin="0,20,0,20"/>
+             Title="Register"
+              BackgroundImageSource="bg1.jpg">
+    <Grid>
 
-            <Entry Placeholder="Name" x:Name="NameEntry" Text="{Binding Name}" Margin="10,30,0,10"/>
-            <Entry Placeholder="Email" x:Name="EmailEntry" Text="{Binding Email}" TextTransform="None" Margin="10,20,0,10"/>
-            <Entry Placeholder="Password" x:Name="PasswordEntry" IsPassword="True" Text="{Binding Password}" Margin="10,20,0,10"/>
-            <Entry Placeholder="Retype Password" x:Name="RetypePasswordEntry" IsPassword="True" Text="{Binding RetypePassword}" Margin="10,20,0,20"/>
+        <BoxView Color="Black" Opacity="0.5" Margin="80,30, 80, 10" CornerRadius="20" />
+        <ScrollView>
+            <StackLayout Padding="20">
+                <Label Text="Register" FontSize="28" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" Margin="0,20,0,20" TextColor="White" FontFamily="Times New Roman"/>
 
-            <Button Text="Register" Command="{Binding RegisterCommand }" HorizontalOptions="CenterAndExpand" Margin="0,20,0,0"/>
+                <Entry Placeholder="Name" x:Name="NameEntry" Text="{Binding Name}" Margin="90,30,90,10" TextColor="White" FontFamily="Times New Roman"/>
+                <Entry Placeholder="Email" x:Name="EmailEntry" Text="{Binding Email}" TextTransform="None" Margin="90,20,90,10" FontFamily="Times New Roman"/>
+                <Entry Placeholder="Password" x:Name="PasswordEntry" IsPassword="True" Text="{Binding Password}" Margin="90,20,90,10" FontFamily="Times New Roman"/>
+                <Entry Placeholder="Retype Password" x:Name="RetypePasswordEntry" IsPassword="True" Text="{Binding RetypePassword}" Margin="90,20,90,20" FontFamily="Times New Roman"/>
 
-            <!--<Label x:Name="ResultLabel" Text="{Binding ResultMessage}" FontSize="16" TextColor="Red" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>-->
-        </StackLayout>
-    </ScrollView>
+                <Button Text="Register" Command="{Binding RegisterCommand }"  FontFamily="Times New Roman" HorizontalOptions="CenterAndExpand" Margin="0,20,0,0" BackgroundColor="Orange" TextColor="White" CornerRadius="30" WidthRequest="180"/>
+
+                <!--<Label x:Name="ResultLabel" Text="{Binding ResultMessage}" FontSize="16" TextColor="Red" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>-->
+            </StackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>
+
+
