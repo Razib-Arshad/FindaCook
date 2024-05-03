@@ -27,8 +27,8 @@ namespace FindaCook.Services
 
                     var favouriteData = new
                     {
-                        UserId = userId,
-                        CookInfoId = cookProfile.Id
+                        userId = userId,
+                        cookInfoId = cookProfile.Id
                     };
 
 
@@ -165,25 +165,25 @@ namespace FindaCook.Services
             }
         }
 
-        public async Task<bool> SendOrder(Orders order)
+        public async Task<bool> SendOrder(Orders order, string id)
         {
             try
             {
                 using (var client = new HttpClient())
                 {
                     // Construct the order sending URL
-                    string apiUrl = "https://localhost:7224/api/request/post";
+                    string apiUrl = "https://localhost:7224/api/OrderRequests/request/post";
                     client.BaseAddress = new Uri(apiUrl);
 
                     var UserId = Preferences.Get("UserID", string.Empty);
 
-                    var cook = GetCookByCategory("chinese");
+                    
 
                     // Create a JSON object to send in the request body
                     var orderData = new
                     {
                         UserId = UserId,
-                        CookInfoId = cook.Id,
+                        CookInfoId = id,
                         //Service = order.SelectedService,
                         Description = order.Description,
                         ContactNumber = order.ContactNumber,

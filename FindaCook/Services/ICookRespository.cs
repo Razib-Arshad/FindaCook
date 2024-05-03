@@ -14,7 +14,7 @@ namespace FindaCook.Services
        public Task<RegistrationResultClass> RegisterCook(Person p,QualificationInfo q,ProfessionalInfoModel prof);
        
         Task<ICollection<CookProfile>> GetCookByCategory(string cat);
-        Task<Boolean> SendOrder(Orders order);
+        Task<Boolean> SendOrder(Orders order,string id);
         Task<bool> AddToFavorites(string cookName,CookProfile cook);
 
 

@@ -10,6 +10,7 @@ namespace FindaCook.ViewModels
 {
     public class OrderViewModel : ObservableObject
     {
+
         private string _selectedService;
         private string _description;
         private string _contactNumber;
@@ -18,10 +19,16 @@ namespace FindaCook.ViewModels
         private DateTime _selectedDate = DateTime.Now;
         private TimeSpan _selectedTime = TimeSpan.Zero;
         readonly ICookRespository _CookRepository = new CookService();
+        public string CookProfileId;
+
+        public OrderViewModel(string cookProfileId)
+        {
+            CookProfileId = cookProfileId;
+            ConfirmCommand = new RelayCommand(async () => await ConfirmOrderAsync());
+        }
 
         public OrderViewModel()
         {
-            ConfirmCommand = new RelayCommand(async () => await ConfirmOrderAsync());
         }
 
         public string SelectedService
@@ -72,15 +79,16 @@ namespace FindaCook.ViewModels
         {
 
             Orders orderDetails = new Orders(
-                    SelectedService,
-                    Description,
-                    ContactNumber,
-                    Address,
-                    Price,
-                    SelectedDate,
-                    SelectedTime
-                );
-            var result = await _CookRepository.SendOrder(orderDetails);
+           SelectedService,
+           Description,
+           ContactNumber,
+           Address,
+           Price,
+           SelectedDate,
+           SelectedTime
+          
+       );
+            var result = await _CookRepository.SendOrder(orderDetails,CookProfileId);
 
             if (result != null)
             {
