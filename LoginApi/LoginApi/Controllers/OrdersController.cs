@@ -41,7 +41,7 @@ namespace LoginApi.Controllers
 
         // GET: api/Orders/5
         [HttpGet("order/get/{id}")]
-        public async Task<ActionResult<Order>> GetOrder(int id)
+        public async Task<ActionResult<Order>> GetOrder(string id)
         {
           if (_context.Order == null)
           {
