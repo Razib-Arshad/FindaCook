@@ -21,9 +21,9 @@
 
         <Tab Title="Order" Icon="chat.png">
             <ShellContent
-    Title="Order"
-    ContentTemplate="{DataTemplate local:Order}"
-    Route="Order"
+    Title="Orders"
+    ContentTemplate="{DataTemplate local:RequestsAndOrders}"
+    Route="RequestsAndOrders"
     />
         </Tab>
 

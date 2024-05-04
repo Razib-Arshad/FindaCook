@@ -218,6 +218,88 @@ namespace FindaCook.Services
                 throw new Exception($"An error occurred: {ex.Message}");
             }
         }
+        public async Task<List<Orders>> GetOrderRequests()
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    string apiUrl = "https://localhost:7224/api/OrderRequests/request/getUserRequest";
+                    client.BaseAddress = new Uri(apiUrl);
+
+                    var UserId = Preferences.Get("UserID", string.Empty);
+
+                    string requestUrl = $"{apiUrl}/{UserId}";
+
+                    // Send a GET request to retrieve orders
+                    HttpResponseMessage response = await client.GetAsync(requestUrl);
+        
+
+                    // Check if the order sending was successful
+                    if (response.IsSuccessStatusCode)
+                    {
+
+                        string contentString = await response.Content.ReadAsStringAsync();
+
+                        // Deserialize the JSON response to a list of Orders
+                        List<Orders> orders = JsonConvert.DeserializeObject<List<Orders>>(contentString);
+
+                        return orders;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+
+                
+            }
+            catch { 
+                return null;
+            }
+        }
+
+        public async Task<List<Orders>> GetOrders()
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    string apiUrl = "https://localhost:7224/api/Orders/order/get";
+                    client.BaseAddress = new Uri(apiUrl);
+
+                    var UserId = Preferences.Get("UserID", string.Empty);
+
+                    string requestUrl = $"{apiUrl}/{UserId}";
+
+                    // Send a GET request to retrieve orders
+                    HttpResponseMessage response = await client.GetAsync(requestUrl);
+
+
+                    // Check if the order sending was successful
+                    if (response.IsSuccessStatusCode)
+                    {
+
+                        string contentString = await response.Content.ReadAsStringAsync();
+
+                        // Deserialize the JSON response to a list of Orders
+                        List<Orders> orders = JsonConvert.DeserializeObject<List<Orders>>(contentString);
+
+                        return orders;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+
+
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
     }
 }
