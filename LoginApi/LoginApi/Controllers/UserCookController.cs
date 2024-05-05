@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using System.Net;
 
 namespace LoginApi.Controllers
 {
@@ -200,139 +201,6 @@ namespace LoginApi.Controllers
             }
             return BadRequest("Invalid Request");
         }
-
-        //[HttpPost("favourite/add")]
-        //[Authorize]
-        //public async Task<ActionResult> AddFavourite(FavouriteViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = await _userManager.GetUserAsync(User);
-
-        //        if (user != null)
-        //        {
-        //            var cookInfo = await _context.CookInfos
-        //                .FirstOrDefaultAsync(c => c.Email == model.CookEmail);
-
-        //            if (cookInfo != null)
-        //            {
-        //                var favourite = new Favourite
-        //                {
-        //                    UserId = user.Id,
-        //                    CookInfoId = cookInfo.Id
-        //                };
-
-        //                _context.Favourites.Add(favourite);
-        //                await _context.SaveChangesAsync();
-
-        //                return Ok(new { StatusCode = 200, Message = "Favourite added successfully" });
-        //            }
-        //            else
-        //            {
-        //                return NotFound(new { StatusCode = 404, Message = "CookInfo not found" });
-        //            }
-        //        }
-        //        else
-        //        {
-        //            return Unauthorized(new { StatusCode = 401, Message = "User not logged in" });
-        //        }
-        //    }
-
-        //    return BadRequest(new { StatusCode = 400, Message = "Invalid Request" });
-        //}
-
-        //[HttpGet("favourite/get")]
-        //public async Task<ActionResult> GetFavourites()
-        //{
-        //    var user = await _userManager.GetUserAsync(User);
-
-        //    if (user != null)
-        //    {
-        //        var favourites = await _context.Favourites
-        //            .Where(f => f.UserId == user.Id)
-        //            .Include(f => f.CookInfo) // Include CookInfo for related data
-        //            .Select(f => new
-        //            {
-        //                f.CookInfo.FirstName,
-        //                f.CookInfo.LastName,
-        //                f.CookInfo.Email,
-        //                f.CookInfo.SkillsAndSpecialties,
-        //                f.CookInfo.SignatureDishes,
-        //                f.CookInfo.ServicesProvided,
-        //                f.CookInfo.ExperienceYears,
-        //                f.CookInfo.CulinarySchoolName,
-        //                f.CookInfo.HasCulinaryDegree,
-        //                f.CookInfo.Degree,
-        //                f.CookInfo.Certificates,
-        //                f.CookInfo.EligibleToWork
-        //            })
-        //            .ToListAsync();
-
-        //        var response = new
-        //        {
-        //            StatusCode = 200,
-        //            Message = "Favourites retrieved successfully",
-        //            Data = favourites
-        //        };
-
-        //        return Ok(response);
-        //    }
-
-        //    var unauthorizedResponse = new
-        //    {
-        //        StatusCode = 401,
-        //        Message = "User not logged in",
-        //        Data = (object)null
-        //    };
-
-        //    return Unauthorized(unauthorizedResponse);
-        //}
-
-        //[HttpPost("favourite/remove")]
-        //public async Task<ActionResult> RemoveFavourite(FavouriteViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = await _userManager.GetUserAsync(User);
-
-        //        if (user != null)
-        //        {
-        //            var cookInfo = await _context.CookInfos
-        //                .FirstOrDefaultAsync(c => c.Email == model.CookEmail);
-
-        //            if (cookInfo != null)
-        //            {
-        //                var favourite = await _context.Favourites
-        //                    .Where(f => f.UserId == user.Id && f.CookInfoId == cookInfo.Id)
-        //                    .FirstOrDefaultAsync();
-
-        //                if (favourite != null)
-        //                {
-        //                    _context.Favourites.Remove(favourite);
-        //                    await _context.SaveChangesAsync();
-
-        //                    return Ok(new { StatusCode = 200, Message = "Favourite removed successfully" });
-        //                }
-        //                else
-        //                {
-        //                    return BadRequest(new { StatusCode = 400, Message = "Favourite not found" });
-        //                }
-        //            }
-        //            else
-        //            {
-        //                return NotFound(new { StatusCode = 404, Message = "CookInfo not found" });
-        //            }
-        //        }
-        //        else
-        //        {
-        //            return Unauthorized(new { StatusCode = 401, Message = "User not logged in" });
-        //        }
-        //    }
-
-        //    return BadRequest(new { StatusCode = 400, Message = "Invalid Request" });
-        //}
-
-
 
         [HttpGet("categories/get/servicesprovided")]
         public async Task<ActionResult> GetCooksByServicesProvided()
@@ -526,5 +394,103 @@ namespace LoginApi.Controllers
             }
             
         }
+
+        [HttpPut("profile/update_cook")]
+        public async Task<ActionResult> UpdateProfile(CookInfoViewModel model)
+        {
+            var cookInfo = await _context.CookInfos.SingleOrDefaultAsync(c => c.Id == model.Id);
+            if (cookInfo == null)
+            {
+                var errorResponse = new
+                {
+                    StatusCode = 404,
+                    Message = "Not Found",
+                };
+
+                return NotFound(errorResponse);
+            }
+            else
+            {
+                try
+                {
+                    cookInfo.FirstName = model.FirstName;
+                    cookInfo.LastName = model.LastName;
+                    cookInfo.ContactNumber = model.ContactNumber;
+                    cookInfo.WhatsappNumber = model.WhatsappNumber;
+                    cookInfo.CurrentAddress = model.CurrentAddress;
+                    cookInfo.PermanentAddress = model.PermanentAddress;
+                    cookInfo.EligibleToWork = model.EligibleToWork;
+                    cookInfo.HasCulinaryDegree = model.HasCulinaryDegree;
+                    cookInfo.Degree = model.Degree;
+                    cookInfo.Certificates = model.Certificates;
+                    cookInfo.CulinarySchoolName = model.CulinarySchoolName;
+                    cookInfo.ExperienceYears = model.ExperienceYears;
+                    cookInfo.SkillsAndSpecialties = model.SkillsAndSpecialties;
+                    cookInfo.SignatureDishes = model.SignatureDishes;
+                    cookInfo.ServicesProvided = model.ServicesProvided;
+
+                    await _context.SaveChangesAsync();
+                    var response = new
+                    {
+                        StatusCode = 200,
+                        Message = "Profile updated successfully",
+                        Data = cookInfo
+                    };
+
+
+                    return Ok(response);
+                }
+                catch(Exception ex)
+                {
+                    // Log the exception or handle it as needed
+                    var errorResponse = new
+                    {
+                        StatusCode = 500,
+                        Message = "An error occurred while updating cook's profile",
+                        ErrorDetails = ex.Message
+                    };
+
+                    return StatusCode(500, errorResponse);
+                }
+            }
+        }
+
+        [HttpPut("password/change")]
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                var errorResponse = new
+                {
+                    StatusCode = 404,
+                    Message = "Not Found",
+                };
+
+                return NotFound(errorResponse);
+            }
+
+            var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+            if (result.Succeeded)
+            {
+                var response = new
+                {
+                    StatusCode = 200,
+                    Message = "Password changed successfully",
+                    Data = result
+                };
+                return Ok(response);
+            }
+            else
+            {
+                var response = new
+                {
+                    Message = "Password not changed",
+                    Data = result.Errors
+                };
+                return BadRequest(response);
+            }
+        }
+
     }
 }
