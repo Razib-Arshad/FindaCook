@@ -12,14 +12,19 @@ namespace LoginApi.Models
         public int RqID { get; set; }
 
         [StringLength(500)]
-        public string Desc;
+        public string Desc { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime Date;
+        public DateTime Date { get; set; }
 
-        public int Price;
-        public string UserContact;
-        public string UserAddress;
+        [DataType(DataType.Time)]
+        public DateTime Time { get; set; }
+
+        public string selectedService { get; set; }
+
+        public int Price { get; set; }
+        public string UserContact { get; set; }
+        public string UserAddress { get; set; }
         public string Status;
 
         [ForeignKey("User")]

@@ -140,6 +140,8 @@ namespace LoginApi.Controllers
             var request = new OrderRequest { 
                 Desc= orderRequest.Desc,
                 Date = orderRequest.Date,
+                Time = orderRequest.Time,
+                selectedService=orderRequest.selectedService,
                 Price= orderRequest.Price,
                 UserContact= orderRequest.UserContact,
                 UserAddress= orderRequest.UserAddress,
