@@ -92,6 +92,49 @@ namespace FindaCook.Services
             }
         }
 
+        
+        
+        public async Task<ICollection<CookProfile>> getFavourites(string id)
+            {
+                try
+                {
+                    using (var client = new HttpClient())
+                    {
+                        // Construct the URL for getting favorite cooks by user ID
+                        string apiUrl = $"https://localhost:7224/api/UserCook/favourites?userId={id}";
+
+                        // Send the GET request
+                        HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            string contentString = await response.Content.ReadAsStringAsync();
+                            var dataContainer = JsonConvert.DeserializeObject<DataContainer>(contentString);
+
+                            List<CookProfile> favorites = dataContainer.Data;
+
+                            return favorites;
+                        }
+                        else
+                        {
+                            var errorResponse = new
+                            {
+                                StatusCode = (int)response.StatusCode,
+                                Message = "An error occurred while retrieving favorites",
+                                ErrorDetails = await response.Content.ReadAsStringAsync()
+                            };
+
+                            throw new Exception(JsonConvert.SerializeObject(errorResponse));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"An error occurred: {ex.Message}");
+                }
+            }
+        
+
         public async Task<RegistrationResultClass> RegisterCook(Person p, QualificationInfo q, ProfessionalInfoModel prof)
         {
             try

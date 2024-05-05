@@ -16,7 +16,8 @@ namespace FindaCook.Services
         Task<ICollection<CookProfile>> GetCookByCategory(string cat);
         Task<Boolean> SendOrder(Orders order,string id);
         Task<bool> AddToFavorites(string cookName,CookProfile cook);
-
+        
+        Task<ICollection<CookProfile>> getFavourites(string id);
 
 
 
