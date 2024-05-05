@@ -5,15 +5,31 @@ namespace LoginApi.Models
 {
     public class OrderRequestModel
     {
-        public string Desc;
+        [Required]
+        public string Desc { get; set; }
 
-        public DateTime Date;
+        [Required]
+        public DateTime Date { get; set; }
 
-        public int Price;
-        public string UserContact;
-        public string UserAddress;
+        [Required]
+        public DateTime Time { get; set; }
+
+        [Required]
+        public string selectedService { get; set; }
+
+        [Required]
+        public int Price { get; set; }
+        [Required]
+        public string UserContact { get; set; }
+        [Required]
+        public string UserAddress { get; set; }
+
         public string Status;
+
+        [Required]
         public string UserId { get; set; }
+
+        [Required]
         public string CookInfoId { get; set; }
     }
 }

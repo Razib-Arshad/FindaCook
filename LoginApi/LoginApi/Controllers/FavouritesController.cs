@@ -63,8 +63,59 @@ namespace LoginApi.Controllers
             return Ok(response);
         }
 
+        [HttpGet("favourites/user/{userId}")]
+        public async Task<ActionResult<IEnumerable<object>>> GetUserFavourites(string userId)
+        {
+            try
+            {
+                // Retrieve favorites for the given user ID
+                var favourites = await _context.Favourites
+                    .Include(f => f.CookInfo)
+                    .Where(f => f.UserId == userId)
+                    .ToListAsync();
+
+                if (favourites == null || !favourites.Any())
+                {
+                    return NotFound(new { StatusCode = 404, Message = "No favorites found for the user." });
+                }
+
+                // Extract necessary details for each favorite cook
+                var cooksDetails = favourites.Select(favourite => new
+                {
+                    favourite.CookInfo.FirstName,
+                    favourite.CookInfo.LastName,
+                    favourite.CookInfo.SkillsAndSpecialties,
+                    favourite.CookInfo.ServicesProvided,
+                    favourite.CookInfo.SignatureDishes,
+                    favourite.CookInfo.ExperienceYears
+                }).ToList();
+
+                // Construct and return the response object
+                var response = new
+                {
+                    StatusCode = 200,
+                    Message = "Favourites retrieved successfully",
+                    Data = cooksDetails
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                var errorResponse = new
+                {
+                    StatusCode = 500,
+                    Message = "An error occurred while retrieving favourites",
+                    ErrorDetails = ex.Message
+                };
+
+                return StatusCode(500, errorResponse);
+            }
+        }
+
+
         // PUT: api/Favourites/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("favourite/update/{id}")]
         public async Task<IActionResult> PutFavourite(int id, Favourite favourite)
         {
@@ -100,7 +151,6 @@ namespace LoginApi.Controllers
         }
 
         // POST: api/Favourites
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("favourite/post")]
         public async Task<ActionResult<Favourite>> PostFavourite(FavouriteModel favourite)
         {

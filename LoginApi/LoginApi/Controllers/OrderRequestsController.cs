@@ -25,11 +25,11 @@ namespace LoginApi.Controllers
         [HttpGet("request/get")]
         public async Task<ActionResult<IEnumerable<OrderRequest>>> GetOrderRequest()
         {
-          if (_context.OrderRequest == null)
-          {
-              return NotFound(new { StatusCode = 400, Message = "Entity set 'AppDbContext.OrderRequest'  is null." });
-          }
-          var orderRequest = await _context.OrderRequest.ToListAsync();
+            if (_context.OrderRequest == null)
+            {
+                return NotFound(new { StatusCode = 400, Message = "Entity set 'AppDbContext.OrderRequest'  is null." });
+            }
+            var orderRequest = await _context.OrderRequest.ToListAsync();
             var response = new
             {
                 StatusCode = 200,
@@ -37,7 +37,7 @@ namespace LoginApi.Controllers
                 Data = orderRequest.ToList()
             };
             return Ok(response);
-             
+
         }
 
         // GET: api/OrderRequests/user/5 
@@ -72,9 +72,9 @@ namespace LoginApi.Controllers
         [HttpGet("request/get/{id}")]
         public async Task<ActionResult<OrderRequest>> GetOrderRequest(int id)
         {
-          if (_context.OrderRequest == null)
-          {
-              return NotFound(new { StatusCode = 400, Message = "Entity set 'AppDbContext.OrderRequest'  is null." });
+            if (_context.OrderRequest == null)
+            {
+                return NotFound(new { StatusCode = 400, Message = "Entity set 'AppDbContext.OrderRequest'  is null." });
             }
             var orderRequest = await _context.OrderRequest.FindAsync(id);
 
@@ -133,19 +133,22 @@ namespace LoginApi.Controllers
         [HttpPost("request/post")]
         public async Task<ActionResult<OrderRequest>> PostOrderRequest(OrderRequestModel orderRequest)
         {
-          if (_context.OrderRequest == null)
-          {
+            if (_context.OrderRequest == null)
+            {
                 return NotFound(new { StatusCode = 400, Message = "Entity set 'AppDbContext.OrderRequest'  is null." });
-          }
-            var request = new OrderRequest { 
-                Desc= orderRequest.Desc,
+            }
+            var request = new OrderRequest
+            {
+                Desc = orderRequest.Desc,
                 Date = orderRequest.Date,
-                Price= orderRequest.Price,
-                UserContact= orderRequest.UserContact,
-                UserAddress= orderRequest.UserAddress,
-                Status= orderRequest.Status,
-                UserId= orderRequest.UserId,
-                CookInfoId= orderRequest.CookInfoId,    
+                Time = orderRequest.Time,
+                selectedService = orderRequest.selectedService,
+                Price = orderRequest.Price,
+                UserContact = orderRequest.UserContact,
+                UserAddress = orderRequest.UserAddress,
+                Status = orderRequest.Status,
+                UserId = orderRequest.UserId,
+                CookInfoId = orderRequest.CookInfoId,
             };
             _context.OrderRequest.Add(request);
             await _context.SaveChangesAsync();
