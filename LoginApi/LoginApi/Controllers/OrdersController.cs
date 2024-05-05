@@ -25,11 +25,11 @@ namespace LoginApi.Controllers
         [HttpGet("orders/get")]
         public async Task<ActionResult<IEnumerable<Order>>> GetOrder()
         {
-          if (_context.Order == null)
-          {
+            if (_context.Order == null)
+            {
                 return NotFound(new { StatusCode = 404, Message = "Orders not found" });
-          }
-          var orders = await _context.Order.ToListAsync();
+            }
+            var orders = await _context.Order.ToListAsync();
             var response = new
             {
                 StatusCode = 200,
@@ -41,17 +41,17 @@ namespace LoginApi.Controllers
 
         // GET: api/Orders/5
         [HttpGet("order/get/{id}")]
-        public async Task<ActionResult<Order>> GetOrder(int id)
+        public async Task<ActionResult<Order>> GetOrder(string id)
         {
-          if (_context.Order == null)
-          {
+            if (_context.Order == null)
+            {
                 return NotFound(new { StatusCode = 404, Message = "Order table is empty" });
             }
             var order = await _context.Order.FindAsync(id);
 
             if (order == null)
             {
-                return NotFound(new { StatusCode = 404, Message = "Order not found with this " + id});
+                return NotFound(new { StatusCode = 404, Message = "Order not found with this " + id });
             }
 
             var response = new
@@ -104,10 +104,10 @@ namespace LoginApi.Controllers
         [HttpPost("order/post")]
         public async Task<ActionResult<Order>> PostOrder(Order order)
         {
-          if (_context.Order == null)
-          {
-              return NotFound(new { StatusCode = 400, Message = "Entity set 'AppDbContext.Order'  is null." });
-          }
+            if (_context.Order == null)
+            {
+                return NotFound(new { StatusCode = 400, Message = "Entity set 'AppDbContext.Order'  is null." });
+            }
             _context.Order.Add(order);
             await _context.SaveChangesAsync();
             var response = new
@@ -130,7 +130,7 @@ namespace LoginApi.Controllers
             var order = await _context.Order.FindAsync(id);
             if (order == null)
             {
-                return NotFound(new { StatusCode = 400, Message = "Order'  is not found wiht this "+ id });
+                return NotFound(new { StatusCode = 400, Message = "Order'  is not found wiht this " + id });
             }
 
             _context.Order.Remove(order);
