@@ -142,6 +142,7 @@ namespace LoginApi.Controllers
                 Desc = orderRequest.Desc,
                 Date = orderRequest.Date,
                 Time = orderRequest.Time,
+<<<<<<< HEAD
                 selectedService = orderRequest.selectedService,
                 Price = orderRequest.Price,
                 UserContact = orderRequest.UserContact,
@@ -149,6 +150,15 @@ namespace LoginApi.Controllers
                 Status = orderRequest.Status,
                 UserId = orderRequest.UserId,
                 CookInfoId = orderRequest.CookInfoId,
+=======
+                selectedService=orderRequest.selectedService,
+                Price= orderRequest.Price,
+                UserContact= orderRequest.UserContact,
+                UserAddress= orderRequest.UserAddress,
+                Status= orderRequest.Status,
+                UserId= orderRequest.UserId,
+                CookInfoId= orderRequest.CookInfoId,    
+>>>>>>> b5f5cac315ea017550c1cea16401117156de7dde
             };
             _context.OrderRequest.Add(request);
             await _context.SaveChangesAsync();
