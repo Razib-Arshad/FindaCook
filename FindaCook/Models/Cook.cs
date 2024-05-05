@@ -84,5 +84,11 @@ namespace FindaCook.Models
         public List<CookProfile> Data { get; set; }
     }
 
+    public class OrderContainer
+    {
+        [JsonProperty("data")]
+        public List<Orders> Data { get; set; }
+    }
+
 
 }

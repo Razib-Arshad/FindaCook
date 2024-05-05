@@ -20,7 +20,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <!-- Define how each item should be displayed -->
-                        <TextCell Text="{Binding Description}" Detail="{Binding Description}" />
+                        <TextCell Text="{Binding Price}" Detail="{Binding Price}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

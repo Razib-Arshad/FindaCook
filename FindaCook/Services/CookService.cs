@@ -240,9 +240,9 @@ namespace FindaCook.Services
                     {
 
                         string contentString = await response.Content.ReadAsStringAsync();
+                        var orderContainer = JsonConvert.DeserializeObject<OrderContainer>(contentString);
+                        List<Orders> orders = orderContainer.Data;
 
-                        // Deserialize the JSON response to a list of Orders
-                        List<Orders> orders = JsonConvert.DeserializeObject<List<Orders>>(contentString);
 
                         return orders;
                     }
@@ -281,11 +281,17 @@ namespace FindaCook.Services
                     {
 
                         string contentString = await response.Content.ReadAsStringAsync();
+                        var orderContainer = JsonConvert.DeserializeObject<OrderContainer>(contentString);
+                        List<Orders> orders = orderContainer.Data;
 
-                        // Deserialize the JSON response to a list of Orders
-                        List<Orders> orders = JsonConvert.DeserializeObject<List<Orders>>(contentString);
-
+                        
                         return orders;
+
+                        /*string contentString = await response.Content.ReadAsStringAsync();
+                        var dataContainer = JsonConvert.DeserializeObject<DataContainer>(contentString);
+
+                        List<CookProfile> cooks = dataContainer.Data;*/
+
                     }
                     else
                     {
