@@ -53,6 +53,16 @@ namespace LoginApi.Controllers
             var orderRequests = await _context.OrderRequest
                 .Where(o => o.UserId == id)
                 .ToListAsync();
+            var cookInfo = await _context.OrderRequest
+                .Include(f => f.CookInfo)
+                .Where(o => o.UserId == id)
+                .ToListAsync();
+
+            var request = new { 
+                Order_Requests=orderRequests,
+                CookDetails = cookInfo 
+            };
+
 
             if (orderRequests == null || !orderRequests.Any())
             {
@@ -63,7 +73,7 @@ namespace LoginApi.Controllers
             {
                 StatusCode = 200,
                 Message = "Order requests retrieved successfully",
-                Data = orderRequests
+                Data = request
             };
             return Ok(response);
         }
@@ -142,23 +152,13 @@ namespace LoginApi.Controllers
                 Desc = orderRequest.Desc,
                 Date = orderRequest.Date,
                 Time = orderRequest.Time,
-<<<<<<< HEAD
                 selectedService = orderRequest.selectedService,
                 Price = orderRequest.Price,
                 UserContact = orderRequest.UserContact,
                 UserAddress = orderRequest.UserAddress,
                 Status = orderRequest.Status,
                 UserId = orderRequest.UserId,
-                CookInfoId = orderRequest.CookInfoId,
-=======
-                selectedService=orderRequest.selectedService,
-                Price= orderRequest.Price,
-                UserContact= orderRequest.UserContact,
-                UserAddress= orderRequest.UserAddress,
-                Status= orderRequest.Status,
-                UserId= orderRequest.UserId,
-                CookInfoId= orderRequest.CookInfoId,    
->>>>>>> b5f5cac315ea017550c1cea16401117156de7dde
+                CookInfoId = orderRequest.CookInfoId
             };
             _context.OrderRequest.Add(request);
             await _context.SaveChangesAsync();

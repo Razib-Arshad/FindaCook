@@ -5,7 +5,6 @@ namespace LoginApi.ViewModels
 {
     public class CookInfoViewModel
     {
-        [Required]
         public string Id { get; set; }
 
         [Required]
