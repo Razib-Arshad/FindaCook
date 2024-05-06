@@ -24,7 +24,10 @@ namespace FindaCook
                 "Desi",
                 "Chinese",
                 "Fast Food",
-                "Western Cuisine"
+                "Italian",
+                "Continental",
+                "Thai"
+
             };
 
             CategoryClickedCommand = new Command<string>(async (category) => await OnCategoryClickedAsync(category));

@@ -10,7 +10,7 @@
 
     <Grid>
         <!-- Transparent Black Box Overlay -->
-        <BoxView Color="Black" Opacity="0.5" Margin="10,20,10,10" CornerRadius="20" />
+        <BoxView Color="Black" Opacity="0.75" Margin="10,20,10,10" CornerRadius="20" />
 
         <ScrollView>
             <StackLayout Padding="20">

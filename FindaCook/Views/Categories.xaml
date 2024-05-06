@@ -26,7 +26,7 @@
                     <VerticalStackLayout>
                         <Image Source="chinese.jpg" HeightRequest="400" WidthRequest="500" />
                         <!--<Label Text="Desi" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="22" Margin="0,0,0,0"/>-->
-                        <Button Text="Chinese" TextColor="White"  Command="{Binding CategoryClickedCommand}" CommandParameter="Desi" BackgroundColor="Orange"/>
+                        <Button Text="Chinese" TextColor="White"  Command="{Binding CategoryClickedCommand}" CommandParameter="Chinese" BackgroundColor="Orange"/>
                     </VerticalStackLayout>
                 </Grid>
             </HorizontalStackLayout>
@@ -38,7 +38,7 @@
                     <VerticalStackLayout>
                         <Image Source="continental.webp" HeightRequest="400" WidthRequest="500" />
                         <!--<Label Text="Desi" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="22" Margin="0,0,0,0"/>-->
-                        <Button Text="Continental" TextColor="White"  Command="{Binding CategoryClickedCommand}" CommandParameter="Desi" BackgroundColor="Orange"/>
+                        <Button Text="Continental" TextColor="White"  Command="{Binding CategoryClickedCommand}" CommandParameter="Continental" BackgroundColor="Orange"/>
                     </VerticalStackLayout>
                 </Grid>
 
@@ -46,7 +46,7 @@
                     <VerticalStackLayout>
                         <Image Source="thai.jpg" HeightRequest="400" WidthRequest="500" />
                         <!--<Label Text="Desi" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="22" Margin="0,0,0,0"/>-->
-                        <Button Text="Thai" TextColor="White"  Command="{Binding CategoryClickedCommand}" CommandParameter="Desi" BackgroundColor="Orange"/>
+                        <Button Text="Thai" TextColor="White"  Command="{Binding CategoryClickedCommand}" CommandParameter="Thai" BackgroundColor="Orange"/>
                     </VerticalStackLayout>
                 </Grid>
             </HorizontalStackLayout>
@@ -57,7 +57,7 @@
                     <VerticalStackLayout>
                         <Image Source="italian.jpg" HeightRequest="400" WidthRequest="500" />
                         <!--<Label Text="Desi" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="22" Margin="0,0,0,0"/>-->
-                        <Button Text="Italian" TextColor="White"  Command="{Binding CategoryClickedCommand}" CommandParameter="Desi" BackgroundColor="Orange"/>
+                        <Button Text="Italian" TextColor="White"  Command="{Binding CategoryClickedCommand}" CommandParameter="Italian" BackgroundColor="Orange"/>
                     </VerticalStackLayout>
                 </Grid>
 
@@ -65,7 +65,7 @@
                     <VerticalStackLayout>
                         <Image Source="fast.jpg" HeightRequest="400" WidthRequest="500" />
                         <!--<Label Text="Desi" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="22" Margin="0,0,0,0"/>-->
-                        <Button Text="Fast Food" TextColor="White"  Command="{Binding CategoryClickedCommand}" CommandParameter="Desi" BackgroundColor="Orange"/>
+                        <Button Text="Fast Food" TextColor="White"  Command="{Binding CategoryClickedCommand}" CommandParameter="Fast Food" BackgroundColor="Orange"/>
                     </VerticalStackLayout>
                 </Grid>
             </HorizontalStackLayout>

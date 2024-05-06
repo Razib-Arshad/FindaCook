@@ -5,38 +5,126 @@
              xmlns:viewmodel="clr-namespace:FindaCook.ViewModels"
              x:Class="FindaCook.Views.CookProfiles"
              x:DataType="viewmodel:CookProfileViewModel"
-             Title="CookProfiles">
+             Title="CookProfiles"
+             BackgroundImageSource="bg1.jpg">
 
     <ContentPage.Resources>
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="18" />
-            <Setter Property="Margin" Value="0,5,0,5" />
+            <Setter Property="Margin" Value="10,5,0,5" />
         </Style>
         <Style TargetType="Button">
             <Setter Property="FontSize" Value="16" />
-            <Setter Property="Margin" Value="0,10,0,10" />
+            <Setter Property="Margin" Value="15,10,0,10" />
         </Style>
     </ContentPage.Resources>
 
-    <VerticalStackLayout>
+
+    <Grid>
+        <BoxView Color="Black" Opacity="0.75" Margin="5,5,5, 5" CornerRadius="20" />
+   
+    <ScrollView>
+        
+        <VerticalStackLayout>
  
 
-        <Label Text="Sample Cook Profile" FontAttributes="Bold" Margin="0,20,0,0" />
-        <Label Text="{Binding FirstName}" />
-        <Label Text="{Binding LastName}" />
-        <Label Text="{Binding Email}" />
-        <Label Text="{Binding SkillsAndSpecialties}" />
-        <Label Text="{Binding SignatureDishes}" />
-        <Label Text="{Binding ServicesProvided}" />
-        <Label Text="{Binding ExperienceYears, StringFormat='Experience: {0} years'}" />
-        <Label Text="{Binding CulinarySchoolName}" />
-        <Label Text="{Binding HasCulinaryDegree, StringFormat='Has Culinary Degree: {0}'}" />
-        <Label Text="{Binding Degree}" />
-        <Label Text="{Binding Certificates}" />
-        <Label Text="{Binding EligibleToWork, StringFormat='Eligible To Work: {0}'}" />
+        <Label Text=" Cook Profile" FontAttributes="Bold"  FontFamily="Times New Roman" FontSize="40" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" TextColor="Orange"/>
+                <Label FontFamily="Times New Roman">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="First Name:   " FontAttributes="Bold" FontFamily="Times New Roman" />
+                            <Span Text="{Binding FirstName}" FontFamily="Times New Roman" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label FontFamily="Times New Roman">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Last Name:   " FontAttributes="Bold" FontFamily="Times New Roman"/>
+                            <Span Text="{Binding LastName}" FontFamily="Times New Roman" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                
+                <Label FontFamily="Times New Roman">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Skills and Specialities:   " FontAttributes="Bold" FontFamily="Times New Roman"/>
+                            <Span Text="{Binding SkillsAndSpecialties}" FontFamily="Times New Roman"  />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
 
+                <Label FontFamily="Times New Roman">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Signature Dishes:   " FontAttributes="Bold" FontFamily="Times New Roman"/>
+                            <Span Text="{Binding SignatureDishes}" FontFamily="Times New Roman"  />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label FontFamily="Times New Roman">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Services Provides:   " FontAttributes="Bold" FontFamily="Times New Roman"/>
+                            <Span Text="{Binding ServicesProvided}" FontFamily="Times New Roman" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label FontFamily="Times New Roman">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Experience:   " FontAttributes="Bold" FontFamily="Times New Roman"/>
+                            <Span Text="{Binding ExperienceYears, StringFormat='{0} years'}" FontFamily="Times New Roman" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label FontFamily="Times New Roman">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Culinary School Name:   " FontAttributes="Bold" FontFamily="Times New Roman"/>
+                            <Span Text="{Binding CulinarySchoolName}" FontFamily="Times New Roman" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label FontFamily="Times New Roman">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Has Culinary Degree:   " FontAttributes="Bold" FontFamily="Times New Roman"/>
+                            <Span Text="{Binding HasCulinaryDegree}" FontFamily="Times New Roman"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label FontFamily="Times New Roman">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Degree:   " FontAttributes="Bold" FontFamily="Times New Roman"/>
+                            <Span Text="{Binding Degree}" FontFamily="Times New Roman" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label FontFamily="Times New Roman">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Certificates:   " FontAttributes="Bold" FontFamily="Times New Roman"/>
+                            <Span Text="{Binding Certificates}" FontFamily="Times New Roman" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label FontFamily="Times New Roman">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Eligible to Work:   " FontAttributes="Bold" FontFamily="Times New Roman"/>
+                            <Span Text="{Binding EligibleToWork}" FontFamily="Times New Roman" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                
         <!-- Buttons -->
-        <Button Text="Add to Favorite" Command="{Binding AddToFavoritesCommand}" />
-        <Button Text="Order" Command="{Binding OrderCommand}" />
+        <Button Text="Add to Favorite" Command="{Binding AddToFavoritesCommand}" TextColor="White" FontSize="20" Margin="0,20,0,0" BackgroundColor="Orange" CornerRadius="30" WidthRequest="300" FontFamily="Times New Roman" />
+        <Button Text="Order" Command="{Binding OrderCommand}" TextColor="White" FontSize="20" Margin="0,20,0,0" BackgroundColor="Orange" CornerRadius="30" WidthRequest="300" FontFamily="Times New Roman"/>
     </VerticalStackLayout>
+    </ScrollView>
+    </Grid>
 </ContentPage>

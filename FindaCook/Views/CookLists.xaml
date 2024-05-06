@@ -5,40 +5,79 @@
              xmlns:vm="clr-namespace:FindaCook.ViewModels"
              x:DataType="vm:CookListViewModel" 
              x:Class="FindaCook.Views.CookLists"
-             Title="CookLists">
+             Title="CookLists"
+             BackgroundImageSource="bg1.jpg">
 
     <CollectionView ItemsSource="{Binding Cooks}">
+        <CollectionView.ItemsLayout>
+            <GridItemsLayout Orientation="Vertical"
+                             Span="2" />
+        </CollectionView.ItemsLayout>
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <Grid Padding="10">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
+                <Frame Padding="10"
+                       CornerRadius="10"
+                       HasShadow="True"
+                       BackgroundColor="Orange"
+                       Opacity="1.5"
+                       Margin="20,20,20,20">
+                    
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                    <Label Grid.Column="0"
-                     Text="{Binding FirstName}"
-                     FontAttributes="Bold">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CookListViewModel}}, Path=CookTappedCommand}" CommandParameter="{Binding .}" />
-                        </Label.GestureRecognizers>
-                    </Label>
+                        <Label Grid.Column="0"
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontFamily="Times New Roman">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Name: "
+                  FontAttributes="Bold" />
+                                    <Span Text="{Binding FirstName}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CookListViewModel}}, Path=CookTappedCommand}" CommandParameter="{Binding .}" />
+                            </Label.GestureRecognizers>
+                        </Label>
 
-                    <Label Grid.Column="1"
-                     Grid.Row="0"
-                     Text="{Binding SkillsAndSpecialties}"
-                     FontAttributes="Italic" />
 
-                    <Label Grid.Column="0"
-                     Grid.Row="1"
-                     Text="{Binding ExperienceYears, StringFormat='Experience: {0} years'}"
-                     FontAttributes="Italic"
-                     VerticalOptions="End" />
-                </Grid>
+                        <Label Grid.Column="1"
+                              Grid.Row="0"
+                              FontAttributes="Italic">
+                              <Label.FormattedText>
+                               <FormattedString>
+                                <Span Text="Skills and Specialties: "
+                               FontAttributes="Bold" />
+                               <Span Text="{Binding SkillsAndSpecialties}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label Grid.Column="0"
+                         Grid.Row="1"
+                         Grid.ColumnSpan="2"
+                          FontAttributes="Italic">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Experience: "
+                                 FontAttributes="Bold" />
+                                    <Span Text="{Binding ExperienceYears, StringFormat='{0} years'}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+
+                    </Grid>
+                </Frame>
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>
