@@ -104,8 +104,9 @@ namespace FindaCook.ViewModels
             if (success != null)
             {
 
-                var loginPageViewModel = new LoginPageViewModel();
-                await Application.Current.MainPage.Navigation.PushAsync(new Login(loginPageViewModel));
+                var appShell = new AppShell();  
+                App.Current.MainPage = appShell;
+
             }
             else
             {

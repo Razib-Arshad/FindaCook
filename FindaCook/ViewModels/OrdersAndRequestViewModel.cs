@@ -31,6 +31,7 @@ namespace FindaCook.ViewModels
             OrdersClickedCommand = new Command(async () => await ExecuteGetOrders());
         }
 
+
         private async Task ExecuteGetRequests()
         {
             try
