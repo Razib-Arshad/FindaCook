@@ -103,9 +103,12 @@ namespace FindaCook.ViewModels
 
             if (success != null)
             {
+                string message = "Cook Registered Successfully!";
+                await App.Current.MainPage.DisplayAlert("Status", message, "OK");
 
-                var loginPageViewModel = new LoginPageViewModel();
-                await Application.Current.MainPage.Navigation.PushAsync(new Login(loginPageViewModel));
+                var appShell = new AppShell();  // New root shell/navigation
+                App.Current.MainPage = appShell;
+
             }
             else
             {

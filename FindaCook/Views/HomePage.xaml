@@ -6,7 +6,6 @@
              x:DataType="ViewModels:HomePageViewModel" 
              x:Class="FindaCook.Views.HomePage "
                 BackgroundColor = "White"
-              BackgroundImageSource="bg1.jpg"
               >
 
 

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using FindaCook.Models; // Assuming CookProfile is here
+using FindaCook.Models; // Assuming FavouriteCookDetails is here
 using FindaCook.Services; // Assuming CookService is here
 using System.Windows.Input;
 
@@ -10,34 +10,37 @@ namespace FindaCook.ViewModels
 {
     public class FavouriteViewModel : ObservableObject
     {
-        private ObservableCollection<CookProfile> _favouriteCooks;
-        private readonly ICookRespository _cookRepository; // Dependency injection or direct instantiation
+        private ObservableCollection<FavouriteCookDetails> _favouriteCooks;
+
+        private readonly ICookRespository _cookRepository=new CookService(); // Using dependency injection or direct instantiation
+
+        public ICommand LoadFavouritesCommand { get; }
 
         public FavouriteViewModel()
         {
             
-            FavouriteCooks = new ObservableCollection<CookProfile>();
+
+            FavouriteCooks = new ObservableCollection<FavouriteCookDetails>();
             LoadFavouritesCommand = new AsyncRelayCommand(LoadFavouritesAsync);
 
             // Automatically load favorites on initialization
             LoadFavouritesAsync().ConfigureAwait(false);
         }
 
-        public ObservableCollection<CookProfile> FavouriteCooks
+        
+
+        public ObservableCollection<FavouriteCookDetails> FavouriteCooks
         {
             get => _favouriteCooks;
             set => SetProperty(ref _favouriteCooks, value);
         }
-
-        // Command to load favourites asynchronously
-        public ICommand LoadFavouritesCommand { get; }
 
         // Asynchronous method to load favorites
         public async Task LoadFavouritesAsync()
         {
             try
             {
-                var favourites = await _cookRepository.getFavourites("user-id"); // Modify to your context
+                var favourites = await _cookRepository.getFavourites(); // Assume returns ICollection<FavouriteCookDetails>
 
                 FavouriteCooks.Clear(); // Clear existing items
                 foreach (var cook in favourites)
@@ -53,10 +56,10 @@ namespace FindaCook.ViewModels
         }
 
         //// Command to remove a favourite
-        //public ICommand RemoveFavouriteCommand => new AsyncRelayCommand<CookProfile>(RemoveFavouriteAsync);
+        //public ICommand RemoveFavouriteCommand => new AsyncRelayCommand<FavouriteCookDetails>(RemoveFavouriteAsync);
 
         //// Asynchronous method to remove a favourite cook
-        //public async Task RemoveFavouriteAsync(CookProfile cookProfile)
+        //public async Task RemoveFavouriteAsync(FavouriteCookDetails cookProfile)
         //{
         //    try
         //    {

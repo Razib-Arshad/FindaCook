@@ -92,48 +92,53 @@ namespace FindaCook.Services
             }
         }
 
-        
-        
-        public async Task<ICollection<CookProfile>> getFavourites(string id)
+
+
+        public async Task<ICollection<FavouriteCookDetails>> getFavourites()
+        {
+            try
             {
-                try
+                using (var client = new HttpClient())
                 {
-                    using (var client = new HttpClient())
+                    var id = Preferences.Get("UserID", string.Empty);
+                    string apiUrl = $"https://localhost:7224/api/Favourites/favourites/user/{id}";
+
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    if (response.IsSuccessStatusCode)
                     {
-                        // Construct the URL for getting favorite cooks by user ID
-                        string apiUrl = $"https://localhost:7224/api/UserCook/favourites?userId={id}";
+                        string contentString = await response.Content.ReadAsStringAsync();
+                        var responseContainer = JsonConvert.DeserializeObject<ResponseContainer>(contentString);
 
-                        // Send the GET request
-                        HttpResponseMessage response = await client.GetAsync(apiUrl);
-
-                        if (response.IsSuccessStatusCode)
+                        var favouriteCooks = JsonConvert.DeserializeObject<List<FavouriteCookDetails>>(JsonConvert.SerializeObject(responseContainer.Data));
+                        return favouriteCooks;
+                    }
+                    else
+                    {
+                        var errorResponse = new
                         {
-                            string contentString = await response.Content.ReadAsStringAsync();
-                            var dataContainer = JsonConvert.DeserializeObject<DataContainer>(contentString);
+                            StatusCode = (int)response.StatusCode,
+                            Message = "An error occurred while retrieving favorites",
+                            ErrorDetails = await response.Content.ReadAsStringAsync()
+                        };
 
-                            List<CookProfile> favorites = dataContainer.Data;
-
-                            return favorites;
-                        }
-                        else
-                        {
-                            var errorResponse = new
-                            {
-                                StatusCode = (int)response.StatusCode,
-                                Message = "An error occurred while retrieving favorites",
-                                ErrorDetails = await response.Content.ReadAsStringAsync()
-                            };
-
-                            throw new Exception(JsonConvert.SerializeObject(errorResponse));
-                        }
+                        throw new Exception(JsonConvert.SerializeObject(errorResponse));
                     }
                 }
-                catch (Exception ex)
-                {
-                    throw new Exception($"An error occurred: {ex.Message}");
-                }
             }
-        
+            catch (Exception ex)
+            {
+                throw new Exception($"An error occurred: {ex.Message}");
+            }
+        }
+
+        public class ResponseContainer
+        {
+            public int StatusCode { get; set; }
+            public string Message { get; set; }
+            public List<FavouriteCookDetails> Data { get; set; }
+        }
+
 
         public async Task<RegistrationResultClass> RegisterCook(Person p, QualificationInfo q, ProfessionalInfoModel prof)
         {
@@ -154,6 +159,7 @@ namespace FindaCook.Services
                     // Create a JSON object to send in the request body
                     var registrationCookData = new
                     {
+                        Id="null",
                         Email = Email,
                         UserPassword = Password,
                         FirstName = p.FirstName,
