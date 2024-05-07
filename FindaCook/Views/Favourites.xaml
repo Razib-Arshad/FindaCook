@@ -1,28 +1,49 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FindaCook.Favourites"
              xmlns:model="clr-namespace:FindaCook.Models"
-
-              xmlns:vm="clr-namespace:FindaCook.ViewModels"
-              x:DataType="vm:FavouriteViewModel" 
+             xmlns:vm="clr-namespace:FindaCook.ViewModels"
+             x:Class="FindaCook.Favourites"
+             x:DataType="vm:FavouriteViewModel" 
              Title="Favourites">
 
-    <StackLayout Padding="10">
-        <Label Text="Favourites" HorizontalOptions="Center" FontSize="40" FontAttributes="Bold" Margin="0,20"/>
+    <ScrollView>
+        <StackLayout Padding="20">
+            <Label Text="Favourites" 
+                   HorizontalOptions="Center" 
+                   FontSize="30" 
+                   FontAttributes="Bold" 
+                   Margin="0,20"/>
 
-        <CollectionView ItemsSource="{Binding FavouriteCooks}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:CookProfile">
-                    <!-- Make sure the namespace is correctly defined -->
-                    <Grid Margin="0,10">
-                        <StackLayout Margin="110,0,0,0">
-                            <Label Text="{Binding FirstName}" FontSize="Large" FontAttributes="Bold"/>
-                            <Label Text="{Binding SkillsAndSpecialties}" FontSize="Small" Margin="0,5,0,0"/>
-                        </StackLayout>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
-    </StackLayout>
+            <CollectionView ItemsSource="{Binding FavouriteCooks}" 
+                            VerticalOptions="FillAndExpand" 
+                            HorizontalOptions="FillAndExpand">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:FavouriteCookDetails">
+                        <Frame Padding="10" Margin="5" CornerRadius="10" BorderColor="LightGray">
+                            <StackLayout>
+                                <Label Text="{Binding FirstName}" 
+                                       FontSize="22" 
+                                       FontAttributes="Bold"/>
+                                <Label Text="{Binding LastName}" 
+                                       FontSize="18" 
+                                       FontAttributes="Italic"/>
+                                <Label Text="{Binding SkillsAndSpecialties}" 
+                                       FontSize="16" 
+                                       Margin="0,5,0,0"/>
+                                <Label Text="{Binding ServicesProvided}"
+                                       FontSize="16"
+                                       Margin="0,5,0,0"/>
+                                <Label Text="{Binding SignatureDishes}"
+                                       FontSize="16"
+                                       Margin="0,5,0,0"/>
+                                <Label Text="{Binding ExperienceYears, StringFormat='Experience: {0} years'}"
+                                       FontSize="16"
+                                       Margin="0,5,0,0"/>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

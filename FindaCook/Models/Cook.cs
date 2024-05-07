@@ -8,30 +8,7 @@ using System.Threading.Tasks;
 
 namespace FindaCook.Models
 {
-    //public class Cook
-    //{
-    //    public string FirstName { get; set; }
-    //    public string LastName { get; set; }
-    //    public string ContactNumber { get; set; }
-    //    public string WhatsappNumber { get; set; }
-    //    public string CurrentAddress { get; set; }
-    //    public string Email { get; set; }
-    //    public string password { get; set; } 
-    //    public string PermanentAddress { get; set; }
-    //    public bool EligibleToWork { get; set; }
-
-    //    // Qualification Information
-    //    public bool HasCulinaryDegree { get; set; }
-    //    public string Degree { get; set; }
-    //    public string Certificates { get; set; }
-    //    public string CulinarySchoolName { get; set; }
-
-    //    // Professional Information
-    //    public int ExperienceYears { get; set; }
-    //    public string SignatureDishes { get; set; }
-    //    public List<string> Skills { get; set; }
-    //    public List<string> Services { get; set; }
-    //}
+    
     public class Cook
     {
         public string FirstName { get; set; }
@@ -88,6 +65,15 @@ namespace FindaCook.Models
     {
         [JsonProperty("data")]
         public List<Orders> Data { get; set; }
+    }
+    public class FavouriteCookDetails
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string SkillsAndSpecialties { get; set; }
+        public string ServicesProvided { get; set; }
+        public string SignatureDishes { get; set; }
+        public int ExperienceYears { get; set; }
     }
 
 

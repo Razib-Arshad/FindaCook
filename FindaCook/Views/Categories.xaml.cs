@@ -9,6 +9,7 @@ namespace FindaCook.Views
             InitializeComponent();
            
             BindingContext = new CategoriesViewModel();
+
         }
     }
 }
