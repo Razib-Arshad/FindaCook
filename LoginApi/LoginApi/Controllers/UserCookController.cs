@@ -395,6 +395,104 @@ namespace LoginApi.Controllers
             
         }
 
+        [HttpGet("search/by/skills")]
+        public async Task<ActionResult> SearchBySkills(string skills)
+        {
+            try
+            {
+                var cooks = await _context.CookInfos
+                    .Where(c => c.SkillsAndSpecialties.Contains(skills))
+                    .Select(c => new
+                    {
+                        c.FirstName,
+                        c.LastName,
+                        c.Email,
+                        c.SkillsAndSpecialties,
+                        c.SignatureDishes,
+                        c.ServicesProvided,
+                        c.ExperienceYears,
+                        c.CulinarySchoolName,
+                        c.HasCulinaryDegree,
+                        c.Degree,
+                        c.Certificates,
+                        c.EligibleToWork
+                    })
+                    .ToListAsync();
+
+                var response = new
+                {
+                    StatusCode = 200,
+                    Message = "Cooks retrieved successfully",
+                    Data = cooks
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                var errorResponse = new
+                {
+                    StatusCode = 500,
+                    Message = "An error occurred while retrieving cooks",
+                    ErrorDetails = ex.Message
+                };
+
+                return StatusCode(500, errorResponse);
+            }
+        }
+
+        [HttpGet("search/by/multiple")]
+        public async Task<ActionResult> SearchByMultipleCriteria(string skills, string category, string firstName, string lastName)
+        {
+            try
+            {
+                var cooks = await _context.CookInfos
+                    .Where(c =>
+                        (string.IsNullOrEmpty(skills) || c.SkillsAndSpecialties.Contains(skills)) &&
+                        (string.IsNullOrEmpty(category) || c.SkillsAndSpecialties.Contains(category)) &&
+                        (string.IsNullOrEmpty(firstName) || c.FirstName.Contains(firstName)) &&
+                        (string.IsNullOrEmpty(lastName) || c.LastName.Contains(lastName))
+                    )
+                    .Select(c => new
+                    {
+                        c.FirstName,
+                        c.LastName,
+                        c.Email,
+                        c.SkillsAndSpecialties,
+                        c.SignatureDishes,
+                        c.ServicesProvided,
+                        c.ExperienceYears,
+                        c.CulinarySchoolName,
+                        c.HasCulinaryDegree,
+                        c.Degree,
+                        c.Certificates,
+                        c.EligibleToWork
+                    })
+                    .ToListAsync();
+
+                var response = new
+                {
+                    StatusCode = 200,
+                    Message = "Cooks retrieved successfully",
+                    Data = cooks
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                var errorResponse = new
+                {
+                    StatusCode = 500,
+                    Message = "An error occurred while retrieving cooks",
+                    ErrorDetails = ex.Message
+                };
+
+                return StatusCode(500, errorResponse);
+            }
+        }
+
+
         [HttpPut("profile/update_cook")]
         public async Task<ActionResult> UpdateProfile(CookInfoViewModel model)
         {
