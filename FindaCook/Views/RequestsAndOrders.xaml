@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:FindaCook"
+             xmlns:viewmodel="clr-namespace:FindaCook.ViewModels"
+             x:DataType="viewmodel:OrdersAndRequestViewModel"
              x:Class="FindaCook.Views.RequestsAndOrders"
-
              Title="RequestsAndOrders">
 
 
     <VerticalStackLayout>
         <HorizontalStackLayout>
-            <Button Text="Requests" TextColor="White"  Command="{Binding RequestsClickedCommand}" BackgroundColor="Orange" />
-            <Button Text="Orders" TextColor="White"  Command="{Binding OrdersClickedCommand}" BackgroundColor="Orange" />
+            <Button Text="Requests" TextColor="White" Command="{Binding ExecuteGetRequestsCommand}" BackgroundColor="Orange" />
+            <Button Text="Orders" TextColor="White" Command="{Binding ExecuteGetOrdersCommand}" BackgroundColor="Orange" />
 
         </HorizontalStackLayout>
         <StackLayout>
             <ListView ItemsSource="{Binding DisplayedData}"
-                  IsPullToRefreshEnabled="true"
-                  RefreshCommand="{Binding RequestsClickedCommand}">
+          IsPullToRefreshEnabled="true"
+          RefreshCommand="{Binding RefreshDataCommand}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <!-- Define how each item should be displayed -->
-                        <TextCell Text="{Binding Price}" Detail="{Binding Price}" />
+                        <!--<TextCell Text="{Binding ItemDescription}" Detail="{Binding Price}" />-->
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
         </StackLayout>
     </VerticalStackLayout>
 </ContentPage>

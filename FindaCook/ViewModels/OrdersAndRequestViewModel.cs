@@ -1,74 +1,59 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using FindaCook.Models;
+using FindaCook.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using FindaCook.Services;
-using FindaCook.Models;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace FindaCook.ViewModels
 {
-    public partial class OrdersAndRequestViewModel : ObservableObject
+    [ObservableObject]
+    public partial class OrdersAndRequestViewModel
     {
-        private readonly CookService _cookService;
+        [ObservableProperty]
+        private ICollection<Orders> displayedData;
 
-        private ICollection<Orders> _requests;
-        private ICollection<Orders> _orders;
+        readonly ICookRespository _cookService;  // Ensure this name matches your interface
 
-        // Property to bind to the ListView
-        public ICollection<Orders> DisplayedData { get; set; }
-        public ICommand RequestsClickedCommand { get; }
-        public ICommand OrdersClickedCommand { get; }
         public OrdersAndRequestViewModel()
         {
             _cookService = new CookService();
-            RequestsClickedCommand = new Command(async () => await ExecuteGetRequests());
-            OrdersClickedCommand = new Command(async () => await ExecuteGetOrders());
         }
 
+        [RelayCommand]
         private async Task ExecuteGetRequests()
         {
             try
             {
-                // Call the service method to get requests
-                _requests = await _cookService.GetOrderRequests();
-
-                // Process the received requests as needed
-                // Update the displayed data
-                DisplayedData = _requests;
-
-                // Notify the UI that the property value has changed
-                OnPropertyChanged(nameof(DisplayedData));
+                var requests = await _cookService.GetOrderRequests();
+                DisplayedData = requests;
             }
             catch (Exception ex)
             {
-                // Handle exception or log error
+                // Handle exception
             }
         }
 
+        [RelayCommand]
         private async Task ExecuteGetOrders()
         {
             try
             {
-                // Call the service method to get orders
-                _orders = await _cookService.GetOrders();
-
-                // Process the received orders as needed
-                // Update the displayed data
-                DisplayedData = _orders;
-
-                // Notify the UI that the property value has changed
-                OnPropertyChanged(nameof(DisplayedData));
+                var orders = await _cookService.GetOrders();
+                DisplayedData = orders;
             }
             catch (Exception ex)
             {
-                // Handle exception or log error
+                // Handle exception
             }
+        }
+
+        [RelayCommand]
+        private async Task RefreshData()
+        {
+            await ExecuteGetRequests();
+            await ExecuteGetOrders();
         }
     }
 }
