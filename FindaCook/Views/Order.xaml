@@ -49,7 +49,7 @@
                 <StackLayout Orientation="Horizontal" Margin="10,20,10,0">
                     <Label Text="Price:" VerticalOptions="Center" WidthRequest="130" FontSize="20" FontFamily="Times New Roman"/>
                     <Entry Placeholder="Enter Price" x:Name="PriceEntry" HorizontalOptions="FillAndExpand" 
-                           Text="{Binding Price, StringFormat='{0:F2}'}" Keyboard="Numeric"/>
+                           Text="{Binding Price}" Keyboard="Numeric"/>
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Margin="10,20,10,0">

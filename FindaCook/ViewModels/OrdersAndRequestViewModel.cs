@@ -3,21 +3,23 @@ using CommunityToolkit.Mvvm.Input;
 using FindaCook.Models;
 using FindaCook.Services;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FindaCook.ViewModels
 {
-    [ObservableObject]
-    public partial class OrdersAndRequestViewModel
+    public partial class OrdersAndRequestViewModel : ObservableObject
     {
         [ObservableProperty]
-        private ICollection<Orders> displayedData;
+        private ObservableCollection<SimpleOrderDTO> _displayedData;
 
-        readonly ICookRespository _cookService;  // Ensure this name matches your interface
+        readonly ICookRespository _cookService;
 
         public OrdersAndRequestViewModel()
         {
+            _displayedData = new ObservableCollection<SimpleOrderDTO>();
             _cookService = new CookService();
         }
 
@@ -27,11 +29,23 @@ namespace FindaCook.ViewModels
             try
             {
                 var requests = await _cookService.GetOrderRequests();
-                DisplayedData = requests;
+                if (requests != null)
+                {
+                    DisplayedData.Clear();
+                    foreach (var request in requests)
+                    {
+                        DisplayedData.Add(request);
+                    }
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine($"Error fetching orders");
+
+                }
             }
             catch (Exception ex)
             {
-                // Handle exception
+                System.Diagnostics.Debug.WriteLine($"Error fetching orders: {ex.Message}");
             }
         }
 
@@ -41,19 +55,26 @@ namespace FindaCook.ViewModels
             try
             {
                 var orders = await _cookService.GetOrders();
-                DisplayedData = orders;
+                if (orders != null)
+                {
+                    DisplayedData.Clear();
+                    foreach (var order in orders)
+                    {
+                        DisplayedData.Add(order);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                // Handle exception
+                System.Diagnostics.Debug.WriteLine($"Error fetching orders: {ex.Message}");
             }
         }
 
         [RelayCommand]
         private async Task RefreshData()
         {
-            await ExecuteGetRequests();
-            await ExecuteGetOrders();
+            await Task.WhenAll(ExecuteGetRequests(), ExecuteGetOrders());
         }
+
     }
 }
