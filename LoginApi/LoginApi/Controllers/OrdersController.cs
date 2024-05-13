@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LoginApi.Models;
 using static NuGet.Packaging.PackagingConstants;
+using LoginApi.ViewModels;
 
 namespace LoginApi.Controllers
 {
@@ -47,27 +48,35 @@ namespace LoginApi.Controllers
             {
                 return NotFound(new { StatusCode = 404, Message = "Order table is empty" });
             }
-            var order = await _context.Order.FindAsync(id);
 
-            if (order == null)
+            try
             {
-                return NotFound(new { StatusCode = 404, Message = "Order not found with this " + id });
+                var order = await _context.Order.FindAsync(id);
+
+                if (order == null)
+                {
+                    return NotFound(new { StatusCode = 404, Message = "Order not found with this " + id });
+                }
+
+                var response = new
+                {
+                    StatusCode = 200,
+                    Message = "order retrieved successfully",
+                    Data = order
+                };
+
+                return Ok(response);
             }
-
-            var response = new
+            catch(Exception ex)
             {
-                StatusCode = 200,
-                Message = "order retrieved successfully",
-                Data = order
-            };
-
-            return Ok(response);
+                return StatusCode(500, new { StatusCode = 500, Message = ex.Message });
+            }
         }
 
         // PUT: api/Orders/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("order/update/{id}")]
-        public async Task<IActionResult> PutOrder(int id, Order order)
+        public async Task<IActionResult> PutOrder(int id, OrderViewModel order)
         {
             if (id != order.OrderId)
             {
@@ -102,22 +111,37 @@ namespace LoginApi.Controllers
         // POST: api/Orders
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("order/post")]
-        public async Task<ActionResult<Order>> PostOrder(Order order)
+        public async Task<ActionResult<Order>> PostOrder(OrderViewModel orderViewModel)
         {
-            if (_context.Order == null)
+            try
             {
-                return NotFound(new { StatusCode = 400, Message = "Entity set 'AppDbContext.Order'  is null." });
-            }
-            _context.Order.Add(order);
-            await _context.SaveChangesAsync();
-            var response = new
-            {
-                StatusCode = 200,
-                Message = "post order successfully"
-            };
-            return Ok(response);
+                if (_context.Order == null)
+                {
+                    return NotFound(new { StatusCode = 400, Message = "Entity set 'AppDbContext.Order' is null." });
+                }
 
+                var order = new Order
+                {
+                    RqId = orderViewModel.RqId
+                };
+
+                _context.Order.Add(order);
+                await _context.SaveChangesAsync();
+
+                var response = new
+                {
+                    StatusCode = 200,
+                    Message = "Post order successful"
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { StatusCode = 500, Message = ex.Message });
+            }
         }
+
 
         // DELETE: api/Orders/5
         [HttpDelete("order/delete/{id}")]
@@ -127,21 +151,28 @@ namespace LoginApi.Controllers
             {
                 return NotFound(new { StatusCode = 400, Message = "Entity set 'AppDbContext.Order'  is null." });
             }
-            var order = await _context.Order.FindAsync(id);
-            if (order == null)
+            try
             {
-                return NotFound(new { StatusCode = 400, Message = "Order'  is not found wiht this " + id });
+                var order = await _context.Order.FindAsync(id);
+                if (order == null)
+                {
+                    return NotFound(new { StatusCode = 400, Message = "Order'  is not found wiht this " + id });
+                }
+
+                _context.Order.Remove(order);
+                await _context.SaveChangesAsync();
+
+                var response = new
+                {
+                    StatusCode = 200,
+                    Message = "delete order successfully"
+                };
+                return Ok(response);
             }
-
-            _context.Order.Remove(order);
-            await _context.SaveChangesAsync();
-
-            var response = new
+            catch(Exception ex)
             {
-                StatusCode = 200,
-                Message = "delete order successfully"
-            };
-            return Ok(response);
+                return StatusCode(500, new { StatusCode = 500, Message = ex.Message });
+            }
         }
 
         private bool OrderExists(int id)

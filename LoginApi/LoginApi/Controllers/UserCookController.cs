@@ -17,6 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Net;
+using Azure;
 
 namespace LoginApi.Controllers
 {
@@ -48,75 +49,122 @@ namespace LoginApi.Controllers
         [HttpPost("Register")]
         public async Task<ActionResult> Add(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-
-                var user = new ApplicationUser
+                if (ModelState.IsValid)
                 {
-                    UserName = model.Username,
-                    Email = model.Email,
-                    UserPassword = model.Password
-                };
+                    // Check if a user with the same email or username already exists
+                    var existingUserByEmail = await _userManager.FindByEmailAsync(model.Email);
 
-                var userInfo = new User
-                {
-                    UserName = model.Username,
-                    Email = model.Email,
-                    UserPassword = model.Password
-                };
+                    if (existingUserByEmail != null)
+                    {
+                        var responseObject = new
+                        {
+                            Message = "Email is already registered."
+                        };
+                        return BadRequest(responseObject);
+                    }
 
-                IdentityResult? result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    _context.Users.Add(userInfo);
-                    await _context.SaveChangesAsync();
-                    return Ok("User created successfully");
+                    var user = new ApplicationUser
+                    {
+                        UserName = model.Username,
+                        Email = model.Email,
+                        UserPassword = model.Password
+                    };
+
+                    var userInfo = new User
+                    {
+                        UserName = model.Username,
+                        Email = model.Email,
+                        UserPassword = model.Password
+                    };
+
+                    IdentityResult? result = await _userManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        _context.Users.Add(userInfo);
+                        await _context.SaveChangesAsync();
+                        var responseObject = new
+                        {
+                            Message = "User created successfully"
+                        };
+                        return Ok(responseObject);
+                    }
+                    else
+                    {
+                        var responseObject = new
+                        {
+                            Message = result.Errors
+                        };
+                        return BadRequest(responseObject);
+                    }
                 }
                 else
                 {
-                    return BadRequest(result.Errors);
+                    var responseObject = new
+                    {
+                        Message = "Invalid Request"
+                    };
+                    return BadRequest(responseObject);
                 }
             }
-
-            return BadRequest("Invalid Request");
+            catch(Exception ex)
+            {
+                return StatusCode(500, new { StatusCode = 500, Message = ex.Message });
+            }
         }
 
         [HttpPost("RegisterCook")]
         public async Task<ActionResult> RegisterCook(CookInfoViewModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                // Additional logic to create CookInfo
-                var cookInfo = new CookInfo
+                if (ModelState.IsValid)
                 {
-                    Email = model.Email,
-                    UserPassword=model.UserPassword,
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    ContactNumber = model.ContactNumber,
-                    WhatsappNumber = model.WhatsappNumber,
-                    CurrentAddress = model.CurrentAddress,
-                    PermanentAddress = model.PermanentAddress,
-                    EligibleToWork = model.EligibleToWork,
-                    HasCulinaryDegree = model.HasCulinaryDegree,
-                    Degree = model.Degree,
-                    Certificates = model.Certificates,
-                    CulinarySchoolName = model.CulinarySchoolName,
-                    ExperienceYears = model.ExperienceYears,
-                    SkillsAndSpecialties = model.SkillsAndSpecialties,
-                    SignatureDishes = model.SignatureDishes,
-                    ServicesProvided = model.ServicesProvided
-                };
+                    // Check if a user with the same email already exists in CookInfo table
+                    var existingCook = await _context.CookInfos.FirstOrDefaultAsync(c => c.Email == model.Email);
 
-                _context.CookInfos.Add(cookInfo);
-                await _context.SaveChangesAsync();
-                return Ok("User registered as a cook successfully");
+                    if (existingCook != null)
+                    {
+                        return BadRequest("Email is already registered as a cook.");
+                    }
+
+                    // Additional logic to create CookInfo
+                    var cookInfo = new CookInfo
+                    {
+                        Email = model.Email,
+                        UserPassword = model.UserPassword,
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        ContactNumber = model.ContactNumber,
+                        WhatsappNumber = model.WhatsappNumber,
+                        CurrentAddress = model.CurrentAddress,
+                        PermanentAddress = model.PermanentAddress,
+                        EligibleToWork = model.EligibleToWork,
+                        HasCulinaryDegree = model.HasCulinaryDegree,
+                        Degree = model.Degree,
+                        Certificates = model.Certificates,
+                        CulinarySchoolName = model.CulinarySchoolName,
+                        ExperienceYears = model.ExperienceYears,
+                        SkillsAndSpecialties = model.SkillsAndSpecialties,
+                        SignatureDishes = model.SignatureDishes,
+                        ServicesProvided = model.ServicesProvided
+                    };
+
+                    _context.CookInfos.Add(cookInfo);
+                    await _context.SaveChangesAsync();
+                    return Ok("User registered as a cook successfully");
+                }
+
+                return BadRequest("Invalid Request");
             }
-            
-            
-            return BadRequest("Invalid Request");
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { StatusCode = 500, Message = ex.Message });
+            }
         }
+
 
         private string GenerateJwtToken(ApplicationUser user)
         {
@@ -146,34 +194,45 @@ namespace LoginApi.Controllers
         [HttpPost("login")]
         public async Task<ActionResult> Login(LoginViewModel model)
         {
-            Console.WriteLine(model);
-            Console.WriteLine($"Received login request for email: {model.Email}");
-
-            if (ModelState.IsValid)
+            try
             {
-                var user = await _userManager.FindByEmailAsync(model.Email);
-                Console.WriteLine(user);
-                if (user != null)
+                if (ModelState.IsValid)
                 {
-                    var result = await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: false, lockoutOnFailure: false);
-
-                    if (result.Succeeded)
+                    var user = await _userManager.FindByEmailAsync(model.Email);
+                    Console.WriteLine(user);
+                    if (user != null)
                     {
-                        var token = GenerateJwtToken(user);
-                        var responseObject = new
+                        var result = await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: false, lockoutOnFailure: false);
+
+                        if (result.Succeeded)
                         {
-                            User = new
+                            var token = GenerateJwtToken(user);
+                            var responseObject = new
                             {
-                                Id = user.Id,
-                                UserName = user.UserName,
-                                UserEmail = user.Email
+                                User = new
+                                {
+                                    Id = user.Id,
+                                    UserName = user.UserName,
+                                    UserEmail = user.Email
 
-                            },
-                            Token = token,
-                            Message = "Login successful"
-                        };
+                                },
+                                Token = token,
+                                Message = "Login successful"
+                            };
 
-                        return Ok(responseObject);
+                            return Ok(responseObject);
+                        }
+                        else
+                        {
+                            var responseObject = new
+                            {
+                                User = (object)null,
+                                Token = (string)null,
+                                Message = "Invalid login attempt"
+                            };
+
+                            return BadRequest(responseObject);
+                        }
                     }
                     else
                     {
@@ -181,25 +240,18 @@ namespace LoginApi.Controllers
                         {
                             User = (object)null,
                             Token = (string)null,
-                            Message = "Invalid login attempt"
+                            Message = "Invalid login attempt. Object not found"
                         };
 
                         return BadRequest(responseObject);
                     }
                 }
-                else
-                {
-                    var responseObject = new
-                    {
-                        User = (object)null,
-                        Token = (string)null,
-                        Message = "Invalid login attempt. Object not found"
-                    };
-
-                    return BadRequest(responseObject);
-                }
+                return BadRequest("Invalid Request");
             }
-            return BadRequest("Invalid Request");
+            catch(Exception ex)
+            {
+                return StatusCode(500, new { StatusCode = 500, Message = ex.Message });
+            }
         }
 
         [HttpGet("categories/get/servicesprovided")]
@@ -556,37 +608,51 @@ namespace LoginApi.Controllers
         [HttpPut("password/change")]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+            try
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    var errorResponse = new
+                    {
+                        StatusCode = 404,
+                        Message = "Not Found",
+                    };
+
+                    return NotFound(errorResponse);
+                }
+
+                var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                if (result.Succeeded)
+                {
+                    var response = new
+                    {
+                        StatusCode = 200,
+                        Message = "Password changed successfully",
+                        Data = result
+                    };
+                    return Ok(response);
+                }
+                else
+                {
+                    var response = new
+                    {
+                        Message = "Password not changed",
+                        Data = result.Errors
+                    };
+                    return BadRequest(response);
+                }
+            }
+            catch(Exception ex)
             {
                 var errorResponse = new
                 {
-                    StatusCode = 404,
-                    Message = "Not Found",
+                    StatusCode = 500,
+                    Message = "An error occurred while updating cook's profile",
+                    ErrorDetails = ex.Message
                 };
 
-                return NotFound(errorResponse);
-            }
-
-            var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
-            if (result.Succeeded)
-            {
-                var response = new
-                {
-                    StatusCode = 200,
-                    Message = "Password changed successfully",
-                    Data = result
-                };
-                return Ok(response);
-            }
-            else
-            {
-                var response = new
-                {
-                    Message = "Password not changed",
-                    Data = result.Errors
-                };
-                return BadRequest(response);
+                return StatusCode(500, errorResponse);
             }
         }
 

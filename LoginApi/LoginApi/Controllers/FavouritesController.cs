@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using LoginApi.Models;
 using Azure;
 using Microsoft.Extensions.Configuration.UserSecrets;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace LoginApi.Controllers
 {
@@ -48,19 +49,33 @@ namespace LoginApi.Controllers
           {
               return NotFound(new { StatusCode = 400, Message = "Entity set 'AppDbContext.Favourite'  is null." });
           }
-            var favourite = await _context.Favourites.FindAsync(id);
+            try
+            {
+                var favourite = await _context.Favourites.FindAsync(id);
 
-            if (favourite == null)
-            {
-                return NotFound(new { StatusCode = 400, Message = "not found favourite in db with this id " + id });
+                if (favourite == null)
+                {
+                    return NotFound(new { StatusCode = 400, Message = "not found favourite in db with this id " + id });
+                }
+                var response = new
+                {
+                    StatusCode = 200,
+                    Message = "post order successfully",
+                    Data = favourite
+                };
+                return Ok(response);
             }
-            var response = new
+            catch(Exception ex)
             {
-                StatusCode = 200,
-                Message = "post order successfully",
-                Data = favourite
-            };
-            return Ok(response);
+                // Log the exception or handle it as needed
+                var errorResponse = new
+                {
+                    StatusCode = 500,
+                    ErrorDetails = ex.Message
+                };
+
+                return StatusCode(500, errorResponse);
+            }
         }
 
         [HttpGet("favourites/user/{userId}")]
@@ -158,21 +173,52 @@ namespace LoginApi.Controllers
           {
                 return NotFound(new { StatusCode = 400, Message = "Entity set 'AppDbContext.Favourite'  is null." });
           }
-            var fav = new Favourite
+          try
             {
-                UserId = favourite.UserId,
-                CookInfoId = favourite.CookInfoId,
+                var favourites = await _context.Favourites
+                      .Where(f => f.UserId == favourite.UserId)
+                      .ToListAsync();
+                if (favourites != null)
+                {
+                    var fav = new Favourite
+                    {
+                        UserId = favourite.UserId,
+                        CookInfoId = favourite.CookInfoId,
 
-            };
-            _context.Favourites.Add(fav);
-            await _context.SaveChangesAsync();
+                    };
+                    _context.Favourites.Add(fav);
+                    await _context.SaveChangesAsync();
 
-            var response = new
+                    var response = new
+                    {
+                        StatusCode = 200,
+                        Message = "add favourite successfully"
+                    };
+                    return Ok(response);
+                }
+                else
+                {
+                    var response = new
+                    {
+                        StatusCode = 404,
+                        Message = "cook already exist in user's favourites list"
+                    };
+                    return Ok(response);
+                }
+            }
+            catch(Exception ex)
             {
-                StatusCode = 200,
-                Message = "add favourite successfully"
-            };
-            return Ok(response);
+                // Log the exception or handle it as needed
+                var errorResponse = new
+                {
+                    StatusCode = 500,
+                    ErrorDetails = ex.Message
+                };
+
+                return StatusCode(500, errorResponse);
+            }
+            
+            
         }
 
         // DELETE: api/Favourites/5
@@ -183,22 +229,67 @@ namespace LoginApi.Controllers
             {
                 return NotFound(new { StatusCode = 400, Message = "Entity set 'AppDbContext.Favourite'  is null." });
             }
-            var favourite = await _context.Favourites.FindAsync(id);
-            if (favourite == null)
+
+            try
             {
-                return NotFound();
+                var favourite = await _context.Favourites.FindAsync(id);
+                if (favourite == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Favourites.Remove(favourite);
+                await _context.SaveChangesAsync();
+
+                var response = new
+                {
+                    StatusCode = 200,
+                    Message = "delete favourite successfully"
+                };
+                return Ok(response);
             }
-
-            _context.Favourites.Remove(favourite);
-            await _context.SaveChangesAsync();
-
-            var response = new
+            catch(Exception ex)
             {
-                StatusCode = 200,
-                Message = "delete favourite successfully"
-            };
-            return Ok(response);
+                // Log the exception or handle it as needed
+                var errorResponse = new
+                {
+                    StatusCode = 500,
+                    ErrorDetails = ex.Message
+                };
+
+                return StatusCode(500, errorResponse);
+            }
         }
+
+        // DELETE: api/Favourites_User/UserId
+        [HttpDelete("favourite_user/delete/{userId}/{cookId}")]
+        public async Task<IActionResult> DeleteUserFavourite(string userId, string cookId)
+        {
+            try
+            {
+                var favourite = await _context.Favourites.FirstOrDefaultAsync(f => f.UserId == userId && f.CookInfoId == cookId);
+
+                if (favourite == null)
+                {
+                    return NotFound(new { StatusCode = 404, Message = "Favorite not found for the given user and cook." });
+                }
+
+                _context.Favourites.Remove(favourite);
+                await _context.SaveChangesAsync();
+
+                var response = new
+                {
+                    StatusCode = 200,
+                    Message = "Favorite deleted successfully"
+                };
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { StatusCode = 500, Message = ex.Message });
+            }
+        }
+
 
         private bool FavouriteExists(int id)
         {
