@@ -6,7 +6,7 @@
              x:DataType="viewmodel:HomePageViewModel" 
              x:Class="FindaCook.Views.HomePage "
                 BackgroundColor = "White"
-              >
+              BackgroundImageSource="bg1.jpg">
 
 
 
@@ -27,8 +27,7 @@
             </StackLayout>
 
             <StackLayout  Spacing="50">
-                <!-- Unique Service Section using CarouselView -->
-
+                
                 <CarouselView x:Name="imageSlider" HeightRequest="480" Margin="0,30">
                     <CarouselView.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
