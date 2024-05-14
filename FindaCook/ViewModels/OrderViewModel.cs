@@ -15,7 +15,7 @@ namespace FindaCook.ViewModels
         private string _description;
         private string _contactNumber;
         private string _address;
-        private decimal _price;
+        private int _price;
         private DateTime _selectedDate = DateTime.Now;
         private TimeSpan _selectedTime = TimeSpan.Zero;
         readonly ICookRespository _CookRepository = new CookService();
@@ -55,7 +55,7 @@ namespace FindaCook.ViewModels
             set => SetProperty(ref _address, value);
         }
 
-        public decimal Price
+        public int Price
         {
             get => _price;
             set => SetProperty(ref _price, value);
@@ -90,7 +90,7 @@ namespace FindaCook.ViewModels
        );
             var result = await _CookRepository.SendOrder(orderDetails,CookProfileId);
 
-            if (result != null)
+            if (result)
             {
                 string message = "Order Placed Successfully!";
                 await App.Current.MainPage.DisplayAlert("Status", message, "OK");

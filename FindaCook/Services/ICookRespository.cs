@@ -18,7 +18,8 @@ namespace FindaCook.Services
         Task<bool> AddToFavorites(string cookName,CookProfile cook);
         
         Task<ICollection<FavouriteCookDetails>> getFavourites();
-
+        Task<List<SimpleOrderDTO>> GetOrderRequests();
+        Task<List<SimpleOrderDTO>> GetOrders();
 
 
     }

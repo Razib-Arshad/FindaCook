@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
+using System.Globalization;
 
 namespace FindaCook.Models
 {
@@ -9,11 +10,11 @@ namespace FindaCook.Models
         public string Description { get; set; }
         public string ContactNumber { get; set; }
         public string Address { get; set; }
-        public decimal Price { get; set; }
+        public int Price { get; set; }
         public DateTime SelectedDate { get; set; }
         public TimeSpan SelectedTime { get; set; }
 
-        public Orders(string selectedService, string description, string contactNumber, string address, decimal price, DateTime selectedDate, TimeSpan selectedTime)
+        public Orders(string selectedService, string description, string contactNumber, string address, int price, DateTime selectedDate, TimeSpan selectedTime)
         {
             SelectedService = selectedService;
             Description = description;
@@ -42,7 +43,22 @@ namespace FindaCook.Models
             [ObservableProperty]
             private string itemPrice;
         }
-    
+    public class SimpleOrderDTO
+    {
+        public string Desc { get; set; }
+        public string Date { get; set; }
+        public string Time { get; set; }
+        public string SelectedService { get; set; }
+        public decimal Price { get; set; }
+        public string CookUserName { get; set; }  // Directly including cook's username here
+
+      
+    }
+
+
+
+
+
 
 
 

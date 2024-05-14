@@ -220,54 +220,48 @@ namespace FindaCook.Services
             {
                 using (var client = new HttpClient())
                 {
-                    // Construct the order sending URL
-                    string apiUrl = "https://localhost:7224/api/OrderRequests/request/post";
-                    client.BaseAddress = new Uri(apiUrl);
+                    string baseUrl = "https://localhost:7224";
+                    string apiEndpoint = "/api/OrderRequests/request/post";
+                    client.BaseAddress = new Uri(baseUrl);
 
                     var UserId = Preferences.Get("UserID", string.Empty);
 
-                    
+                    // Assuming SelectedDate is a DateTime that includes the date and SelectedTime is a TimeSpan
+                    DateTime fullDateTime = order.SelectedDate.Add(order.SelectedTime);
 
-                    // Create a JSON object to send in the request body
                     var orderData = new
                     {
-                        UserId = UserId,
-                        CookInfoId = id,
-                        //Service = order.SelectedService,
-                        Description = order.Description,
-                        ContactNumber = order.ContactNumber,
-                        Address = order.Address,
-                        Price = order.Price,
-                        Date = order.SelectedDate.Add(order.SelectedTime), // Combine date and time
+                        desc = order.Description,
+                        date = fullDateTime.ToString("o"), // "o" specifier for ISO 8601 format
+                        time = fullDateTime.ToString("o"), // Same here, assuming the API truly needs the full datetime in both fields
+                        selectedService = order.SelectedService,
+                        price = order.Price,
+                        userContact = order.ContactNumber,
+                        userAddress = order.Address,
+                        userId = UserId,
+                        cookInfoId = id
                     };
 
-                    // Serialize the object to JSON
                     string jsonData = System.Text.Json.JsonSerializer.Serialize(orderData);
-
-                    // Create a StringContent with the JSON data and set Content-Type
                     var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-
-                    // Send the POST request with the JSON data in the body
-                    HttpResponseMessage response = await client.PostAsync(apiUrl, content);
-
-                    // Check if the order sending was successful
+                    HttpResponseMessage response = await client.PostAsync(apiEndpoint, content);
                     return response.IsSuccessStatusCode;
                 }
             }
             catch (HttpRequestException ex)
             {
                 // Handle network-related errors
-                // Log the exception or perform additional actions
                 throw new Exception($"An error occurred: {ex.Message}");
             }
             catch (Exception ex)
             {
                 // Handle other exceptions
-                // Log the exception or perform additional actions
                 throw new Exception($"An error occurred: {ex.Message}");
             }
         }
-        public async Task<List<Orders>> GetOrderRequests()
+
+
+        public async Task<List<SimpleOrderDTO>> GetOrderRequests()
         {
             try
             {
@@ -277,38 +271,33 @@ namespace FindaCook.Services
                     client.BaseAddress = new Uri(apiUrl);
 
                     var UserId = Preferences.Get("UserID", string.Empty);
-
                     string requestUrl = $"{apiUrl}/{UserId}";
 
-                    // Send a GET request to retrieve orders
                     HttpResponseMessage response = await client.GetAsync(requestUrl);
-        
 
-                    // Check if the order sending was successful
                     if (response.IsSuccessStatusCode)
                     {
-
                         string contentString = await response.Content.ReadAsStringAsync();
-                        var orderContainer = JsonConvert.DeserializeObject<OrderContainer>(contentString);
-                        List<Orders> orders = orderContainer.Data;
-
-
-                        return orders;
+                        var apiResponse = JsonConvert.DeserializeObject<ApiResponse>(contentString);
+                        if (apiResponse != null && apiResponse.StatusCode == 200)
+                        {
+                            return apiResponse.Data;
+                        }
                     }
-                    else
-                    {
-                        return null;
-                    }
+                    return null;
                 }
-
-                
             }
-            catch { 
+            catch (Exception ex)
+            {
+                // It's a good practice to log the exception
+                System.Diagnostics.Debug.WriteLine($"Error in GetOrderRequests: {ex}");
                 return null;
             }
         }
 
-        public async Task<List<Orders>> GetOrders()
+
+
+        public async Task<List<SimpleOrderDTO>> GetOrders()
         {
             try
             {
@@ -318,42 +307,34 @@ namespace FindaCook.Services
                     client.BaseAddress = new Uri(apiUrl);
 
                     var UserId = Preferences.Get("UserID", string.Empty);
-
                     string requestUrl = $"{apiUrl}/{UserId}";
 
-                    // Send a GET request to retrieve orders
                     HttpResponseMessage response = await client.GetAsync(requestUrl);
 
-
-                    // Check if the order sending was successful
                     if (response.IsSuccessStatusCode)
                     {
-
                         string contentString = await response.Content.ReadAsStringAsync();
-                        var orderContainer = JsonConvert.DeserializeObject<OrderContainer>(contentString);
-                        List<Orders> orders = orderContainer.Data;
-
-                        
-                        return orders;
-
-                        /*string contentString = await response.Content.ReadAsStringAsync();
-                        var dataContainer = JsonConvert.DeserializeObject<DataContainer>(contentString);
-
-                        List<CookProfile> cooks = dataContainer.Data;*/
-
+                        var apiResponse = JsonConvert.DeserializeObject<ApiResponse>(contentString);
+                        if (apiResponse != null && apiResponse.StatusCode == 200)
+                        {
+                            return apiResponse.Data;
+                        }
                     }
-                    else
-                    {
-                        return null;
-                    }
+                    return null;
                 }
-
-
             }
-            catch
+            catch (Exception ex)
             {
+                // It's a good practice to log the exception
+                System.Diagnostics.Debug.WriteLine($"Error in GetOrders: {ex}");
                 return null;
             }
+        }
+        public class ApiResponse
+        {
+            public int StatusCode { get; set; }
+            public string Message { get; set; }
+            public List<SimpleOrderDTO> Data { get; set; }
         }
 
     }

@@ -1,29 +1,38 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:FindaCook"
+             xmlns:viewmodel="clr-namespace:FindaCook.ViewModels"
+             xmlns:model="clr-namespace:FindaCook.Models"
              x:Class="FindaCook.Views.RequestsAndOrders"
-
              Title="RequestsAndOrders">
 
+    <ContentPage.BindingContext>
+        <viewmodel:OrdersAndRequestViewModel/>
+    </ContentPage.BindingContext>
 
     <VerticalStackLayout>
+        <!-- Buttons for triggering Requests and Orders fetching -->
         <HorizontalStackLayout>
-            <Button Text="Requests" TextColor="White"  Command="{Binding RequestsClickedCommand}" BackgroundColor="Orange" />
-            <Button Text="Orders" TextColor="White"  Command="{Binding OrdersClickedCommand}" BackgroundColor="Orange" />
-
+            <Button Text="Requests" TextColor="White" Command="{Binding ExecuteGetRequestsCommand}" BackgroundColor="Orange" />
+            <Button Text="Orders" TextColor="White" Command="{Binding ExecuteGetOrdersCommand}" BackgroundColor="Orange" />
         </HorizontalStackLayout>
-        <StackLayout>
-            <ListView ItemsSource="{Binding DisplayedData}"
-                  IsPullToRefreshEnabled="true"
-                  RefreshCommand="{Binding RequestsClickedCommand}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <!-- Define how each item should be displayed -->
-                        <TextCell Text="{Binding Price}" Detail="{Binding Price}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+
+        <!-- ListView to display data -->
+        <ListView ItemsSource="{Binding DisplayedData}" IsPullToRefreshEnabled="true" RefreshCommand="{Binding RefreshDataCommand}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:SimpleOrderDTO">
+                    <ViewCell>
+                        <StackLayout Orientation="Vertical" Padding="10">
+                            <Label Text="{Binding Desc}" FontSize="Medium" />
+                            <Label Text="{Binding SelectedService}" FontAttributes="Italic" />
+                            <Label Text="{Binding Date, StringFormat='{0:dd MMM yyyy}'}" />
+                            <Label Text="{Binding Time, StringFormat='{0:hh\\:mm}'}" />
+                            <Label Text="{Binding Price, StringFormat='Price: {0:C}'}" />
+                            <Label Text="{Binding CookUserName}" FontAttributes="Bold" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </VerticalStackLayout>
 </ContentPage>
