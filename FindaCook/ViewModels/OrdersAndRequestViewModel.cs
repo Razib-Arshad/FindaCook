@@ -23,6 +23,7 @@ namespace FindaCook.ViewModels
             _cookService = new CookService();
         }
 
+
         [RelayCommand]
         private async Task ExecuteGetRequests()
         {

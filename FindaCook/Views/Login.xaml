@@ -24,11 +24,12 @@
 
                 <Button Command="{Binding SignInCommand}" Text="Login"  HorizontalOptions="Center" FontSize="18" Margin="10,20,10,0" Padding="10,0,10,0"  Background="Orange" TextColor="White" FontFamily="Times New Roman"  CornerRadius="20" />
 
-                <Button Text="Forgot Password? "   TextColor="Orange" FontSize="13" Margin="10,20,10,10" HorizontalOptions="Center" FontFamily="Times New Roman" />
-
+                <!-- <Button Text="Forgot Password? "   TextColor="Orange" FontSize="13" Margin="10,20,10,10" HorizontalOptions="Center" FontFamily="Times New Roman" />
+-->
                 <Button Text="Register As a User " FontAttributes="Bold"  Background="Orange" TextColor="White" FontSize="18" Margin="10,20,10,10" Clicked="Register_Button_Clicked"  HorizontalOptions="Center" FontFamily="Times New Roman"  CornerRadius="30"/>
 
-                <Button Text="Register As a Cook " FontAttributes="Bold" Background="Orange" TextColor="White" FontSize="18" Margin="10,0,10,10" Clicked="RegisterCook_Button_Clicked"  HorizontalOptions="Center"  CornerRadius="30" FontFamily="Times New Roman"/>
+                <!--<Button Text="Register As a Cook " FontAttributes="Bold" Background="Orange" TextColor="White" FontSize="18" Margin="10,0,10,10" Clicked="RegisterCook_Button_Clicked" 
+                HorizontalOptions="Center"  CornerRadius="30" FontFamily="Times New Roman"/>-->
                 <Label x:Name="ResultLabel" Text="" FontSize="16" TextColor="White" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
             </StackLayout>
         </ScrollView>

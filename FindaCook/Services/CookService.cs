@@ -159,7 +159,7 @@ namespace FindaCook.Services
                     // Create a JSON object to send in the request body
                     var registrationCookData = new
                     {
-                        Id="null",
+                        Id ="null",
                         Email = Email,
                         UserPassword = Password,
                         FirstName = p.FirstName,

@@ -40,7 +40,10 @@ namespace FindaCook.ViewModels
         {
             try
             {
+
+
                 var favourites = await _cookRepository.getFavourites(); // Assume returns ICollection<FavouriteCookDetails>
+
 
                 FavouriteCooks.Clear(); // Clear existing items
                 foreach (var cook in favourites)
