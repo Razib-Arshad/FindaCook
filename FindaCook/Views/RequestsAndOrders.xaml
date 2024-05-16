@@ -4,35 +4,55 @@
              xmlns:viewmodel="clr-namespace:FindaCook.ViewModels"
              xmlns:model="clr-namespace:FindaCook.Models"
              x:Class="FindaCook.Views.RequestsAndOrders"
-             Title="RequestsAndOrders">
+             Shell.NavBarIsVisible="False"
+             >
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Define colors as resources -->
+            <Color x:Key="PrimaryColor">#222a35f0</Color>
+            <Color x:Key="SecondaryColor">#91914bcc</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.BindingContext>
         <viewmodel:OrdersAndRequestViewModel/>
     </ContentPage.BindingContext>
 
-    <VerticalStackLayout>
-        <!-- Buttons for triggering Requests and Orders fetching -->
-        <HorizontalStackLayout>
-            <Button Text="Requests" TextColor="White" Command="{Binding ExecuteGetRequestsCommand}" BackgroundColor="Orange" />
-            <Button Text="Orders" TextColor="White" Command="{Binding ExecuteGetOrdersCommand}" BackgroundColor="Orange" />
+    <Grid BackgroundColor="{StaticResource PrimaryColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Center the buttons and increase their size -->
+        <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center" Padding="10">
+            <Button Text="Requests" TextColor="White" Command="{Binding ExecuteGetRequestsCommand}" BackgroundColor="{StaticResource SecondaryColor}" 
+                    WidthRequest="150" HeightRequest="50" CornerRadius="25" />
+            <Button Text="Orders" TextColor="White" Command="{Binding ExecuteGetOrdersCommand}" BackgroundColor="{StaticResource SecondaryColor}" 
+                    WidthRequest="150" HeightRequest="50" CornerRadius="25" />
         </HorizontalStackLayout>
 
-        <!-- ListView to display data -->
-        <ListView ItemsSource="{Binding DisplayedData}" IsPullToRefreshEnabled="true" RefreshCommand="{Binding RefreshDataCommand}">
+        <!-- ListView to display data, let it handle scrolling -->
+        <ListView Grid.Row="1" ItemsSource="{Binding DisplayedData}" IsPullToRefreshEnabled="true" RefreshCommand="{Binding RefreshDataCommand}">
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="model:SimpleOrderDTO">
+                <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Vertical" Padding="10">
-                            <Label Text="{Binding Desc}" FontSize="Medium" />
-                            <Label Text="{Binding SelectedService}" FontAttributes="Italic" />
-                            <Label Text="{Binding Date, StringFormat='{0:dd MMM yyyy}'}" />
-                            <Label Text="{Binding Time, StringFormat='{0:hh\\:mm}'}" />
-                            <Label Text="{Binding Price, StringFormat='Price: {0:C}'}" />
-                            <Label Text="{Binding CookUserName}" FontAttributes="Bold" />
-                        </StackLayout>
+                        <Frame Padding="10" Margin="10" CornerRadius="20" HasShadow="True" BackgroundColor="{StaticResource SecondaryColor}">
+                            <StackLayout Orientation="Vertical" Spacing="5">
+                                <Label Text="{Binding CookUserName}" FontSize="Large" TextColor="White" FontAttributes="Bold" />
+                                <Label Text="{Binding Desc}" FontSize="Medium" TextColor="White" />
+                                <Label Text="{Binding SelectedService}" FontSize="Small" TextColor="White" FontAttributes="Italic" />
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10">
+                                    <Label Text="{Binding Date, StringFormat='{0:dd MMM yyyy}'}" FontSize="Small" TextColor="White" />
+                                    <Label Text="{Binding Time, StringFormat='{0:hh\\:mm}'}" FontSize="Small" TextColor="White" />
+                                </StackLayout>
+                                <Label Text="{Binding Price, StringFormat='Price: {0:C}'}" FontSize="Small" TextColor="White" />
+                            </StackLayout>
+                        </Frame>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>
