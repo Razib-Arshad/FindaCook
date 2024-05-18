@@ -494,16 +494,21 @@ namespace LoginApi.Controllers
         }
 
         [HttpGet("search/by/multiple")]
-        public async Task<ActionResult> SearchByMultipleCriteria(string skills, string category, string firstName, string lastName)
+        public async Task<ActionResult> SearchByMultipleCriteria(string searchTerm)
         {
             try
             {
+                if (string.IsNullOrEmpty(searchTerm))
+                {
+                    return BadRequest(new { StatusCode = 400, Message = "Search term cannot be null or empty." });
+                }
+
                 var cooks = await _context.CookInfos
                     .Where(c =>
-                        (string.IsNullOrEmpty(skills) || c.SkillsAndSpecialties.Contains(skills)) &&
-                        (string.IsNullOrEmpty(category) || c.SkillsAndSpecialties.Contains(category)) &&
-                        (string.IsNullOrEmpty(firstName) || c.FirstName.Contains(firstName)) &&
-                        (string.IsNullOrEmpty(lastName) || c.LastName.Contains(lastName))
+                        c.FirstName.Contains(searchTerm) ||
+                        c.LastName.Contains(searchTerm) ||
+                        c.SkillsAndSpecialties.Contains(searchTerm) ||
+                        c.ServicesProvided.Contains(searchTerm) 
                     )
                     .Select(c => new
                     {
@@ -521,6 +526,11 @@ namespace LoginApi.Controllers
                         c.EligibleToWork
                     })
                     .ToListAsync();
+
+                if (cooks == null || !cooks.Any())
+                {
+                    return NotFound(new { StatusCode = 404, Message = "No cooks found matching the search criteria." });
+                }
 
                 var response = new
                 {
@@ -543,6 +553,7 @@ namespace LoginApi.Controllers
                 return StatusCode(500, errorResponse);
             }
         }
+
 
 
         [HttpPut("profile/update_cook")]
