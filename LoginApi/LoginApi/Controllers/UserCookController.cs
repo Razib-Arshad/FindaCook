@@ -508,7 +508,8 @@ namespace LoginApi.Controllers
                         c.FirstName.Contains(searchTerm) ||
                         c.LastName.Contains(searchTerm) ||
                         c.SkillsAndSpecialties.Contains(searchTerm) ||
-                        c.ServicesProvided.Contains(searchTerm) 
+                        c.ServicesProvided.Contains(searchTerm) ||
+                        c.SignatureDishes.Contains(searchTerm)
                     )
                     .Select(c => new
                     {
