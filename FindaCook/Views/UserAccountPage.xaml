@@ -3,44 +3,44 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FindaCook.Views.UserAccountPage"
              Title="Account"
-             BackgroundImageSource="bg1.jpg">
-
+             BackgroundImageSource="bg1.jpg"
+              Shell.NavBarIsVisible="False"
+             Padding="20">
 
     <ScrollView>
-        <StackLayout>
-            <StackLayout>
-                <Image Source="profile.png"  WidthRequest="100" HeightRequest="100" Aspect="AspectFill" />
+        <VerticalStackLayout Spacing="20" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
 
-
-                <VerticalStackLayout>
-                    <Label FontSize="22" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontFamily="Times New Roman">Razib Arshad</Label>
-                    <Label FontSize="16" Margin="30,0,10,10" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontFamily="Times New Roman">razib.arshad@gmail.com</Label>
-                </VerticalStackLayout>
-            </StackLayout>
+          
+            <Label Text="Razib Arshad" FontSize="24" HorizontalOptions="Center" FontFamily="Times New Roman" />
+            <Label Text="razib.arshad@gmail.com" FontSize="18" HorizontalOptions="Center" FontFamily="Times New Roman" />
 
             <HorizontalStackLayout HorizontalOptions="Center">
                 <Button Text="Register as a Cook" Clicked="RegisterCook_Button_Clicked"  HorizontalOptions="Center" FontSize="22" Margin="0,20,10,20" 
                         BackgroundColor="Orange" TextColor="White" FontFamily="Times New Roman"/>
                 <Button Text="Change Password" Clicked="ResetPassword_Button_Clicked"  HorizontalOptions="Center" FontSize="22" Margin="30,20,10,20"  BackgroundColor="Orange" TextColor="White" WidthRequest="230" FontFamily="Times New Roman"/>
-
             </HorizontalStackLayout>
 
-            <HorizontalStackLayout HorizontalOptions="Center">
-                <Button Text="Favourites" Clicked="FavouritesButton_Clicked"   HorizontalOptions="Center" FontSize="22" Margin="0,20,0,20"  BackgroundColor="Orange" TextColor="White"  WidthRequest="200" FontFamily="Times New Roman"/>
-                <Button Text="Order History"  HorizontalOptions="Center" FontSize="22" Margin="30,20,10,20"  BackgroundColor="Orange" TextColor="White"  WidthRequest="230" FontFamily="Times New Roman"/>
 
-            </HorizontalStackLayout>
+            
+                <Button Text="Favourites" Clicked="FavouritesButton_Clicked"
+                    BackgroundColor="Orange" TextColor="White" FontSize="22" FontFamily="Times New Roman"
+                    CornerRadius="10" Padding="10" Margin="0,10,0,0" />
 
-            <Button Text="Terms and Policy"  LineBreakMode="WordWrap"   TextColor="White" HorizontalOptions="Center" FontSize="22" Margin="30,20,10,0"  BackgroundColor="Orange"  WidthRequest="230" FontFamily="Times New Roman"/>
+            
 
+                <Button Text="Terms and Policy" Clicked="TermsPolicyButton_Clicked"
+                    BackgroundColor="Orange" TextColor="White" FontSize="22" FontFamily="Times New Roman"
+                    CornerRadius="10" Padding="10" Margin="0,10,0,0" />
+           
 
-            <Button Text="Logout"  WidthRequest="105" HeightRequest="60" TextColor="White"  BackgroundColor="Orange" CornerRadius="50" BorderWidth="3"  HorizontalOptions='Center' FontSize="22" Margin="30,20,10,0" FontFamily="Times New Roman" />
+            <Button Text="Switch to Cook Mode" Clicked="SwitchToCook_Button_Clicked"
+                    BackgroundColor="Orange" TextColor="White" FontSize="22" FontFamily="Times New Roman"
+                    CornerRadius="10" Padding="10" Margin="0,20,0,0" />
 
+            <Button Text="Logout" Clicked="Logout_Button_Clicked"
+                    BackgroundColor="Orange" TextColor="White" FontSize="22" FontFamily="Times New Roman"
+                    CornerRadius="50" Padding="10" Margin="0,20,0,0" WidthRequest="150" />
 
-        </StackLayout>
-
+        </VerticalStackLayout>
     </ScrollView>
-
-
-
 </ContentPage>
