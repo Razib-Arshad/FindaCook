@@ -84,5 +84,47 @@ namespace FindaCook.Services
 
             return null;
         }
+
+        public async Task<bool> ResetPassword(string oldPassword, string newPassword)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    // Construct the login URL
+                    string apiUrl = "https://localhost:7224/api/UserCook/password/change";
+                    client.BaseAddress = new Uri(apiUrl);
+
+                    var requestData = new {
+                        oldPassword = oldPassword,
+                        newPassword = newPassword
+                    };
+
+                    // Serialize the object to JSON format
+                    string jsonData = JsonSerializer.Serialize(requestData);
+
+                    // Create a StringContent with the JSON data and set Content-Type
+                    var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                    var response = await client.PutAsync(apiUrl, content);
+
+                    // Check if the request was successful (status code 200)
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true; // Password reset was successful
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                 }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return true;// Placeholder, replace with actual logic
+        }
     }
 }

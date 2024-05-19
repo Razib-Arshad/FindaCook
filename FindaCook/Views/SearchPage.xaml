@@ -3,38 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FindaCook.Views.SearchPage"
              Title="SearchPage"
-              BackgroundImageSource="bg1.jpg"
-             >
+             BackgroundImageSource="bg1.jpg">
     <Grid>
-
-        <BoxView Color="Black"  Opacity="0.5" Margin="10,20, 10, 10" CornerRadius="20"  />
+        <BoxView Color="Black" Opacity="0.5" Margin="10,20,10,10" CornerRadius="20" />
         <StackLayout>
-
-
             <StackLayout Margin="20">
-                <Label Text="What are you looking for??" FontAttributes="Bold"   FontSize="50" TextColor="Orange"  FontFamily="Times New Roman"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
-                   Margin="0,10"/>
+                <Label Text="What are you looking for??" FontAttributes="Bold" FontSize="50" TextColor="Orange" FontFamily="Times New Roman" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,10"/>
             </StackLayout>
-            <!-- Search Bar -->
-            <SearchBar Placeholder="Search Items..." PlaceholderColor="Orange" CancelButtonColor ="Black" Margin="20, 10" FontFamily="Times New Roman"/>
-
-            <!-- Search History (ListView) -->
-            <!--<ListView
-            x:Name="searchHistoryListView"
-            ItemsSource="{Binding SearchHistory}"
-            IsVisible="{Binding IsSearchHistoryVisible}"
-            HasUnevenRows="True">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout>
-                            <Label Text="{Binding .}" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>-->
-
+            <SearchBar Placeholder="Search Items..." 
+                       SearchCommand="{Binding SearchCommand}"
+                       Text="{Binding SearchText}"
+                       BackgroundColor="AliceBlue" 
+                       PlaceholderColor="Orange" 
+                       CancelButtonColor="Black" 
+                       Margin="20,0" 
+                       FontFamily="Times New Roman"/>
+            <Label Text="Filter By" Background="Transparent" TextColor="Orange" Margin="10,0" />
+            <CollectionView ItemsSource="{Binding FilterOptions}" BackgroundColor="Black" Margin="20,0"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedFilter}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding Name}" TextColor="Orange"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
     </Grid>
 </ContentPage>

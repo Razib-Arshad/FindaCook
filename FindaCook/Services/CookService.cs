@@ -7,7 +7,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using FindaCook.Maui.Models;
 using FindaCook.Models;
+using Microsoft.Maui.Controls;
 using Newtonsoft.Json;
+
 
 
 
@@ -335,6 +337,115 @@ namespace FindaCook.Services
             public int StatusCode { get; set; }
             public string Message { get; set; }
             public List<SimpleOrderDTO> Data { get; set; }
+        }
+
+        public async Task<ICollection<CookProfile>> SearchCook(string SelectedFilter,string SearchText)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    string apiUrl = $"https://localhost:7224/api/UserCook/search/by/multiple?searchTerm={SearchText}";
+
+                    if (SelectedFilter == "Category")
+                    {
+                        apiUrl = $"https://localhost:7224/api/UserCook/search/bycategory?category={SearchText}";
+
+                    }
+                    else if (SelectedFilter == "Name")
+                    {
+                        apiUrl = $"https://localhost:7224/api/UserCook/search/bycook?cookName={SearchText}";
+
+
+                    }
+                    else if(SelectedFilter == "Skills")
+                    {
+                        apiUrl = $"https://localhost:7224/api/UserCook/search/by/skills?skills={SearchText}";
+
+                    }
+
+                    // Send the GET request
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    // Check if the request was successful
+                    if (response.IsSuccessStatusCode)
+                    {
+
+                        string contentString = await response.Content.ReadAsStringAsync();
+                        var dataContainer = JsonConvert.DeserializeObject<DataContainer>(contentString);
+
+                        List<CookProfile> cooks = dataContainer.Data;
+
+                        return cooks;
+                    }
+                    else
+                    {
+                        // If the request was not successful, handle the error
+                        var errorResponse = new
+                        {
+                            StatusCode = (int)response.StatusCode,
+                            Message = "An error occurred while retrieving cooks",
+                            ErrorDetails = await response.Content.ReadAsStringAsync()
+                        };
+
+                        throw new Exception(JsonConvert.SerializeObject(errorResponse));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception as needed
+                throw new Exception($"An error occurred: {ex.Message}");
+            }
+
+
+        }
+
+        public async Task<ICollection<CookProfile>> SearchCooks(string SearchText)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    string apiUrl = $"https://localhost:7224/api/UserCook/search/by/multiple?searchTerm={SearchText}";
+
+                    
+
+                    // Send the GET request
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    // Check if the request was successful
+                    if (response.IsSuccessStatusCode)
+                    {
+
+                        string contentString = await response.Content.ReadAsStringAsync();
+                        var dataContainer = JsonConvert.DeserializeObject<DataContainer>(contentString);
+
+                        List<CookProfile> cooks = dataContainer.Data;
+
+                        return cooks;
+                    }
+                    else
+                    {
+                        // If the request was not successful, handle the error
+                        var errorResponse = new
+                        {
+                            StatusCode = (int)response.StatusCode,
+                            Message = "An error occurred while retrieving cooks",
+                            ErrorDetails = await response.Content.ReadAsStringAsync()
+                        };
+
+                        throw new Exception(JsonConvert.SerializeObject(errorResponse));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception as needed
+                throw new Exception($"An error occurred: {ex.Message}");
+            }
+
+
         }
 
     }

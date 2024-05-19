@@ -5,12 +5,10 @@ using System.Runtime.CompilerServices;
 using System;
 using System.Threading.Tasks;
 using System;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Maui.Controls;
-using FindaCook.Models;
 using FindaCook.Services;
 using FindaCook.ViewModels;
 using FindaCook.Views;
@@ -37,10 +35,11 @@ namespace FindaCook
             };
 
             CategoryClickedCommand = new Command<string>(async (category) => await OnCategoryClickedAsync(category));
+            SearchCommand = new Command(async () => await ExecuteSearch());
         }
 
 
-
+        public ICommand SearchCommand { get; }
 
 
         public ObservableCollection<string> Categories { get; }
@@ -57,6 +56,16 @@ namespace FindaCook
             set => SetProperty(ref _cooks, value);
         }
 
+        private string _searchText;
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                _searchText = value;
+                OnPropertyChanged();
+            }
+        }
         public ICommand CategoryClickedCommand { get; set; }
 
         private async Task OnCategoryClickedAsync(string category)
@@ -78,6 +87,27 @@ namespace FindaCook
             catch (Exception ex)
             {
 
+            }
+        }
+
+        private async Task ExecuteSearch()
+        { 
+
+            try
+            {
+
+                var result = await _CookRepository.SearchCooks(SearchText);
+                Cooks = new ObservableCollection<CookProfile>(result.ToList());
+                if (Cooks.Count > 0)
+                {
+                    await App.Current.MainPage.Navigation.PushAsync(new CookLists(Cooks));
+                }
+
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                Console.WriteLine($"An error occurred: {ex.Message}");
             }
         }
     }
