@@ -5,7 +5,7 @@
              x:Class="FindaCook.Views.Categories"
              x:DataType="viewmodel:CategoriesViewModel"
              Title="Categories"
-             BackgroundImageSource="bg1.jpg">
+            >
 
     <ScrollView>
         <VerticalStackLayout>
@@ -13,66 +13,47 @@
                    Margin="0,10">Categories</Label>
             <SearchBar Placeholder="Search Items..." PlaceholderColor="Orange" CancelButtonColor ="Black" Margin="20, 10" FontFamily="Times New Roman" FontSize="20" FontAttributes="Bold"/>
 
-            <HorizontalStackLayout Margin="100,10,10,10">
+            <Grid RowSpacing="10" ColumnSpacing="10" HorizontalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-                <Grid Margin="20,10,5,5" HeightRequest="400" WidthRequest="500" >
-                    <VerticalStackLayout>
-                        <Image Source="desi3.jpg"  HeightRequest="400" WidthRequest="500"/>
-                        <Button Text="Desi" TextColor="White"  Command="{Binding CategoryClickedCommand}" CommandParameter="Desi" BackgroundColor="Orange" />
-                    </VerticalStackLayout>
-                </Grid>
+                <!-- Row 1 -->
+                <VerticalStackLayout Grid.Row="0" Grid.Column="0" Margin="10">
+                    <Image Source="desi3.jpg" Aspect="AspectFill" />
+                    <Button Text="Desi" TextColor="White" Command="{Binding CategoryClickedCommand}" CommandParameter="Desi" BackgroundColor="Orange"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Row="0" Grid.Column="1" Margin="10">
+                    <Image Source="chinese.jpg" Aspect="AspectFill"/>
+                    <Button Text="Chinese" TextColor="White" Command="{Binding CategoryClickedCommand}" CommandParameter="Chinese" BackgroundColor="Orange"/>
+                </VerticalStackLayout>
 
-                <Grid Margin="20,10,5,5" HeightRequest="400" WidthRequest="500">
-                    <VerticalStackLayout>
-                        <Image Source="chinese.jpg" HeightRequest="400" WidthRequest="500" />
-                        <!--<Label Text="Desi" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="22" Margin="0,0,0,0"/>-->
-                        <Button Text="Chinese" TextColor="White"  Command="{Binding CategoryClickedCommand}" CommandParameter="Chinese" BackgroundColor="Orange"/>
-                    </VerticalStackLayout>
-                </Grid>
-            </HorizontalStackLayout>
+                <!-- Row 2 -->
+                <VerticalStackLayout Grid.Row="1" Grid.Column="0" Margin="10">
+                    <Image Source="continental.webp" Aspect="AspectFill"/>
+                    <Button Text="Continental" TextColor="White" Command="{Binding CategoryClickedCommand}" CommandParameter="Continental" BackgroundColor="Orange"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Row="1" Grid.Column="1" Margin="10">
+                    <Image Source="thai.jpg" Aspect="AspectFill"/>
+                    <Button Text="Thai" TextColor="White" Command="{Binding CategoryClickedCommand}" CommandParameter="Thai" BackgroundColor="Orange"/>
+                </VerticalStackLayout>
 
-
-            <HorizontalStackLayout Margin="100,100,10,10">
-
-                <Grid Margin="20,10,5,5" HeightRequest="400" WidthRequest="500">
-                    <VerticalStackLayout>
-                        <Image Source="continental.webp" HeightRequest="400" WidthRequest="500" />
-                        <!--<Label Text="Desi" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="22" Margin="0,0,0,0"/>-->
-                        <Button Text="Continental" TextColor="White"  Command="{Binding CategoryClickedCommand}" CommandParameter="Continental" BackgroundColor="Orange"/>
-                    </VerticalStackLayout>
-                </Grid>
-
-                <Grid Margin="20,10,5,5" HeightRequest="400" WidthRequest="500">
-                    <VerticalStackLayout>
-                        <Image Source="thai.jpg" HeightRequest="400" WidthRequest="500" />
-                        <!--<Label Text="Desi" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="22" Margin="0,0,0,0"/>-->
-                        <Button Text="Thai" TextColor="White"  Command="{Binding CategoryClickedCommand}" CommandParameter="Thai" BackgroundColor="Orange"/>
-                    </VerticalStackLayout>
-                </Grid>
-            </HorizontalStackLayout>
-
-            <HorizontalStackLayout Margin="100,100,10,100">
-
-                <Grid Margin="20,10,5,5" HeightRequest="400" WidthRequest="500">
-                    <VerticalStackLayout>
-                        <Image Source="italian.jpg" HeightRequest="400" WidthRequest="500" />
-                        <!--<Label Text="Desi" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="22" Margin="0,0,0,0"/>-->
-                        <Button Text="Italian" TextColor="White"  Command="{Binding CategoryClickedCommand}" CommandParameter="Italian" BackgroundColor="Orange"/>
-                    </VerticalStackLayout>
-                </Grid>
-
-                <Grid Margin="20,10,5,5" HeightRequest="400" WidthRequest="500">
-                    <VerticalStackLayout>
-                        <Image Source="fast.jpg" HeightRequest="400" WidthRequest="500" />
-                        <!--<Label Text="Desi" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="22" Margin="0,0,0,0"/>-->
-                        <Button Text="Fast Food" TextColor="White"  Command="{Binding CategoryClickedCommand}" CommandParameter="Fast Food" BackgroundColor="Orange"/>
-                    </VerticalStackLayout>
-                </Grid>
-            </HorizontalStackLayout>
-
+                <!-- Row 3 -->
+                <VerticalStackLayout Grid.Row="2" Grid.Column="0" Margin="10">
+                    <Image Source="italian.jpg" Aspect="AspectFill"/>
+                    <Button Text="Italian" TextColor="White" Command="{Binding CategoryClickedCommand}" CommandParameter="Italian" BackgroundColor="Orange"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Row="2" Grid.Column="1" Margin="10">
+                    <Image Source="fast.jpg" Aspect="AspectFill"/>
+                    <Button Text="Fast Food" TextColor="White" Command="{Binding CategoryClickedCommand}" CommandParameter="Fast Food" BackgroundColor="Orange"/>
+                </VerticalStackLayout>
+            </Grid>
         </VerticalStackLayout>
     </ScrollView>
-
-    <!-- this page in under progress-->
 </ContentPage>
-

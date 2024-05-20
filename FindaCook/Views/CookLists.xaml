@@ -10,8 +10,7 @@
 
     <CollectionView ItemsSource="{Binding Cooks}">
         <CollectionView.ItemsLayout>
-            <GridItemsLayout Orientation="Vertical"
-                             Span="2" />
+            <GridItemsLayout Orientation="Vertical" Span="2" />
         </CollectionView.ItemsLayout>
         <CollectionView.ItemTemplate>
             <DataTemplate>
@@ -21,8 +20,8 @@
                        BackgroundColor="Orange"
                        Opacity="1.5"
                        Margin="20,20,20,20">
-                    
-                    <Grid>
+
+                    <Grid x:Name="ClickableGrid">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -33,49 +32,46 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
+                        <!-- TapGestureRecognizer added to the whole Grid -->
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CookListViewModel}}, Path=CookTappedCommand}"
+                                                  CommandParameter="{Binding .}" />
+                        </Grid.GestureRecognizers>
+
                         <Label Grid.Column="0"
-                            Grid.Row="0"
-                            FontAttributes="Bold"
-                            FontFamily="Times New Roman">
+                               Grid.Row="0"
+                               FontAttributes="Bold"
+                               FontFamily="Times New Roman">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span Text="Name: "
-                  FontAttributes="Bold" />
+                                    <Span Text="Name: " FontAttributes="Bold" />
                                     <Span Text="{Binding FirstName}" />
                                 </FormattedString>
                             </Label.FormattedText>
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CookListViewModel}}, Path=CookTappedCommand}" CommandParameter="{Binding .}" />
-                            </Label.GestureRecognizers>
                         </Label>
 
-
                         <Label Grid.Column="1"
-                              Grid.Row="0"
-                              FontAttributes="Italic">
-                              <Label.FormattedText>
-                               <FormattedString>
-                                <Span Text="Skills and Specialties: "
-                               FontAttributes="Bold" />
-                               <Span Text="{Binding SkillsAndSpecialties}" />
+                               Grid.Row="0"
+                               FontAttributes="Italic">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Skills and Specialties: " FontAttributes="Bold" />
+                                    <Span Text="{Binding SkillsAndSpecialties}" />
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
 
                         <Label Grid.Column="0"
-                         Grid.Row="1"
-                         Grid.ColumnSpan="2"
-                          FontAttributes="Italic">
+                               Grid.Row="1"
+                               Grid.ColumnSpan="2"
+                               FontAttributes="Italic">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span Text="Experience: "
-                                 FontAttributes="Bold" />
+                                    <Span Text="Experience: " FontAttributes="Bold" />
                                     <Span Text="{Binding ExperienceYears, StringFormat='{0} years'}" />
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
-
-
                     </Grid>
                 </Frame>
             </DataTemplate>

@@ -3,17 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FindaCook.Page1"
              BackgroundColor="Black">
-
-    <Grid>
+    <ScrollView>
+        <Grid>
         <!-- Background Image -->
-        <Image Source="background.jpg"/>
+        <Image Source="background.jpg" MaximumHeightRequest="600"/>
 
         <!-- Transparent Black Box -->
         <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="#80000000">
             <!-- Center Content -->
             <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                 <!-- Frame with Text -->
-                <Frame BackgroundColor="Black" Opacity="0.5" CornerRadius="10" HeightRequest="300" WidthRequest="400" Margin="10,70,10, 10">
+                <Frame BackgroundColor="Black" Opacity="0.5" CornerRadius="10"  Margin="10,70,10, 10"
+                        HeightRequest="{OnPlatform Default=200, WinUI=300}"
+                           WidthRequest="{OnPlatform Default=200, WinUI=400}"
+                           >
                     <StackLayout Padding="20">
                         <Label Text="Welcome!"
                                TextColor="FloralWhite"
@@ -31,16 +34,17 @@
                     </StackLayout>
                 </Frame>
 
-                
+
                 <Button Text="Get Started"
-                        Clicked="OnGetStartedClicked"
-                        BackgroundColor="Orange"
-                        TextColor="White"
-                        CornerRadius="30"
-                        VerticalOptions="End"
-                        Margin="10,30,10,10"/>
+                            Clicked="OnGetStartedClicked"
+                            BackgroundColor="Orange"
+                            TextColor="White"
+                            CornerRadius="30"
+                            Margin="10"
+                            HorizontalOptions="Center"
+                            WidthRequest="200"/>
             </StackLayout>
         </StackLayout>
     </Grid>
-
+    </ScrollView>
 </ContentPage>

@@ -12,7 +12,7 @@
 
         <Tab Title="Home" Icon="home.png">
             <ShellContent
-           Title="Chat"
+           Title="Home"
            ContentTemplate="{DataTemplate local:HomePage}"
            Route="HomePage" />
         </Tab>

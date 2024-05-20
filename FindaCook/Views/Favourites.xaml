@@ -4,14 +4,17 @@
              xmlns:vm="clr-namespace:FindaCook.ViewModels"
              x:Class="FindaCook.Favourites"
              x:DataType="vm:FavouriteViewModel" 
-             Title="Favourites">
+             Title="Favourites"
+             BackgroundImageSource="bg1.jpg">
 
     <ScrollView>
         <StackLayout Padding="20">
             <Label Text="Favourites" 
                    HorizontalOptions="Center" 
-                   FontSize="30" 
+                   FontSize="40" 
                    FontAttributes="Bold" 
+                    FontFamily="Times New Roman"
+                   TextColor="Orange"
                    Margin="0,20"/>
 
             <CollectionView ItemsSource="{Binding FavouriteCooks}" 
@@ -19,26 +22,56 @@
                             HorizontalOptions="FillAndExpand">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:FavouriteCookDetails">
-                        <Frame Padding="10" Margin="5" CornerRadius="10" BorderColor="LightGray">
+                        <Frame Padding="10" Margin="5" CornerRadius="10" BorderColor="LightGray" BackgroundColor="Orange">
                             <StackLayout>
-                                <Label Text="{Binding FirstName}" 
-                                       FontSize="22" 
-                                       FontAttributes="Bold"/>
-                                <Label Text="{Binding LastName}" 
-                                       FontSize="18" 
-                                       FontAttributes="Italic"/>
-                                <Label Text="{Binding SkillsAndSpecialties}" 
-                                       FontSize="16" 
-                                       Margin="0,5,0,0"/>
-                                <Label Text="{Binding ServicesProvided}"
-                                       FontSize="16"
-                                       Margin="0,5,0,0"/>
-                                <Label Text="{Binding SignatureDishes}"
-                                       FontSize="16"
-                                       Margin="0,5,0,0"/>
-                                <Label Text="{Binding ExperienceYears, StringFormat='Experience: {0} years'}"
-                                       FontSize="16"
-                                       Margin="0,5,0,0"/>
+                                <Label FontSize="16" FontAttributes="Bold">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="First Name: "  FontAttributes="Bold" FontSize="18" />
+                                            <Span Text="{Binding FirstName}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label FontSize="16" Margin="0,5,0,0">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Last Name: " FontAttributes="Bold" FontSize="18" />
+                                            <Span Text="{Binding LastName}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label FontSize="16" Margin="0,5,0,0">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Skills and Specialties: " FontAttributes="Bold" FontSize="18"  />
+                                            <Span Text="{Binding SkillsAndSpecialties}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label FontSize="16" Margin="0,5,0,0">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Services Provided: "  FontAttributes="Bold" FontSize="18"/>
+                                            <Span Text="{Binding ServicesProvided}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label FontSize="16" Margin="0,5,0,0">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Signature Dishes: " FontAttributes="Bold" FontSize="18" />
+                                            <Span Text="{Binding SignatureDishes}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label FontSize="16" Margin="0,5,0,0">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Experience: "  FontAttributes="Bold" FontSize="18"/>
+                                            <Span Text="{Binding ExperienceYears, StringFormat='{0} years'}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
                             </StackLayout>
                         </Frame>
                     </DataTemplate>
