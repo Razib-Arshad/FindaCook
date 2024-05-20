@@ -21,6 +21,9 @@ namespace FindaCook.Services
         Task<List<SimpleOrderDTO>> GetOrderRequests();
         Task<List<SimpleOrderDTO>> GetOrders();
 
+        Task<ICollection<CookProfile>> SearchCook(string SelectedFilter, string SearchText);
+
+        Task<ICollection<CookProfile>> SearchCooks(string SearchText);
 
     }
 }
