@@ -61,8 +61,24 @@ namespace LoginApi.Controllers
 
                 var request = new
                 {
-                    Order_Requests = orderRequests,
-                    CookDetails = cookInfo
+                    Order_Requests = new
+                    { orderRequestID = orderRequests[0].RqID, 
+                    orderRequestDesc = orderRequests[0].Desc, 
+                    orderRequestDate = orderRequests[0].Date, 
+                    orderRequestPrice = orderRequests[0].Price, 
+                    orderRequestService = orderRequests[0].selectedService, 
+                    orderRequestTime = orderRequests[0].Time
+                    }
+                    ,
+                    CookInfo = new
+                    {
+                        cookId = cookInfo[0].CookInfo.Id,
+                        cookFirstName = cookInfo[0].CookInfo.FirstName,
+                        cookLastName = cookInfo[0].CookInfo.LastName,
+                        cookSkillsAndSpecialties = cookInfo[0].CookInfo.SkillsAndSpecialties,
+                        cookSignatureDishes = cookInfo[0].CookInfo.SignatureDishes,
+                        cookExperience = cookInfo[0].CookInfo.ExperienceYears,
+                    }
                 };
 
 
