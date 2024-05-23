@@ -5,6 +5,7 @@
              xmlns:vm="clr-namespace:FindaCook.ViewModels"
              x:DataType="vm:CookListViewModel" 
              x:Class="FindaCook.Views.CookLists"
+             Shell.NavBarIsVisible="False"
              Title="CookLists"
              BackgroundImageSource="bg1.jpg">
 

@@ -95,7 +95,10 @@ namespace FindaCook.Services
                     string apiUrl = "https://localhost:7224/api/UserCook/password/change";
                     client.BaseAddress = new Uri(apiUrl);
 
+                    var email = Preferences.Get("UserEmail", string.Empty);
+
                     var requestData = new {
+                        email=email,
                         oldPassword = oldPassword,
                         newPassword = newPassword
                     };

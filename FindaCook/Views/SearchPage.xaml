@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FindaCook.Views.SearchPage"
              Title="SearchPage"
+             Shell.NavBarIsVisible="False"
              BackgroundImageSource="bg1.jpg">
     <Grid>
         <BoxView Color="Black" Opacity="0.5" Margin="10,20,10,10" CornerRadius="20" />
@@ -17,6 +18,7 @@
                        PlaceholderColor="Orange" 
                        CancelButtonColor="Black" 
                        Margin="20,0" 
+                       TextColor="Black"
                        FontFamily="Times New Roman"/>
             <Label Text="Filter By" Background="Transparent" TextColor="Orange" Margin="10,0" />
             <CollectionView ItemsSource="{Binding FilterOptions}" BackgroundColor="Black" Margin="20,0"

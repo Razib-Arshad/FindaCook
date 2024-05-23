@@ -6,6 +6,7 @@
              x:Class="FindaCook.Views.CookProfiles"
              x:DataType="viewmodel:CookProfileViewModel"
              Title="CookProfiles"
+             Shell.NavBarIsVisible="False"
              BackgroundImageSource="bg1.jpg">
 
     <ContentPage.Resources>
