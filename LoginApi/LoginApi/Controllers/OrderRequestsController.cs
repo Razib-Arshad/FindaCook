@@ -42,29 +42,19 @@ namespace LoginApi.Controllers
 
         // GET: api/OrderRequests/user/5 
         [HttpGet("request/getUserRequest/{id}")]
-        public async Task<ActionResult<OrderRequest>> GetOrderRequest(string id)
+        public async Task<ActionResult> GetOrderRequest(string id)
         {
             if (_context.OrderRequest == null)
             {
-                return NotFound(new { StatusCode = 400, Message = "Entity set 'AppDbContext.OrderRequest'  is null." });
+                return NotFound(new { StatusCode = 400, Message = "Entity set 'AppDbContext.OrderRequest' is null." });
             }
             try
             {
                 // Query the database for order requests associated with the specified user ID
                 var orderRequests = await _context.OrderRequest
                     .Where(o => o.UserId == id)
+                    .Include(o => o.CookInfo)
                     .ToListAsync();
-                var cookInfo = await _context.OrderRequest
-                    .Include(f => f.CookInfo)
-                    .Where(o => o.UserId == id)
-                    .ToListAsync();
-
-                var request = new
-                {
-                    Order_Requests = orderRequests,
-                    CookDetails = cookInfo
-                };
-
 
                 if (orderRequests == null || !orderRequests.Any())
                 {
@@ -75,16 +65,37 @@ namespace LoginApi.Controllers
                 {
                     StatusCode = 200,
                     Message = "Order requests retrieved successfully",
-                    Data = request
+                    Data = orderRequests.Select(o => new
+                    {
+                        o.RqID,
+                        o.Status,
+                        o.Date,
+                        Cook = new
+                        {
+                            o.CookInfo.FirstName,
+                            o.CookInfo.LastName,
+                            o.CookInfo.Email,
+                            o.CookInfo.SkillsAndSpecialties,
+                            o.CookInfo.SignatureDishes,
+                            o.CookInfo.ServicesProvided,
+                            o.CookInfo.ExperienceYears,
+                            o.CookInfo.CulinarySchoolName,
+                            o.CookInfo.HasCulinaryDegree,
+                            o.CookInfo.Degree,
+                            o.CookInfo.Certificates,
+                            o.CookInfo.EligibleToWork
+                        }
+                    })
                 };
+
                 return Ok(response);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return StatusCode(500, new { StatusCode = 500, Message = ex.Message });
             }
-            
         }
+
 
         //get accepted orderRequest of users
         [HttpGet("request_user/accept/{id}")]
