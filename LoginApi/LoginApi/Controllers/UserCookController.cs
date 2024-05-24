@@ -5,13 +5,9 @@ using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-
-//using LoginApi.Data;//
-
 using LoginApi.Models;
 using LoginApi.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -508,7 +504,8 @@ namespace LoginApi.Controllers
                         c.FirstName.Contains(searchTerm) ||
                         c.LastName.Contains(searchTerm) ||
                         c.SkillsAndSpecialties.Contains(searchTerm) ||
-                        c.ServicesProvided.Contains(searchTerm) 
+                        c.ServicesProvided.Contains(searchTerm) ||
+                        c.SignatureDishes.Contains(searchTerm)
                     )
                     .Select(c => new
                     {
@@ -621,7 +618,7 @@ namespace LoginApi.Controllers
         {
             try
             {
-                var user = await _userManager.GetUserAsync(User);
+                var user = await _userManager.FindByEmailAsync(model.email);
                 if (user == null)
                 {
                     var errorResponse = new

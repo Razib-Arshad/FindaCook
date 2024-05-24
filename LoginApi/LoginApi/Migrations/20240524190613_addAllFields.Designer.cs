@@ -11,8 +11,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LoginApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
+<<<<<<<< HEAD:LoginApi/LoginApi/Migrations/20240524190613_addAllFields.Designer.cs
     [Migration("20240524190613_addAllFields")]
     partial class addAllFields
+========
+    [Migration("20240519124902_updation")]
+    partial class updation
+>>>>>>>> 889227ca7dc8346f3dd6c28f58b9093bc0f99c05:LoginApi/LoginApi/Migrations/20240519124902_updation.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

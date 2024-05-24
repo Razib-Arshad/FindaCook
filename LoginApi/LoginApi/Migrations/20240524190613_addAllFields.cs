@@ -6,7 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LoginApi.Migrations
 {
     /// <inheritdoc />
+<<<<<<<< HEAD:LoginApi/LoginApi/Migrations/20240524190613_addAllFields.cs
     public partial class addAllFields : Migration
+========
+    public partial class updation : Migration
+>>>>>>>> 889227ca7dc8346f3dd6c28f58b9093bc0f99c05:LoginApi/LoginApi/Migrations/20240519124902_updation.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
