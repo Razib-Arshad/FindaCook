@@ -97,170 +97,146 @@ namespace LoginApi.Controllers
         }
 
 
-        //get accepted orderRequest of users
-        [HttpGet("request_user/accept/{id}")]
-        public async Task<ActionResult> GetAcceptedUserOrderRequests(string id)
+        private async Task<ActionResult> GetUserRequestsByStatus(string userId, string status)
         {
+            if (_context.OrderRequest == null)
+            {
+                return NotFound(new { StatusCode = 400, Message = "Entity set 'AppDbContext.OrderRequest' is null." });
+            }
             try
             {
-                var acceptedRequests = await _context.OrderRequest
-                    .Where(o => o.UserId == id && o.Status == "Accept")
+                // Validate status input
+                var validStatuses = new[] { "Accepted", "Declined", "Pending" };
+                if (!validStatuses.Contains(status, StringComparer.OrdinalIgnoreCase))
+                {
+                    return BadRequest(new { StatusCode = 400, Message = "Invalid status value. Valid values are: Accepted, Declined, Pending." });
+                }
+                // Query the database for order requests associated with the specified user ID and status
+                var orderRequests = await _context.OrderRequest
+                    .Where(o => o.UserId == userId && o.Status.Equals(status, StringComparison.OrdinalIgnoreCase))
+                    .Include(o => o.CookInfo)
                     .ToListAsync();
 
-                if (acceptedRequests == null || !acceptedRequests.Any())
+                if (orderRequests == null || !orderRequests.Any())
                 {
-                    return NotFound(new { StatusCode = 404, Message = "No accepted order requests found for the specified user." });
+                    return NotFound(new { StatusCode = 404, Message = $"No {status.ToLower()} order requests found for the specified user." });
                 }
+
                 var response = new
                 {
                     StatusCode = 200,
-                    Message = "Order requests retrieved successfully",
-                    Data = acceptedRequests
+                    Message = $"{status} order requests retrieved successfully",
+                    Data = orderRequests.Select(o => new
+                    {
+                        o.CookInfoId,
+                        o.Status,
+                        o.Date,
+                        Cook = new
+                        {
+                            o.CookInfo.FirstName,
+                            o.CookInfo.LastName,
+                            o.CookInfo.Email,
+                            o.CookInfo.SkillsAndSpecialties,
+                            o.CookInfo.SignatureDishes,
+                            o.CookInfo.ServicesProvided,
+                            o.CookInfo.ExperienceYears,
+                            o.CookInfo.CulinarySchoolName,
+                            o.CookInfo.HasCulinaryDegree,
+                            o.CookInfo.Degree,
+                            o.CookInfo.Certificates,
+                            o.CookInfo.EligibleToWork
+                        }
+                    })
                 };
+
                 return Ok(response);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return StatusCode(500, new { StatusCode = 500, Message = ex.Message });
             }
         }
+
+        public async Task<ActionResult> GetCookRequestByStatus(string cookId, string status)
+        {
+            try
+            {
+                // Validate status input
+                var validStatuses = new[] { "Accepted", "Declined", "Pending" };
+                if (!validStatuses.Contains(status, StringComparer.OrdinalIgnoreCase))
+                {
+                    return BadRequest(new { StatusCode = 400, Message = "Invalid status value. Valid values are: Accepted, Declined, Pending." });
+                }
+
+                // Retrieve order requests for the specified cook and status
+                var orderRequests = await _context.OrderRequest
+                    .Where(o => o.CookInfoId == cookId && o.Status.Equals(status, StringComparison.OrdinalIgnoreCase))
+                    .ToListAsync();
+
+                if (orderRequests == null || !orderRequests.Any())
+                {
+                    return NotFound(new { StatusCode = 404, Message = $"No order requests found for cook with ID {cookId} and status {status}." });
+                }
+
+                var response = new
+                {
+                    StatusCode = 200,
+                    Message = $"Order requests with status {status} retrieved successfully for cook with ID {cookId}.",
+                    Data = orderRequests
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { StatusCode = 500, Message = "An error occurred while retrieving the order requests.", ErrorDetails = ex.Message });
+            }
+        }
+
+
+        // GET: api/OrderRequests/user/accepted/5
+        [HttpGet("request/getUserAcceptedRequests/{id}")]
+        public async Task<ActionResult> GetUserAcceptedRequests(string id)
+        {
+            return await GetUserRequestsByStatus(id, "Accepted");
+        }
+
 
         //get accepted orderRequest of Cook
-        [HttpGet("request_cook/accept/{id}")]
+        [HttpGet("request/getCookAcceptedRequests/{id}")]
         public async Task<ActionResult> GetAcceptedCookOrderRequests(string id)
         {
-            try
-            {
-                var acceptedRequests = await _context.OrderRequest
-                    .Where(o => o.CookInfoId == id && o.Status == "Accept")
-                    .ToListAsync();
-
-                if (acceptedRequests == null || !acceptedRequests.Any())
-                {
-                    return NotFound(new { StatusCode = 404, Message = "No accepted order requests found for the specified user." });
-                }
-                var response = new
-                {
-                    StatusCode = 200,
-                    Message = "Order requests retrieved successfully",
-                    Data = acceptedRequests
-                };
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { StatusCode = 500, Message = ex.Message });
-            }
+            return await GetCookRequestByStatus(id, "Accepted");
         }
         //get decline orderRequest of users
-        [HttpGet("request_user/decline/{id}")]
-        public async Task<ActionResult> GetDeclineUserOrderRequests(string id)
+        // GET: api/OrderRequests/user/declined/5
+        [HttpGet("request/getUserDeclinedRequests/{id}")]
+        public async Task<ActionResult> GetUserDeclinedRequests(string id)
         {
-            try
-            {
-                var acceptedRequests = await _context.OrderRequest
-                    .Where(o => o.UserId == id && o.Status == "Decline")
-                    .ToListAsync();
-
-                if (acceptedRequests == null || !acceptedRequests.Any())
-                {
-                    return NotFound(new { StatusCode = 404, Message = "No accepted order requests found for the specified user." });
-                }
-                var response = new
-                {
-                    StatusCode = 200,
-                    Message = "Order requests retrieved successfully",
-                    Data = acceptedRequests
-                };
-                return Ok(response);
-            }
-            catch(Exception ex)
-            {
-                return StatusCode(500, new { StatusCode = 500, Message = ex.Message });
-            }
+            return await GetUserRequestsByStatus(id, "Declined");
         }
+
 
         //get decline orderRequest of Cook
-        [HttpGet("request_cook/decline/{id}")]
+        [HttpGet("request/getCookDeclinedRequests/{id}")]
         public async Task<ActionResult> GetDeclineCookOrderRequests(string id)
         {
-            try
-            {
-                var acceptedRequests = await _context.OrderRequest
-                    .Where(o => o.CookInfoId == id && o.Status == "Decline")
-                    .ToListAsync();
-
-                if (acceptedRequests == null || !acceptedRequests.Any())
-                {
-                    return NotFound(new { StatusCode = 404, Message = "No accepted order requests found for the specified user." });
-                }
-                var response = new
-                {
-                    StatusCode = 200,
-                    Message = "Order requests retrieved successfully",
-                    Data = acceptedRequests
-                };
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { StatusCode = 500, Message = ex.Message });
-            }
+            return await GetCookRequestByStatus(id, "Declined");
         }
-        //get pending orderRequest of users
-        [HttpGet("request_user/pending/{id}")]
-        public async Task<ActionResult> GetPendingUserOrderRequests(string id)
+
+        // GET: api/OrderRequests/user/pending/5
+        [HttpGet("request/getUserPendingRequests/{id}")]
+        public async Task<ActionResult> GetUserPendingRequests(string id)
         {
-            try
-            {
-                var acceptedRequests = await _context.OrderRequest
-                    .Where(o => o.UserId == id && o.Status == "Pending")
-                    .ToListAsync();
-
-                if (acceptedRequests == null || !acceptedRequests.Any())
-                {
-                    return NotFound(new { StatusCode = 404, Message = "No accepted order requests found for the specified user." });
-                }
-                var response = new
-                {
-                    StatusCode = 200,
-                    Message = "Order requests retrieved successfully",
-                    Data = acceptedRequests
-                };
-                return Ok(response);
-            }
-            catch(Exception ex)
-            {
-                return StatusCode(500, new { StatusCode = 500, Message = ex.Message });
-            }
+            return await GetUserRequestsByStatus(id, "Pending");
         }
+
 
         //get pending orderRequest of Cook
-        [HttpGet("request_cook/pending/{id}")]
+        [HttpGet("request/getCookPendingRequests/{id}")]
         public async Task<ActionResult> GetPendingCookOrderRequests(string id)
         {
-            try
-            {
-                var acceptedRequests = await _context.OrderRequest
-                    .Where(o => o.CookInfoId == id && o.Status == "Pending")
-                    .ToListAsync();
-
-                if (acceptedRequests == null || !acceptedRequests.Any())
-                {
-                    return NotFound(new { StatusCode = 404, Message = "No accepted order requests found for the specified user." });
-                }
-                var response = new
-                {
-                    StatusCode = 200,
-                    Message = "Order requests retrieved successfully",
-                    Data = acceptedRequests
-                };
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500,new { StatusCode = 500, Message = ex });
-            }
+            return await GetCookRequestByStatus(id, "Pending");
         }
 
         // GET: api/OrderRequests/5
