@@ -250,6 +250,49 @@ namespace LoginApi.Controllers
             }
         }
 
+
+        //check if given user register as cook or not if regestered then return their CookInfoID
+        // GET: api/users/checkcookemail/{email}
+        [HttpGet("users/checkcookemail/{email}")]
+        public async Task<ActionResult> CheckUserRegisteredAsCookByEmail(string email)
+        {
+            try
+            {
+                // Check if the email exists in the CookInfos table
+                var cookInfo = await _context.CookInfos
+                    .Where(c => c.Email == email)
+                    .Select(c => new { c.Id }) 
+                    .FirstOrDefaultAsync();
+
+                if (cookInfo == null)
+                {
+                    return NotFound(new { StatusCode = 404, Message = "Email is not registered as a cook." });
+                }
+
+                var response = new
+                {
+                    StatusCode = 200,
+                    Message = "Email is registered as a cook.",
+                    CookInfoId = cookInfo.Id  
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                var errorResponse = new
+                {
+                    StatusCode = 500,
+                    Message = "An error occurred while checking the email's cook registration.",
+                    ErrorDetails = ex.Message
+                };
+
+                return StatusCode(500, errorResponse);
+            }
+        }
+
+
+
         [HttpGet("categories/get/servicesprovided")]
         public async Task<ActionResult> GetCooksByServicesProvided()
         {

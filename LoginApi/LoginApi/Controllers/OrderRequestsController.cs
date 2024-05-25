@@ -406,6 +406,96 @@ namespace LoginApi.Controllers
             
         }
 
+        // 1. Return count of total orders received by a cook
+        [HttpGet("orders/count/cook/received/{cookId}")]
+        public async Task<ActionResult> GetTotalOrdersReceivedByCook(string cookId)
+        {
+            try
+            {
+                var count = await _context.OrderRequest.CountAsync(o => o.CookInfoId == cookId);
+                return Ok(new { Count = count, Message = "Total recieved order requests by cook" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { StatusCode = 500, Message = "An error occurred while retrieving the count of orders received by the cook.", ErrorDetails = ex.Message });
+            }
+        }
+
+        // 2. Return count of total orders received by a user
+        [HttpGet("orders/count/user/received/{userId}")]
+        public async Task<ActionResult> GetTotalOrdersReceivedByUser(string userId)
+        {
+            try
+            {
+                var count = await _context.OrderRequest.CountAsync(o => o.UserId == userId);
+                return Ok(new { Count = count, Message = "Total user's order requests"  });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { StatusCode = 500, Message = "An error occurred while retrieving the count of orders received by the user.", ErrorDetails = ex.Message });
+            }
+        }
+
+        // 3. Return count of total orders accepted by a cook
+        [HttpGet("orders/count/cook/accepted/{cookId}")]
+        public async Task<ActionResult> GetTotalOrdersAcceptedByCook(string cookId)
+        {
+            try
+            {
+                var count = await _context.OrderRequest.CountAsync(o => o.CookInfoId == cookId && o.Status == "Accepted");
+                return Ok(new { Count = count, Message = "Total accepted order requests by cook"  });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { StatusCode = 500, Message = "An error occurred while retrieving the count of orders accepted by the cook.", ErrorDetails = ex.Message });
+            }
+        }
+
+        // 4. Return count of total orders accepted by a user
+        [HttpGet("orders/count/user/accepted/{userId}")]
+        public async Task<ActionResult> GetTotalOrdersAcceptedByUser(string userId)
+        {
+            try
+            {
+                var count = await _context.OrderRequest.CountAsync(o => o.UserId == userId && o.Status == "Accepted");
+                return Ok(new { Count = count, Message = "Total declined user's order requests"  });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { StatusCode = 500, Message = "An error occurred while retrieving the count of orders accepted by the user.", ErrorDetails = ex.Message });
+            }
+        }
+
+        // 5. Return count of total orders declined by a cook
+        [HttpGet("orders/count/cook/declined/{cookId}")]
+        public async Task<ActionResult> GetTotalOrdersDeclinedByCook(string cookId)
+        {
+            try
+            {
+                var count = await _context.OrderRequest.CountAsync(o => o.CookInfoId == cookId && o.Status == "Declined");
+                return Ok(new { Count = count ,Message ="Total declined order requests by cook"});
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { StatusCode = 500, Message = "An error occurred while retrieving the count of orders declined by the cook.", ErrorDetails = ex.Message });
+            }
+        }
+
+        // 6. Return count of total orders declined by a user
+        [HttpGet("orders/count/user/declined/{userId}")]
+        public async Task<ActionResult> GetTotalOrdersDeclinedByUser(string userId)
+        {
+            try
+            {
+                var count = await _context.OrderRequest.CountAsync(o => o.UserId == userId && o.Status == "Declined");
+                return Ok(new { Count = count, Message = "Total declined user's order requests" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { StatusCode = 500, Message = "An error occurred while retrieving the count of orders declined by the user.", ErrorDetails = ex.Message });
+            }
+        }
+
         private bool OrderRequestExists(int id)
         {
             return (_context.OrderRequest?.Any(e => e.RqID == id)).GetValueOrDefault();
