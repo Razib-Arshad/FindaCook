@@ -18,7 +18,7 @@
         <Tab Title="Manage Orders" Icon="orders.png">
             <ShellContent
                 Title="Manage Orders"
-                ContentTemplate="{DataTemplate local:ManageOrdersPage}"
+                ContentTemplate="{DataTemplate local:CookOrders}"
                 Route="ManageOrdersPage"
                 />
         </Tab>

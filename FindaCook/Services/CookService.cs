@@ -283,7 +283,24 @@ namespace FindaCook.Services
                         var apiResponse = JsonConvert.DeserializeObject<ApiResponse>(contentString);
                         if (apiResponse != null && apiResponse.StatusCode == 200)
                         {
-                            return apiResponse.Data;
+                            var simpleOrderDtoList = new List<SimpleOrderDTO>();
+
+                            var orderRequest = apiResponse.Data.order_Requests;
+                            var cookInfo = apiResponse.Data.cookInfo;
+
+                            var simpleOrderDto = new SimpleOrderDTO
+                            {
+                                Desc = orderRequest.orderRequestDesc,
+                                Date = orderRequest.orderRequestDate,
+                                Time = orderRequest.orderRequestTime,
+                                SelectedService = orderRequest.orderRequestService,
+                                Price = orderRequest.orderRequestPrice,
+                                CookUserName = $"{cookInfo.cookFirstName} {cookInfo.cookLastName}",
+                                contactNumber = orderRequest.contactNumber // Add if there's a contact number in the response
+                            };
+
+                            simpleOrderDtoList.Add(simpleOrderDto);
+                            return simpleOrderDtoList;
                         }
                     }
                     return null;
@@ -291,7 +308,6 @@ namespace FindaCook.Services
             }
             catch (Exception ex)
             {
-                // It's a good practice to log the exception
                 System.Diagnostics.Debug.WriteLine($"Error in GetOrderRequests: {ex}");
                 return null;
             }
@@ -336,8 +352,9 @@ namespace FindaCook.Services
         {
             public int StatusCode { get; set; }
             public string Message { get; set; }
-            public List<SimpleOrderDTO> Data { get; set; }
+            public dynamic Data { get; set; }
         }
+
 
         public async Task<ICollection<CookProfile>> SearchCook(string SelectedFilter,string SearchText)
         {
@@ -447,6 +464,119 @@ namespace FindaCook.Services
 
 
         }
+
+
+        //Cook interfaces implementation
+        public async Task<List<SimpleOrderDTO>> GetAllOrderRequests()
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    string cookId = Preferences.Get("CookInfoId", string.Empty);
+                    string apiUrl = $"https://localhost:7224/api/OrderRequests/request_cook/pending/{cookId}";
+
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string contentString = await response.Content.ReadAsStringAsync();
+                        var apiResponse = JsonConvert.DeserializeObject<ApiResponse>(contentString);
+                        if (apiResponse != null && apiResponse.StatusCode == 200)
+                        {
+                            var simpleOrderDtoList = new List<SimpleOrderDTO>();
+
+                            foreach (var order in apiResponse.Data)
+                            {
+                                var simpleOrderDto = new SimpleOrderDTO
+                                {
+                                    Desc = order.OrderRequestDesc,
+                                    Date = order.OrderRequestDate.ToString("yyyy-MM-dd"),
+                                    Time = order.OrderRequestTime.ToString("HH:mm:ss"),
+                                    SelectedService = order.OrderRequestService,
+                                    Price = order.OrderRequestPrice,
+                                    CookUserName = $"{order.CookInfo.FirstName} {order.CookInfo.LastName}",
+                                    contactNumber = order.UserContact // Assuming this field exists
+                                };
+
+                                simpleOrderDtoList.Add(simpleOrderDto);
+                            }
+
+                            return simpleOrderDtoList;
+                        }
+                    }
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in GetAllOrderRequests: {ex}");
+                return null;
+            }
+        }
+        public async Task<List<SimpleOrderDTO>> GetAcceptedCookOrderRequests()
+        {
+            string cookId = Preferences.Get("CookInfoId", string.Empty);
+            return await GetCookOrderRequestsByStatus(cookId, "Accept");
+        }
+
+        public async Task<List<SimpleOrderDTO>> GetDeclinedCookOrderRequests()
+        {
+            string cookId = Preferences.Get("CookInfoId", string.Empty);
+            return await GetCookOrderRequestsByStatus(cookId, "Decline");
+        }
+
+        private async Task<List<SimpleOrderDTO>> GetCookOrderRequestsByStatus(string cookId, string status)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    string apiUrl = $"https://localhost:7224/api/OrderRequests/request_cook/{status.ToLower()}/{cookId}";
+
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string contentString = await response.Content.ReadAsStringAsync();
+                        var apiResponse = JsonConvert.DeserializeObject<ApiResponse>(contentString);
+                        if (apiResponse != null && apiResponse.StatusCode == 200)
+                        {
+                            var simpleOrderDtoList = new List<SimpleOrderDTO>();
+
+                            foreach (var order in apiResponse.Data)
+                            {
+                                var simpleOrderDto = new SimpleOrderDTO
+                                {
+                                    Desc = order.OrderRequestDesc,
+                                    Date = order.OrderRequestDate.ToString("yyyy-MM-dd"),
+                                    Time = order.OrderRequestTime.ToString("HH:mm:ss"),
+                                    SelectedService = order.OrderRequestService,
+                                    Price = order.OrderRequestPrice,
+                                    CookUserName = $"{order.CookInfo.FirstName} {order.CookInfo.LastName}",
+                                    contactNumber = order.UserContact // Assuming this field exists
+                                };
+
+                                simpleOrderDtoList.Add(simpleOrderDto);
+                            }
+
+                            return simpleOrderDtoList;
+                        }
+                    }
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in GetCookOrderRequestsByStatus: {ex}");
+                return null;
+            }
+        }
+
+
+
+
+
 
     }
 }

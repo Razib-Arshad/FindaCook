@@ -51,6 +51,7 @@ namespace FindaCook.Models
         public string SelectedService { get; set; }
         public decimal Price { get; set; }
         public string CookUserName { get; set; }  // Directly including cook's username here
+        public string contactNumber { get; set;  }
 
       
     }
