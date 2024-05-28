@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FindaCook.Models
 {
@@ -29,7 +26,6 @@ namespace FindaCook.Models
         public string selectedService { get; set; }
         public int Price { get; set; }
         public string UserAddress { get; set; }
-
         public string Status { get; set; }
         public DateTime Date { get; set; }
         public CookInfo Cook { get; set; }
@@ -40,10 +36,15 @@ namespace FindaCook.Models
         public List<OrderRequest> OrderRequests { get; set; }
     }
 
-    public class RequestApiResponse
+  
+
+    public class SimpleOrderDTO
     {
-        public int StatusCode { get; set; }
-        public string Message { get; set; }
-        public Data Data { get; set; }
+        public string Desc { get; set; }
+        public DateTime Date { get; set; }
+        public string SelectedService { get; set; }
+        public int Price { get; set; }
+        public string CookUserName { get; set; }
+        public string ServicesProvided { get; set; }
     }
 }

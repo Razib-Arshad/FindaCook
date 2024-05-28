@@ -48,7 +48,7 @@ namespace FindaCook.Services
                             PropertyNameCaseInsensitive = true,
                         };
 
-                        LoginResponse loginResponse = JsonSerializer.Deserialize<LoginResponse>(rawContent, options); 
+                        Response loginResponse = JsonSerializer.Deserialize<Response>(rawContent, options); 
 
                         if (loginResponse != null)
                         {

@@ -110,7 +110,7 @@ namespace FindaCook.Services
                     if (response.IsSuccessStatusCode)
                     {
                         string contentString = await response.Content.ReadAsStringAsync();
-                        var responseContainer = JsonConvert.DeserializeObject<ResponseContainer>(contentString);
+                        var responseContainer = JsonConvert.DeserializeObject<FavResponseContainer>(contentString);
 
                         var favouriteCooks = JsonConvert.DeserializeObject<List<FavouriteCookDetails>>(JsonConvert.SerializeObject(responseContainer.Data));
                         return favouriteCooks;
@@ -134,21 +134,6 @@ namespace FindaCook.Services
             }
         }
 
-        public class ResponseContainer
-        {
-            public int StatusCode { get; set; }
-            public string Message { get; set; }
-            public List<FavouriteCookDetails> Data { get; set; }
-        }
-
-        public class ApiResponse
-        {
-            public int StatusCode { get; set; }
-            public string Message { get; set; }
-            public dynamic Data { get; set; }
-        }
-
-        
 
 
 
@@ -272,9 +257,7 @@ namespace FindaCook.Services
                 throw new Exception($"An error occurred: {ex.Message}");
             }
         }
-
-
-        public async Task<RequestApiResponse> GetOrderRequests()
+        public async Task<ICollection<SimpleOrderDTO>> GetOrderRequests()
         {
             try
             {
@@ -291,14 +274,19 @@ namespace FindaCook.Services
                     if (response.IsSuccessStatusCode)
                     {
                         string contentString = await response.Content.ReadAsStringAsync();
-                        System.Diagnostics.Debug.WriteLine($"Response JSON: {contentString}");
+                        var responseContainer = JsonConvert.DeserializeObject<orderResponseContainer>(contentString);
 
-                        var apiResponse = JsonConvert.DeserializeObject<RequestApiResponse>(contentString);
+                        var orderRequests = responseContainer.Data.Select(order => new SimpleOrderDTO
+                        {
+                            Desc = order.Desc ?? "No description available",
+                            Date = order.Date,
+                            SelectedService = order.selectedService ?? "No service selected",
+                            Price = order.Price,
+                            CookUserName = $"{order.Cook?.FirstName ?? "Unknown"} {order.Cook?.LastName ?? "Unknown"}",
+                            ServicesProvided = order.Cook?.ServicesProvided ?? "No services provided"
+                        }).ToList();
 
-                        
-
-                        return apiResponse;
-                        
+                        return orderRequests;
                     }
 
                     return null;
@@ -468,8 +456,8 @@ namespace FindaCook.Services
                 using (var client = new HttpClient())
                 {
                     string cookId = Preferences.Get("CookInfoId", string.Empty);
-                    string apiUrl = $"https://localhost:7224/api/OrderRequests/request_cook/pending/{cookId}";
-
+                    string apiUrl = $"https://localhost:7224/api/OrderRequests/request/getCookPendingRequests/{cookId}";
+                   
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
 
                     if (response.IsSuccessStatusCode)
@@ -486,11 +474,9 @@ namespace FindaCook.Services
                                 {
                                     Desc = order.OrderRequestDesc,
                                     Date = order.OrderRequestDate.ToString("yyyy-MM-dd"),
-                                    Time = order.OrderRequestTime.ToString("HH:mm:ss"),
                                     SelectedService = order.OrderRequestService,
                                     Price = order.OrderRequestPrice,
                                     CookUserName = $"{order.CookInfo.FirstName} {order.CookInfo.LastName}",
-                                    contactNumber = order.UserContact // Assuming this field exists
                                 };
 
                                 simpleOrderDtoList.Add(simpleOrderDto);
@@ -544,11 +530,9 @@ namespace FindaCook.Services
                                 {
                                     Desc = order.OrderRequestDesc,
                                     Date = order.OrderRequestDate.ToString("yyyy-MM-dd"),
-                                    Time = order.OrderRequestTime.ToString("HH:mm:ss"),
                                     SelectedService = order.OrderRequestService,
                                     Price = order.OrderRequestPrice,
                                     CookUserName = $"{order.CookInfo.FirstName} {order.CookInfo.LastName}",
-                                    contactNumber = order.UserContact // Assuming this field exists
                                 };
 
                                 simpleOrderDtoList.Add(simpleOrderDto);

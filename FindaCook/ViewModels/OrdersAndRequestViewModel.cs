@@ -28,52 +28,26 @@ namespace FindaCook.ViewModels
             _cookService = new CookService();
         }
 
-     
         [RelayCommand]
         private async Task ExecuteGetRequests()
         {
             try
             {
                 var requests = await _cookService.GetOrderRequests();
-                DisplayedData.Clear();
 
-
-                var simpleOrderDtoList = new List<SimpleOrderDTO>();
-
-                if (requests != null)
-                {
-
-
-                    foreach (var orderRequest in requests.Data.OrderRequests)
-                    {
-
-                        var simpleOrderDto = new SimpleOrderDTO
-                        {
-                            Desc = orderRequest.Desc,
-                            Date = orderRequest.Date,
-                            SelectedService = orderRequest.selectedService,
-                            Price = orderRequest.Price,
-                            CookUserName = $"{orderRequest.Cook.FirstName} {orderRequest.Cook.LastName}",
-                            // Add if there's a contact number in the response
-                        };
-                        simpleOrderDtoList.Add(simpleOrderDto);
-                    }
-                }
-
-                if (simpleOrderDtoList != null && simpleOrderDtoList.Any())
-                {
-                    foreach (var request in simpleOrderDtoList)
-                    {
-                        DisplayedData.Add(request);
-                    }
-                    NoRequests = false;
-                }
-
-
-                else
+                if (requests == null || !requests.Any())
                 {
                     NoRequests = true;
+                    return;
                 }
+
+                DisplayedData.Clear();
+                foreach (var request in requests)
+                {
+                    DisplayedData.Add(request);
+                }
+
+                NoRequests = false;
             }
             catch (Exception ex)
             {
@@ -88,20 +62,20 @@ namespace FindaCook.ViewModels
             try
             {
                 var orders = await _cookService.GetOrders();
-                DisplayedData.Clear();
 
-                if (orders != null && orders.Any())
-                {
-                    NoOrders = false;
-                    foreach (var order in orders)
-                    {
-                        DisplayedData.Add(order);
-                    }
-                }
-                else
+                if (orders == null || !orders.Any())
                 {
                     NoOrders = true;
+                    return;
                 }
+
+                DisplayedData.Clear();
+                foreach (var order in orders)
+                {
+                    DisplayedData.Add(order);
+                }
+
+                NoOrders = false;
             }
             catch (Exception ex)
             {
