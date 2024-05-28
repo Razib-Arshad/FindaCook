@@ -37,14 +37,39 @@ namespace FindaCook.ViewModels
                 var requests = await _cookService.GetOrderRequests();
                 DisplayedData.Clear();
 
-                if (requests != null && requests.Any())
+
+                var simpleOrderDtoList = new List<SimpleOrderDTO>();
+
+                if (requests != null)
                 {
-                    foreach (var request in requests)
+
+
+                    foreach (var orderRequest in requests.Data.OrderRequests)
+                    {
+
+                        var simpleOrderDto = new SimpleOrderDTO
+                        {
+                            Desc = orderRequest.Desc,
+                            Date = orderRequest.Date,
+                            SelectedService = orderRequest.selectedService,
+                            Price = orderRequest.Price,
+                            CookUserName = $"{orderRequest.Cook.FirstName} {orderRequest.Cook.LastName}",
+                            // Add if there's a contact number in the response
+                        };
+                        simpleOrderDtoList.Add(simpleOrderDto);
+                    }
+                }
+
+                if (simpleOrderDtoList != null && simpleOrderDtoList.Any())
+                {
+                    foreach (var request in simpleOrderDtoList)
                     {
                         DisplayedData.Add(request);
                     }
                     NoRequests = false;
                 }
+
+
                 else
                 {
                     NoRequests = true;

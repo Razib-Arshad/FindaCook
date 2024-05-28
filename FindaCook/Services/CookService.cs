@@ -141,6 +141,16 @@ namespace FindaCook.Services
             public List<FavouriteCookDetails> Data { get; set; }
         }
 
+        public class ApiResponse
+        {
+            public int StatusCode { get; set; }
+            public string Message { get; set; }
+            public dynamic Data { get; set; }
+        }
+
+        
+
+
 
         public async Task<RegistrationResultClass> RegisterCook(Person p, QualificationInfo q, ProfessionalInfoModel prof)
         {
@@ -240,6 +250,7 @@ namespace FindaCook.Services
                         price = order.Price,
                         userContact = order.ContactNumber,
                         userAddress = order.Address,
+                        status="Pending",
                         userId = UserId,
                         cookInfoId = id
                     };
@@ -263,7 +274,7 @@ namespace FindaCook.Services
         }
 
 
-        public async Task<List<SimpleOrderDTO>> GetOrderRequests()
+        public async Task<RequestApiResponse> GetOrderRequests()
         {
             try
             {
@@ -280,29 +291,16 @@ namespace FindaCook.Services
                     if (response.IsSuccessStatusCode)
                     {
                         string contentString = await response.Content.ReadAsStringAsync();
-                        var apiResponse = JsonConvert.DeserializeObject<ApiResponse>(contentString);
-                        if (apiResponse != null && apiResponse.StatusCode == 200)
-                        {
-                            var simpleOrderDtoList = new List<SimpleOrderDTO>();
+                        System.Diagnostics.Debug.WriteLine($"Response JSON: {contentString}");
 
-                            var orderRequest = apiResponse.Data.order_Requests;
-                            var cookInfo = apiResponse.Data.cookInfo;
+                        var apiResponse = JsonConvert.DeserializeObject<RequestApiResponse>(contentString);
 
-                            var simpleOrderDto = new SimpleOrderDTO
-                            {
-                                Desc = orderRequest.orderRequestDesc,
-                                Date = orderRequest.orderRequestDate,
-                                Time = orderRequest.orderRequestTime,
-                                SelectedService = orderRequest.orderRequestService,
-                                Price = orderRequest.orderRequestPrice,
-                                CookUserName = $"{cookInfo.cookFirstName} {cookInfo.cookLastName}",
-                                contactNumber = orderRequest.contactNumber // Add if there's a contact number in the response
-                            };
+                        
 
-                            simpleOrderDtoList.Add(simpleOrderDto);
-                            return simpleOrderDtoList;
-                        }
+                        return apiResponse;
+                        
                     }
+
                     return null;
                 }
             }
@@ -312,6 +310,7 @@ namespace FindaCook.Services
                 return null;
             }
         }
+
 
 
 
@@ -348,12 +347,7 @@ namespace FindaCook.Services
                 return null;
             }
         }
-        public class ApiResponse
-        {
-            public int StatusCode { get; set; }
-            public string Message { get; set; }
-            public dynamic Data { get; set; }
-        }
+        
 
 
         public async Task<ICollection<CookProfile>> SearchCook(string SelectedFilter,string SearchText)

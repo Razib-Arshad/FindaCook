@@ -16,7 +16,17 @@ namespace FindaCook.Views
 
         private async void RegisterCook_Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Personal_info());
+            var email = Preferences.Get("UserEmail", string.Empty);
+            if (await _loginService.CheckUserRegisteredAsCookByEmail(email))
+            {
+                await DisplayAlert("Error", "You are already registered as a cook.", "OK");
+            }
+            else
+            {
+                await Navigation.PushAsync(new Personal_info());
+            }
+
+            
         }
 
         private async void ResetPassword_Button_Clicked(object sender, EventArgs e)

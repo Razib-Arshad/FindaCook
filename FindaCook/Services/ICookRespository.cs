@@ -1,5 +1,6 @@
 ﻿using FindaCook.Maui.Models;
 using FindaCook.Models;
+using FindaCook.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace FindaCook.Services
         Task<bool> AddToFavorites(string cookName,CookProfile cook);
         
         Task<ICollection<FavouriteCookDetails>> getFavourites();
-        Task<List<SimpleOrderDTO>> GetOrderRequests();
+        Task<RequestApiResponse> GetOrderRequests();
         Task<List<SimpleOrderDTO>> GetOrders();
 
         Task<ICollection<CookProfile>> SearchCook(string SelectedFilter, string SearchText);

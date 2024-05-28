@@ -36,15 +36,15 @@
         </HorizontalStackLayout>
 
         <!-- Display message when there are no requests -->
-        <Label Grid.Row="1" Text="No requests available" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"
+        <Label Grid.Row="1" Text="Not available" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"
                IsVisible="{Binding NoRequests}" />
 
         <!-- Display message when there are no accepted orders -->
-        <Label Grid.Row="1" Text="No accepted orders" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"
+        <Label Grid.Row="1" Text="Not available" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"
                IsVisible="{Binding NoAcceptedOrders}" />
 
         <!-- Display message when there are no declined orders -->
-        <Label Grid.Row="1" Text="No declined orders" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"
+        <Label Grid.Row="1" Text="Not available" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"
                IsVisible="{Binding NoDeclinedOrders}" />
 
         <!-- ListView to display data, let it handle scrolling -->

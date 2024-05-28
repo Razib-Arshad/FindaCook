@@ -46,8 +46,8 @@ namespace FindaCook.Models
     public class SimpleOrderDTO
     {
         public string Desc { get; set; }
-        public string Date { get; set; }
-        public string Time { get; set; }
+        public DateTime Date { get; set; }
+        public DateTime Time { get; set; }
         public string SelectedService { get; set; }
         public decimal Price { get; set; }
         public string CookUserName { get; set; }  // Directly including cook's username here
