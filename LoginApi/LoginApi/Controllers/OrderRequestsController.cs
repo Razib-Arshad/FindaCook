@@ -68,6 +68,10 @@ namespace LoginApi.Controllers
                     Data = orderRequests.Select(o => new
                     {
                         o.RqID,
+                        o.Desc,
+                        o.selectedService,
+                        o.Price,
+                        o.UserAddress,
                         o.Status,
                         o.Date,
                         Cook = new
