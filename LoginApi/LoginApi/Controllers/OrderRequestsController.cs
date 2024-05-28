@@ -68,6 +68,10 @@ namespace LoginApi.Controllers
                     Data = orderRequests.Select(o => new
                     {
                         o.RqID,
+                        o.Desc,
+                        o.selectedService,
+                        o.Price,
+                        o.UserAddress,
                         o.Status,
                         o.Date,
                         Cook = new
@@ -107,13 +111,13 @@ namespace LoginApi.Controllers
             {
                 // Validate status input
                 var validStatuses = new[] { "Accepted", "Declined", "Pending" };
-                if (!validStatuses.Contains(status, StringComparer.OrdinalIgnoreCase))
+                if (!validStatuses.Contains(status))
                 {
                     return BadRequest(new { StatusCode = 400, Message = "Invalid status value. Valid values are: Accepted, Declined, Pending." });
                 }
                 // Query the database for order requests associated with the specified user ID and status
                 var orderRequests = await _context.OrderRequest
-                    .Where(o => o.UserId == userId && o.Status.Equals(status, StringComparison.OrdinalIgnoreCase))
+                    .Where(o => o.UserId == userId && o.Status == status)
                     .Include(o => o.CookInfo)
                     .ToListAsync();
 
@@ -163,14 +167,14 @@ namespace LoginApi.Controllers
             {
                 // Validate status input
                 var validStatuses = new[] { "Accepted", "Declined", "Pending" };
-                if (!validStatuses.Contains(status, StringComparer.OrdinalIgnoreCase))
+                if (!validStatuses.Contains(status))
                 {
                     return BadRequest(new { StatusCode = 400, Message = "Invalid status value. Valid values are: Accepted, Declined, Pending." });
                 }
 
                 // Retrieve order requests for the specified cook and status
                 var orderRequests = await _context.OrderRequest
-                    .Where(o => o.CookInfoId == cookId && o.Status.Equals(status, StringComparison.OrdinalIgnoreCase))
+                    .Where(o => o.CookInfoId == cookId && o.Status == status)
                     .ToListAsync();
 
                 if (orderRequests == null || !orderRequests.Any())
@@ -263,14 +267,13 @@ namespace LoginApi.Controllers
                 };
                 return Ok(response);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return StatusCode(500, new { StatusCode = 500, Message = ex.Message });
             }
         }
 
         // PUT: api/OrderRequests/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("request/update/{id}")]
         public async Task<IActionResult> PutOrderRequest(int id, OrderRequest orderRequest)
         {
@@ -341,11 +344,11 @@ namespace LoginApi.Controllers
                 };
                 return Ok(response);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return StatusCode(500, new { StatusCode = 500, Message = ex.Message });
             }
-            
+
         }
 
         // DELETE: api/OrderRequests/5
@@ -375,11 +378,11 @@ namespace LoginApi.Controllers
                 };
                 return Ok(response);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return StatusCode(500, new { StatusCode = 500, Message = ex.Message });
             }
-            
+
         }
 
         // 1. Return count of total orders received by a cook
@@ -404,7 +407,7 @@ namespace LoginApi.Controllers
             try
             {
                 var count = await _context.OrderRequest.CountAsync(o => o.UserId == userId);
-                return Ok(new { Count = count, Message = "Total user's order requests"  });
+                return Ok(new { Count = count, Message = "Total user's order requests" });
             }
             catch (Exception ex)
             {
@@ -419,7 +422,7 @@ namespace LoginApi.Controllers
             try
             {
                 var count = await _context.OrderRequest.CountAsync(o => o.CookInfoId == cookId && o.Status == "Accepted");
-                return Ok(new { Count = count, Message = "Total accepted order requests by cook"  });
+                return Ok(new { Count = count, Message = "Total accepted order requests by cook" });
             }
             catch (Exception ex)
             {
@@ -434,7 +437,7 @@ namespace LoginApi.Controllers
             try
             {
                 var count = await _context.OrderRequest.CountAsync(o => o.UserId == userId && o.Status == "Accepted");
-                return Ok(new { Count = count, Message = "Total declined user's order requests"  });
+                return Ok(new { Count = count, Message = "Total declined user's order requests" });
             }
             catch (Exception ex)
             {
@@ -449,7 +452,7 @@ namespace LoginApi.Controllers
             try
             {
                 var count = await _context.OrderRequest.CountAsync(o => o.CookInfoId == cookId && o.Status == "Declined");
-                return Ok(new { Count = count ,Message ="Total declined order requests by cook"});
+                return Ok(new { Count = count, Message = "Total declined order requests by cook" });
             }
             catch (Exception ex)
             {

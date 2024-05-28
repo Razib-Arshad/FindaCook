@@ -169,57 +169,58 @@ namespace LoginApi.Controllers
         [HttpPost("favourite/post")]
         public async Task<ActionResult<Favourite>> PostFavourite(FavouriteModel favourite)
         {
-          if (_context.Favourites == null)
-          {
-                return NotFound(new { StatusCode = 400, Message = "Entity set 'AppDbContext.Favourite'  is null." });
-          }
-          try
+            if (_context.Favourites == null)
             {
-                var favourites = await _context.Favourites
-                      .Where(f => f.UserId == favourite.UserId)
-                      .ToListAsync();
-                if (favourites != null)
-                {
-                    var fav = new Favourite
-                    {
-                        UserId = favourite.UserId,
-                        CookInfoId = favourite.CookInfoId,
-
-                    };
-                    _context.Favourites.Add(fav);
-                    await _context.SaveChangesAsync();
-
-                    var response = new
-                    {
-                        StatusCode = 200,
-                        Message = "add favourite successfully"
-                    };
-                    return Ok(response);
-                }
-                else
-                {
-                    var response = new
-                    {
-                        StatusCode = 404,
-                        Message = "cook already exist in user's favourites list"
-                    };
-                    return Ok(response);
-                }
+                return NotFound(new { StatusCode = 400, Message = "Entity set 'AppDbContext.Favourites' is null." });
             }
-            catch(Exception ex)
+
+            try
             {
-                // Log the exception or handle it as needed
+                // Check if the favourite already exists
+                var existingFavourite = await _context.Favourites
+                    .FirstOrDefaultAsync(f => f.UserId == favourite.UserId && f.CookInfoId == favourite.CookInfoId);
+
+                if (existingFavourite != null)
+                {
+                    var response = new
+                    {
+                        StatusCode = 400,
+                        Message = "Cook already exists in user's favourites list"
+                    };
+                    return Ok(response);
+                }
+
+                // Add new favourite
+                var fav = new Favourite
+                {
+                    UserId = favourite.UserId,
+                    CookInfoId = favourite.CookInfoId,
+                };
+
+                _context.Favourites.Add(fav);
+                await _context.SaveChangesAsync();
+
+                var successResponse = new
+                {
+                    StatusCode = 200,
+                    Message = "Favourite added successfully"
+                };
+                return Ok(successResponse);
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
                 var errorResponse = new
                 {
                     StatusCode = 500,
+                    Message = "An error occurred while adding the favourite.",
                     ErrorDetails = ex.Message
                 };
 
                 return StatusCode(500, errorResponse);
             }
-            
-            
         }
+
 
         // DELETE: api/Favourites/5
         [HttpDelete("favourite/delete/{id}")]
