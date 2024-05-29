@@ -48,7 +48,7 @@ namespace FindaCook.Services
                             PropertyNameCaseInsensitive = true,
                         };
 
-                        LoginResponse loginResponse = JsonSerializer.Deserialize<LoginResponse>(rawContent, options); 
+                        Response loginResponse = JsonSerializer.Deserialize<Response>(rawContent, options); 
 
                         if (loginResponse != null)
                         {
@@ -95,7 +95,10 @@ namespace FindaCook.Services
                     string apiUrl = "https://localhost:7224/api/UserCook/password/change";
                     client.BaseAddress = new Uri(apiUrl);
 
+                    var email = Preferences.Get("UserEmail", string.Empty);
+
                     var requestData = new {
+                        email=email,
                         oldPassword = oldPassword,
                         newPassword = newPassword
                     };
@@ -126,5 +129,51 @@ namespace FindaCook.Services
             }
             return true;// Placeholder, replace with actual logic
         }
+
+        public async Task<bool> CheckUserRegisteredAsCookByEmail(string email)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    string apiUrl = $"https://localhost:7224/api/UserCook/users/checkcookemail/{email}";
+                    client.BaseAddress = new Uri(apiUrl);
+
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string rawContent = await response.Content.ReadAsStringAsync();
+                        var options = new JsonSerializerOptions
+                        {
+                            PropertyNameCaseInsensitive = true,
+                        };
+
+                        var checkResponse = JsonSerializer.Deserialize<CheckCookResponse>(rawContent, options);
+
+                        if (checkResponse != null && checkResponse.StatusCode == 200)
+                        {
+                            Preferences.Set("CookInfoId", checkResponse.CookInfoId);
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+
+            return false;
+        }
+
+        public class CheckCookResponse
+        {
+            public int StatusCode { get; set; }
+            public string Message { get; set; }
+            public string CookInfoId { get; set; }
+        }
+
+
     }
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:FindaCook.ViewModels"
+             x:Class="FindaCook.Views.OrderDetailsPage"
+             Title="Order Details">
+
+    <ContentPage.BindingContext>
+        <viewmodel:OrderDetailsViewModel/>
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Padding="10">
+        <Label Text="Order Details" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" />
+
+        <Label Text="{Binding SelectedOrder.CookUserName}" FontSize="Large" TextColor="Black" />
+        <Label Text="{Binding SelectedOrder.Desc}" FontSize="Medium" TextColor="Black" />
+        <Label Text="{Binding SelectedOrder.SelectedService}" FontSize="Small" TextColor="Black" FontAttributes="Italic" />
+        <Label Text="{Binding SelectedOrder.Date, StringFormat='{0:dd MMM yyyy}'}" FontSize="Small" TextColor="Black" />
+        <Label Text="{Binding SelectedOrder.Time, StringFormat='{0:hh\\:mm}'}" FontSize="Small" TextColor="Black" />
+        <Label Text="{Binding SelectedOrder.Price, StringFormat='Price: {0:C}'}" FontSize="Small" TextColor="Black" />
+
+        <HorizontalStackLayout HorizontalOptions="Center" Padding="10" Spacing="10">
+            <Button Text="Accept" Command="{Binding AcceptCommand}" BackgroundColor="Green" TextColor="White" WidthRequest="100" HeightRequest="50" />
+            <Button Text="Reject" Command="{Binding RejectCommand}" BackgroundColor="Red" TextColor="White" WidthRequest="100" HeightRequest="50" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

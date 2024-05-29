@@ -4,6 +4,7 @@
              xmlns:viewModels="clr-namespace:FindaCook.ViewModels" 
              x:DataType="viewModels:OrderViewModel"
              x:Class="FindaCook.Views.Order"
+             Shell.NavBarIsVisible="False"
              x:Name="OrderPage"
              BackgroundImageSource="bg1.jpg">
 

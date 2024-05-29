@@ -4,6 +4,7 @@
              xmlns:vm="clr-namespace:FindaCook.ViewModels"
              x:Class="FindaCook.Favourites"
              x:DataType="vm:FavouriteViewModel" 
+             Shell.NavBarIsVisible="False"
              Title="Favourites"
              BackgroundImageSource="bg1.jpg">
 

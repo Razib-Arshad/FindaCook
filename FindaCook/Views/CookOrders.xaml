@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:FindaCook.ViewModels"
              xmlns:model="clr-namespace:FindaCook.Models"
-             x:Class="FindaCook.Views.RequestsAndOrders"
-             Shell.NavBarIsVisible="False">
+             x:Class="FindaCook.Views.CookOrders"
+             Shell.NavBarIsVisible="False"
+             Title="Cook Orders">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -15,7 +16,7 @@
     </ContentPage.Resources>
 
     <ContentPage.BindingContext>
-        <viewmodel:OrdersAndRequestViewModel/>
+        <viewmodel:CookOrdersViewModel/>
     </ContentPage.BindingContext>
 
     <Grid BackgroundColor="{StaticResource PrimaryColor}">
@@ -26,22 +27,29 @@
 
         <!-- Center the buttons and increase their size -->
         <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center" Padding="10">
-            <Button Text="Requests" TextColor="White" Command="{Binding ExecuteGetRequestsCommand}" BackgroundColor="{StaticResource SecondaryColor}" 
+            <Button Text="All Requests" TextColor="White" Command="{Binding ExecuteGetAllRequestsCommand}" BackgroundColor="{StaticResource SecondaryColor}" 
                     WidthRequest="150" HeightRequest="50" CornerRadius="25" />
-            <Button Text="Orders" TextColor="White" Command="{Binding ExecuteGetOrdersCommand}" BackgroundColor="{StaticResource SecondaryColor}" 
+            <Button Text="Accepted Orders" TextColor="White" Command="{Binding ExecuteGetAcceptedOrdersCommand}" BackgroundColor="{StaticResource SecondaryColor}" 
+                    WidthRequest="150" HeightRequest="50" CornerRadius="25" />
+            <Button Text="Declined Orders" TextColor="White" Command="{Binding ExecuteGetDeclinedOrdersCommand}" BackgroundColor="{StaticResource SecondaryColor}" 
                     WidthRequest="150" HeightRequest="50" CornerRadius="25" />
         </HorizontalStackLayout>
 
         <!-- Display message when there are no requests -->
-        <Label Grid.Row="1" Text="No request placed yet" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"
+        <Label Grid.Row="1" Text="Not available" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"
                IsVisible="{Binding NoRequests}" />
 
-        <!-- Display message when there are no orders -->
-        <Label Grid.Row="1" Text="No order accepted yet" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"
-               IsVisible="{Binding NoOrders}" />
+        <!-- Display message when there are no accepted orders -->
+        <Label Grid.Row="1" Text="Not available" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"
+               IsVisible="{Binding NoAcceptedOrders}" />
+
+        <!-- Display message when there are no declined orders -->
+        <Label Grid.Row="1" Text="Not available" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"
+               IsVisible="{Binding NoDeclinedOrders}" />
 
         <!-- ListView to display data, let it handle scrolling -->
-        <ListView Grid.Row="1" ItemsSource="{Binding DisplayedData}" IsPullToRefreshEnabled="true" RefreshCommand="{Binding RefreshDataCommand}">
+        <ListView Grid.Row="1" ItemsSource="{Binding DisplayedData}" IsPullToRefreshEnabled="true" RefreshCommand="{Binding RefreshDataCommand}"
+                  ItemSelected="OnOrderSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -56,7 +64,6 @@
                                 </StackLayout>
                                 <Label Text="{Binding Price, StringFormat='Price: {0:C}'}" FontSize="Small" TextColor="White" />
                                 <Label Text="{Binding contactNumber}" FontSize="Medium" TextColor="White" />
-
                             </StackLayout>
                         </Frame>
                     </ViewCell>
