@@ -20,7 +20,7 @@ public partial class UserAccountPage : ContentPage
     }
     private async void TermsPolicyButton_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new Favourites());
+       // await Navigation.PushAsync(new Favourites());
     }
     private void SwitchToCook_Button_Clicked(object sender, EventArgs e)
     {
@@ -30,7 +30,7 @@ public partial class UserAccountPage : ContentPage
     }
     private async void Logout_Button_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new Favourites());
+        //await Navigation.PushAsync(new Favourites());
     }
 
 

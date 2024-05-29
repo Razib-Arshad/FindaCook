@@ -60,7 +60,7 @@
 -->
 
             <StackLayout>
-                <Label Text="Popular Categories: " FontAttributes="Bold"   FontSize="50" TextColor="#91914bcc"  FontFamily="Times New Roman" />
+                <Label Text="Popular Categories: " FontAttributes="Bold"   FontSize="50" TextColor="Orange"  FontFamily="Times New Roman" />
             </StackLayout>
 
             <VerticalStackLayout>

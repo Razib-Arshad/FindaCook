@@ -24,10 +24,10 @@
                                HorizontalOptions="CenterAndExpand"
                                VerticalOptions="CenterAndExpand"/>
                        
-                        <Label Text="Discover the joy of cooking with our Cook app. Whether you are a Seasoned Chef or a User, our app provides a seamless cooking experience with a variety of
-                               recipes and helpful features."
+                        <Label Text="Discover the joy of cooking with our Cook app. Whether you are a Seasoned Chef or a User, our app provides a seamless cooking experience with a variety of recipes and helpful features."
                                TextColor="White"
                                FontSize="16"
+                               
                                HorizontalOptions="CenterAndExpand"
                                VerticalOptions="CenterAndExpand"
                                />
