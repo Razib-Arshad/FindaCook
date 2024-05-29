@@ -6,7 +6,7 @@
     <ScrollView>
         <Grid>
         <!-- Background Image -->
-        <Image Source="background.jpg" MaximumHeightRequest="600"/>
+        <Image Source="background.jpg" MaximumHeightRequest="800"/>
 
         <!-- Transparent Black Box -->
         <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="#80000000">
@@ -17,19 +17,18 @@
                         HeightRequest="{OnPlatform Default=200, WinUI=300}"
                            WidthRequest="{OnPlatform Default=200, WinUI=400}"
                            >
-                    <StackLayout Padding="20">
+                    <StackLayout>
                         <Label Text="Welcome!"
                                TextColor="FloralWhite"
                                FontSize="24"
-                               HorizontalOptions="CenterAndExpand"
+                               HorizontalOptions="Center"
                                VerticalOptions="CenterAndExpand"/>
                        
                         <Label Text="Discover the joy of cooking with our Cook app. Whether you are a Seasoned Chef or a User, our app provides a seamless cooking experience with a variety of recipes and helpful features."
                                TextColor="White"
-                               FontSize="16"
-                               
-                               HorizontalOptions="CenterAndExpand"
-                               VerticalOptions="CenterAndExpand"
+                               FontSize="11"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
                                />
                     </StackLayout>
                 </Frame>

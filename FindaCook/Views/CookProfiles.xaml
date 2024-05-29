@@ -33,16 +33,16 @@
                 <Label FontFamily="Times New Roman">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="First Name:   " FontAttributes="Bold" FontFamily="Times New Roman" />
-                            <Span Text="{Binding FirstName}" FontFamily="Times New Roman" />
+                            <Span Text="First Name:   " FontAttributes="Bold" FontFamily="Times New Roman" TextColor="White" />
+                            <Span Text="{Binding FirstName}" FontFamily="Times New Roman"  TextColor="White"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
                 <Label FontFamily="Times New Roman">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="Last Name:   " FontAttributes="Bold" FontFamily="Times New Roman"/>
-                            <Span Text="{Binding LastName}" FontFamily="Times New Roman" />
+                            <Span Text="Last Name:   " FontAttributes="Bold" FontFamily="Times New Roman" TextColor="White"/>
+                            <Span Text="{Binding LastName}" FontFamily="Times New Roman" TextColor="White" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -50,8 +50,8 @@
                 <Label FontFamily="Times New Roman">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="Skills and Specialities:   " FontAttributes="Bold" FontFamily="Times New Roman"/>
-                            <Span Text="{Binding SkillsAndSpecialties}" FontFamily="Times New Roman"  />
+                            <Span Text="Skills and Specialities:   " FontAttributes="Bold" FontFamily="Times New Roman" TextColor="White"/>
+                            <Span Text="{Binding SkillsAndSpecialties}" FontFamily="Times New Roman" TextColor="White" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -59,8 +59,8 @@
                 <Label FontFamily="Times New Roman">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="Signature Dishes:   " FontAttributes="Bold" FontFamily="Times New Roman"/>
-                            <Span Text="{Binding SignatureDishes}" FontFamily="Times New Roman"  />
+                            <Span Text="Signature Dishes:   " FontAttributes="Bold" FontFamily="Times New Roman" TextColor="White"/>
+                            <Span Text="{Binding SignatureDishes}" FontFamily="Times New Roman"  TextColor="White"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -68,56 +68,56 @@
                 <Label FontFamily="Times New Roman">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="Services Provides:   " FontAttributes="Bold" FontFamily="Times New Roman"/>
-                            <Span Text="{Binding ServicesProvided}" FontFamily="Times New Roman" />
+                            <Span Text="Services Provides:   " FontAttributes="Bold" FontFamily="Times New Roman" TextColor="White"/>
+                            <Span Text="{Binding ServicesProvided}" FontFamily="Times New Roman" TextColor="White"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
                 <Label FontFamily="Times New Roman">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="Experience:   " FontAttributes="Bold" FontFamily="Times New Roman"/>
-                            <Span Text="{Binding ExperienceYears, StringFormat='{0} years'}" FontFamily="Times New Roman" />
+                            <Span Text="Experience:   " FontAttributes="Bold" FontFamily="Times New Roman" TextColor="White"/>
+                            <Span Text="{Binding ExperienceYears, StringFormat='{0} years'}" FontFamily="Times New Roman" TextColor="White"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
                 <Label FontFamily="Times New Roman">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="Culinary School Name:   " FontAttributes="Bold" FontFamily="Times New Roman"/>
-                            <Span Text="{Binding CulinarySchoolName}" FontFamily="Times New Roman" />
+                            <Span Text="Culinary School Name:   " FontAttributes="Bold" FontFamily="Times New Roman" TextColor="White"/>
+                            <Span Text="{Binding CulinarySchoolName}" FontFamily="Times New Roman" TextColor="White"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
                 <Label FontFamily="Times New Roman">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="Has Culinary Degree:   " FontAttributes="Bold" FontFamily="Times New Roman"/>
-                            <Span Text="{Binding HasCulinaryDegree}" FontFamily="Times New Roman"/>
+                            <Span Text="Has Culinary Degree:   " FontAttributes="Bold" FontFamily="Times New Roman" TextColor="White"/>
+                            <Span Text="{Binding HasCulinaryDegree}" FontFamily="Times New Roman" TextColor="White"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
                 <Label FontFamily="Times New Roman">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="Degree:   " FontAttributes="Bold" FontFamily="Times New Roman"/>
-                            <Span Text="{Binding Degree}" FontFamily="Times New Roman" />
+                            <Span Text="Degree:   " FontAttributes="Bold" FontFamily="Times New Roman" TextColor="White"/>
+                            <Span Text="{Binding Degree}" FontFamily="Times New Roman" TextColor="White"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
                 <Label FontFamily="Times New Roman">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="Certificates:   " FontAttributes="Bold" FontFamily="Times New Roman"/>
-                            <Span Text="{Binding Certificates}" FontFamily="Times New Roman" />
+                            <Span Text="Certificates:   " FontAttributes="Bold" FontFamily="Times New Roman" TextColor="White"/>
+                            <Span Text="{Binding Certificates}" FontFamily="Times New Roman" TextColor="White" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
                 <Label FontFamily="Times New Roman">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="Eligible to Work:   " FontAttributes="Bold" FontFamily="Times New Roman"/>
-                            <Span Text="{Binding EligibleToWork}" FontFamily="Times New Roman" />
+                            <Span Text="Eligible to Work:   " FontAttributes="Bold" FontFamily="Times New Roman" TextColor="White"/>
+                            <Span Text="{Binding EligibleToWork}" FontFamily="Times New Roman" TextColor="White" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>

@@ -31,31 +31,31 @@
                 <!-- Row 1 -->
                 <VerticalStackLayout Grid.Row="0" Grid.Column="0" Margin="10">
                     <Image Source="desi3.jpg" Aspect="AspectFill" />
-                    <Button Text="Desi" TextColor="White" Command="{Binding CategoryClickedCommand}" CommandParameter="Desi" BackgroundColor="Orange"/>
+                    <Button Text="Desi" TextColor="White" Command="{Binding CategoryClickedCommand}" CommandParameter="Desi" BackgroundColor="Orange" Margin="0,5,0,0"/>
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Row="0" Grid.Column="1" Margin="10">
                     <Image Source="chinese.jpg" Aspect="AspectFill"/>
-                    <Button Text="Chinese" TextColor="White" Command="{Binding CategoryClickedCommand}" CommandParameter="Chinese" BackgroundColor="Orange"/>
+                    <Button Text="Chinese" TextColor="White" Command="{Binding CategoryClickedCommand}" CommandParameter="Chinese" BackgroundColor="Orange" Margin="0,5,0,0"/>
                 </VerticalStackLayout>
 
                 <!-- Row 2 -->
                 <VerticalStackLayout Grid.Row="1" Grid.Column="0" Margin="10">
                     <Image Source="continental.webp" Aspect="AspectFill"/>
-                    <Button Text="Continental" TextColor="White" Command="{Binding CategoryClickedCommand}" CommandParameter="Continental" BackgroundColor="Orange"/>
+                    <Button Text="Continental" TextColor="White" Command="{Binding CategoryClickedCommand}" CommandParameter="Continental" BackgroundColor="Orange" Margin="0,5,0,0"/>
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Row="1" Grid.Column="1" Margin="10">
                     <Image Source="thai.jpg" Aspect="AspectFill"/>
-                    <Button Text="Thai" TextColor="White" Command="{Binding CategoryClickedCommand}" CommandParameter="Thai" BackgroundColor="Orange"/>
+                    <Button Text="Thai" TextColor="White" Command="{Binding CategoryClickedCommand}" CommandParameter="Thai" BackgroundColor="Orange" Margin="0,5,0,0"/>
                 </VerticalStackLayout>
 
                 <!-- Row 3 -->
                 <VerticalStackLayout Grid.Row="2" Grid.Column="0" Margin="10">
                     <Image Source="italian.jpg" Aspect="AspectFill"/>
-                    <Button Text="Italian" TextColor="White" Command="{Binding CategoryClickedCommand}" CommandParameter="Italian" BackgroundColor="Orange"/>
+                    <Button Text="Italian" TextColor="White" Command="{Binding CategoryClickedCommand}" CommandParameter="Italian" BackgroundColor="Orange" Margin="0,5,0,0"/>
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Row="2" Grid.Column="1" Margin="10">
                     <Image Source="fast.jpg" Aspect="AspectFill"/>
-                    <Button Text="Fast Food" TextColor="White" Command="{Binding CategoryClickedCommand}" CommandParameter="Fast Food" BackgroundColor="Orange"/>
+                    <Button Text="Fast Food" TextColor="White" Command="{Binding CategoryClickedCommand}" CommandParameter="Fast Food" BackgroundColor="Orange" Margin="0,5,0,0"/>
                 </VerticalStackLayout>
             </Grid>
 

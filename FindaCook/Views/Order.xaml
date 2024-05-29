@@ -30,38 +30,38 @@
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Margin="10,20,10,0">
-                    <Label Text="Description:" VerticalOptions="Center" WidthRequest="130" FontSize="20" FontFamily="Times New Roman"/>
-                    <Entry Placeholder="Enter Description" x:Name="DescriptionEntry" HorizontalOptions="FillAndExpand" 
+                    <Label Text="Description:" VerticalOptions="Center" WidthRequest="130" FontSize="20" FontFamily="Times New Roman" TextColor="White"/>
+                    <Entry Placeholder="Enter Description" x:Name="DescriptionEntry" HorizontalOptions="FillAndExpand" TextColor="White"
                            Text="{Binding Description}" />
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Margin="10,20,10,0">
-                    <Label Text="Contact Number:" VerticalOptions="Center" WidthRequest="130" FontSize="20" FontFamily="Times New Roman"/>
+                    <Label Text="Contact Number:" VerticalOptions="Center" WidthRequest="130" FontSize="20" FontFamily="Times New Roman" TextColor="White"/>
                     <Entry Placeholder="Enter Contact Number" x:Name="ContactEntry" HorizontalOptions="FillAndExpand" 
-                           Text="{Binding ContactNumber}" />
+                           Text="{Binding ContactNumber}" TextColor="White"/>
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Margin="10,20,10,0">
-                    <Label Text="Address:" VerticalOptions="Center" WidthRequest="130" FontSize="20" FontFamily="Times New Roman"/>
-                    <Entry Placeholder="Enter Address" x:Name="AddressEntry" HorizontalOptions="FillAndExpand" 
+                    <Label Text="Address:" VerticalOptions="Center" WidthRequest="130" FontSize="20" FontFamily="Times New Roman" TextColor="White"/>
+                    <Entry Placeholder="Enter Address" x:Name="AddressEntry" HorizontalOptions="FillAndExpand" TextColor="White"
                            Text="{Binding Address}" />
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Margin="10,20,10,0">
-                    <Label Text="Price:" VerticalOptions="Center" WidthRequest="130" FontSize="20" FontFamily="Times New Roman"/>
-                    <Entry Placeholder="Enter Price" x:Name="PriceEntry" HorizontalOptions="FillAndExpand" 
+                    <Label Text="Price:" VerticalOptions="Center" WidthRequest="130" FontSize="20" FontFamily="Times New Roman" TextColor="White"/>
+                    <Entry Placeholder="Enter Price" x:Name="PriceEntry" HorizontalOptions="FillAndExpand" TextColor="White"
                            Text="{Binding Price}" Keyboard="Numeric"/>
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Margin="10,20,10,0">
-                    <Label Text="Date on which you want the service: " VerticalOptions="Center" WidthRequest="130" FontSize="20" FontFamily="Times New Roman"/>
-                    <DatePicker x:Name="datePicker" HorizontalOptions="FillAndExpand" 
+                    <Label Text="Date on you want service: " VerticalOptions="Center" WidthRequest="130" FontSize="20" FontFamily="Times New Roman" TextColor="White"/>
+                    <DatePicker x:Name="datePicker" HorizontalOptions="FillAndExpand" TextColor="White"
                                 Date="{Binding SelectedDate}" />
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Margin="10,20,10,0">
-                    <Label Text="Time at which you want service: " VerticalOptions="Center" WidthRequest="130" FontSize="20" FontFamily="Times New Roman"/>
-                    <TimePicker x:Name="timePicker" HorizontalOptions="FillAndExpand" 
+                    <Label Text="Time at you want service: " VerticalOptions="Center" WidthRequest="130" FontSize="20" FontFamily="Times New Roman" TextColor="White"/>
+                    <TimePicker x:Name="timePicker" HorizontalOptions="FillAndExpand" TextColor="White"
                                 Time="{Binding SelectedTime}" />
                 </StackLayout>
 
