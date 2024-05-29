@@ -551,6 +551,174 @@ namespace FindaCook.Services
             }
         }
 
+        //Counts function
+
+        public async Task<int> GetTotalOrdersAcceptedByCook()
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    string cookId= Preferences.Get("CookInfoId", string.Empty);
+
+                    string apiUrl = $"https://localhost:7224/orders/count/cook/accepted/{cookId}";
+
+                    // Send the GET request
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    // Check if the request was successful
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string contentString = await response.Content.ReadAsStringAsync();
+                        var result = JsonConvert.DeserializeObject<CountApiResponse>(contentString);
+
+                        int count = result.Count;
+
+                        return count;
+                    }
+                    else
+                    {
+                        // If the request was not successful, handle the error
+                        var errorResponse = new
+                        {
+                            StatusCode = (int)response.StatusCode,
+                            Message = "An error occurred while retrieving the count of orders accepted by the cook.",
+                            ErrorDetails = await response.Content.ReadAsStringAsync()
+                        };
+
+                        throw new Exception(JsonConvert.SerializeObject(errorResponse));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception as needed
+                throw new Exception($"An error occurred: {ex.Message}");
+            }
+        }
+
+        public async Task<int> GetTotalOrdersDeclinedByCook()
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    string cookId = Preferences.Get("CookInfoId", string.Empty);
+
+                    string apiUrl = $"https://localhost:7224/orders/count/cook/declined/{cookId}";
+
+                    // Send the GET request
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    // Check if the request was successful
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string contentString = await response.Content.ReadAsStringAsync();
+                        var result = JsonConvert.DeserializeObject<CountApiResponse>(contentString);
+
+                        int count = result.Count;
+
+                        return count;
+                    }
+                    else
+                    {
+                        // If the request was not successful, handle the error
+                        var errorResponse = new
+                        {
+                            StatusCode = (int)response.StatusCode,
+                            Message = "An error occurred while retrieving the count of orders accepted by the cook.",
+                            ErrorDetails = await response.Content.ReadAsStringAsync()
+                        };
+
+                        throw new Exception(JsonConvert.SerializeObject(errorResponse));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception as needed
+                throw new Exception($"An error occurred: {ex.Message}");
+            }
+        }
+
+        public async Task<int> GetTotalOrdersReceivedByCook()
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    string cookId = Preferences.Get("CookInfoId", string.Empty);
+
+                    string apiUrl = $"https://localhost:7224/orders/count/cook/received/{cookId}";
+
+                    // Send the GET request
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    // Check if the request was successful
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string contentString = await response.Content.ReadAsStringAsync();
+                        var result = JsonConvert.DeserializeObject<CountApiResponse>(contentString);
+
+                        int count = result.Count;
+
+                        return count;
+                    }
+                    else
+                    {
+                        // If the request was not successful, handle the error
+                        var errorResponse = new
+                        {
+                            StatusCode = (int)response.StatusCode,
+                            Message = "An error occurred while retrieving the count of orders accepted by the cook.",
+                            ErrorDetails = await response.Content.ReadAsStringAsync()
+                        };
+
+                        throw new Exception(JsonConvert.SerializeObject(errorResponse));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception as needed
+                throw new Exception($"An error occurred: {ex.Message}");
+            }
+        }
+
+        public async Task<int[]> GetAllCounts()
+        {
+            try
+            {
+                // Create tasks for each of the three methods
+                Task<int> acceptedCountTask = GetTotalOrdersAcceptedByCook();
+                Task<int> declinedCountTask = GetTotalOrdersDeclinedByCook();
+                Task<int> receivedCountTask = GetTotalOrdersReceivedByCook();
+
+                // Wait for all the tasks to complete
+                await Task.WhenAll(acceptedCountTask, declinedCountTask, receivedCountTask);
+
+                // Get the results
+                int acceptedCount = await acceptedCountTask;
+                int declinedCount = await declinedCountTask;
+                int receivedCount = await receivedCountTask;
+
+                // Return the results as an array
+                return new int[] { acceptedCount, declinedCount, receivedCount };
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception as needed
+                throw new Exception($"An error occurred: {ex.Message}");
+            }
+        }
+
+        private class CountApiResponse
+        {
+            public int Count { get; set; }
+            public string Message { get; set; }
+        }
+
+
 
 
 
