@@ -45,8 +45,8 @@
                                FontFamily="Times New Roman">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span Text="Name: " FontAttributes="Bold" />
-                                    <Span Text="{Binding FirstName}" />
+                                    <Span Text="Name: " FontAttributes="Bold" TextColor="White" />
+                                    <Span Text="{Binding FirstName}" TextColor="White"/>
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
@@ -56,8 +56,8 @@
                                FontAttributes="Italic">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span Text="Skills and Specialties: " FontAttributes="Bold" />
-                                    <Span Text="{Binding SkillsAndSpecialties}" />
+                                    <Span Text="Skills and Specialties: " FontAttributes="Bold" TextColor="White"/>
+                                    <Span Text="{Binding SkillsAndSpecialties}" TextColor="White"/>
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
@@ -68,8 +68,8 @@
                                FontAttributes="Italic">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span Text="Experience: " FontAttributes="Bold" />
-                                    <Span Text="{Binding ExperienceYears, StringFormat='{0} years'}" />
+                                    <Span Text="Experience: " FontAttributes="Bold" TextColor="White" />
+                                    <Span Text="{Binding ExperienceYears, StringFormat='{0} years'}"  TextColor="White" />
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>

@@ -5,25 +5,31 @@
              xmlns:viewmodel="clr-namespace:FindaCook.Maui.ViewModels"
              x:DataType="viewmodel:UserRegistrationPageViewModel"
              Title="Register"
-              BackgroundImageSource="bg1.jpg">
-    <Grid>
+             BackgroundImageSource="bg1.jpg">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="DefaultMargin" x:TypeArguments="Thickness">
+                <On Platform="iOS" Value="20,10,20,10" />
+                <On Platform="Android" Value="20,10,20,10" />
+                <On Platform="WinUI" Value="20,10,20,10" />
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-        <BoxView Color="Black" Opacity="0.5" Margin="80,30, 80, 10" CornerRadius="20" />
+    <Grid>
+        <BoxView Color="Black" Opacity="0.5" Margin="20" CornerRadius="20" />
+
         <ScrollView>
             <StackLayout Padding="20">
                 <Label Text="Register" FontSize="28" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" Margin="0,20,0,20" TextColor="White" FontFamily="Times New Roman"/>
 
-                <Entry Placeholder="Name" x:Name="NameEntry" Text="{Binding Name}" Margin="90,30,90,10" TextColor="White" FontFamily="Times New Roman"/>
-                <Entry Placeholder="Email" x:Name="EmailEntry" Text="{Binding Email}" TextTransform="None" Margin="90,20,90,10" FontFamily="Times New Roman"/>
-                <Entry Placeholder="Password" x:Name="PasswordEntry" IsPassword="True" Text="{Binding Password}" Margin="90,20,90,10" FontFamily="Times New Roman"/>
-                <Entry Placeholder="Retype Password" x:Name="RetypePasswordEntry" IsPassword="True" Text="{Binding RetypePassword}" Margin="90,20,90,20" FontFamily="Times New Roman"/>
+                <Entry Placeholder="Name" x:Name="NameEntry" Text="{Binding Name}" Margin="{StaticResource DefaultMargin}" TextColor="White" FontFamily="Times New Roman" />
+                <Entry Placeholder="Email" x:Name="EmailEntry" Text="{Binding Email}" TextTransform="None" Margin="{StaticResource DefaultMargin}" FontFamily="Times New Roman" TextColor="White" />
+                <Entry Placeholder="Password" x:Name="PasswordEntry" IsPassword="True" Text="{Binding Password}" Margin="{StaticResource DefaultMargin}" FontFamily="Times New Roman" TextColor="White" />
+                <Entry Placeholder="Retype Password" x:Name="RetypePasswordEntry" IsPassword="True" Text="{Binding RetypePassword}" Margin="{StaticResource DefaultMargin}" FontFamily="Times New Roman" TextColor="White" />
 
-                <Button Text="Register" Command="{Binding RegisterCommand }"  FontFamily="Times New Roman" HorizontalOptions="CenterAndExpand" Margin="0,20,0,0" BackgroundColor="Orange" TextColor="White" CornerRadius="30" WidthRequest="180"/>
-
-                <!--<Label x:Name="ResultLabel" Text="{Binding ResultMessage}" FontSize="16" TextColor="Red" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>-->
+                <Button Text="Register" Command="{Binding RegisterCommand }" FontFamily="Times New Roman" HorizontalOptions="CenterAndExpand" Margin="0,20,0,0" BackgroundColor="Orange" TextColor="White" CornerRadius="30" WidthRequest="180"/>
             </StackLayout>
         </ScrollView>
     </Grid>
 </ContentPage>
-
-

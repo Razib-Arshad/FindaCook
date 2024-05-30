@@ -1,81 +1,104 @@
-﻿<!-- Personal_info.xaml -->
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:FindaCook.Maui.ViewModels"
              x:Class="FindaCook.Personal_info"
              x:DataType="viewmodel:Personal_infoViewModel"
              Title="Personal Info"
-              BackgroundImageSource="bg1.jpg">
+             BackgroundImageSource="bg1.jpg">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="DefaultMargin" x:TypeArguments="Thickness">
+                <On Platform="iOS" Value="20,10,20,10" />
+                <On Platform="Android" Value="20,10,20,10" />
+                <On Platform="WinUI" Value="20,10,20,10" />
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    
 
     <Grid>
 
-        <BoxView Color="Black" Opacity="0.75" Margin="80,20, 80, 10" CornerRadius="20" />
-
+        <BoxView Color="Black" Opacity="0.75" Margin="20" CornerRadius="20" />
 
         <ScrollView>
-
-
-            <StackLayout>
+            <StackLayout Padding="20">
                 <Label Text="Personal Information" FontSize="28" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" Margin="0,20,0,20" TextColor="White" FontFamily="Times New Roman"/>
 
-                <!-- Last Name -->
-                <StackLayout Orientation="Horizontal" Margin="100,20,10,10">
-                    <Label Text="First Name:" VerticalOptions="Center" WidthRequest="120" FontSize="15" FontFamily="Times New Roman"/>
-                    <Entry Placeholder="Enter First Name" Text="{Binding FirstName}"  TextColor="White" FontFamily="Times New Roman" WidthRequest="800"/>
-                </StackLayout>
+                <!-- First Name -->
+                <Grid Margin="{StaticResource DefaultMargin}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <!-- <Label Text="First Name: " VerticalOptions="Center" FontSize="15" FontFamily="Times New Roman" TextColor="White"/>  -->
+                    <Entry Grid.Column="1" Placeholder="Enter First Name" Text="{Binding FirstName}" TextColor="White" FontFamily="Times New Roman"/>
+                </Grid>
 
-
                 <!-- Last Name -->
-                <StackLayout Orientation="Horizontal" Margin="100,20,10,10">
-                    <Label Text="Last Name:" VerticalOptions="Center" WidthRequest="120" FontSize="15" />
-                    <Entry Placeholder="Enter Last Name" Text="{Binding LastName}"  TextColor="White" FontFamily="Times New Roman" WidthRequest="800"/>
-                </StackLayout>
+                <Grid Margin="{StaticResource DefaultMargin}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <!-- <Label Text="Last Name: " VerticalOptions="Center" FontSize="15" FontFamily="Times New Roman" TextColor="White"/> -->
+                    <Entry Grid.Column="1" Placeholder="Enter Last Name" Text="{Binding LastName}" TextColor="White" FontFamily="Times New Roman"/>
+                </Grid>
 
                 <!-- Contact Number -->
-                <StackLayout Orientation="Horizontal" Margin="100,20,10,10">
-                    <Label Text="Contact Number:" VerticalOptions="Center" WidthRequest="120" FontSize="15" />
-                    <Entry Placeholder="Enter Contact Number" Text="{Binding ContactNumber}"  TextColor="White" FontFamily="Times New Roman" WidthRequest="800"/>
-                </StackLayout>
+                <Grid Margin="{StaticResource DefaultMargin}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <!-- <Label Text="Contact Number: " VerticalOptions="Center" FontSize="15" FontFamily="Times New Roman" TextColor="White"/> -->
+                    <Entry Grid.Column="1" Placeholder="Enter Contact Number" Text="{Binding ContactNumber}" TextColor="White" FontFamily="Times New Roman"/>
+                </Grid>
 
-                <!-- Whatsapp Contact Number -->
-                <StackLayout Orientation="Horizontal" Margin="100,20,10,10">
-                    <Label Text="Whatsapp Number:" VerticalOptions="Center" WidthRequest="120" FontSize="15" />
-                    <Entry Placeholder="Enter Whatsapp Contact Number" Text="{Binding WhatsappNumber}"  TextColor="White" FontFamily="Times New Roman" WidthRequest="800"/>
-                </StackLayout>
-
-                <!-- Email --><!--
-                <StackLayout Orientation="Horizontal" Margin="100,20,10,10">
-                    <Label Text="Email:" VerticalOptions="Center" WidthRequest="120" FontSize="15"   />
-                    <Entry Placeholder="Enter Email" Text="{Binding Email}"  TextColor="White" FontFamily="Times New Roman" WidthRequest="800"/>
-                </StackLayout>-->
-
-                <!-- Password -->
-                <!--<StackLayout Orientation="Horizontal" Margin="100,20,10,10">
-                    <Label Text="Password:" VerticalOptions="Center" WidthRequest="120" FontSize="15" />
-                    <Entry Placeholder="Enter Password" Text="{Binding Password}" IsPassword="True"  TextColor="White" FontFamily="Times New Roman" WidthRequest="800"/>
-                </StackLayout>-->
+                <!-- Whatsapp Number -->
+                <Grid Margin="{StaticResource DefaultMargin}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions> 
+                    <!--  <Label Text="Whatsapp Num :" VerticalOptions="Center" FontSize="15" FontFamily="Times New Roman" TextColor="White"/> -->
+                    <Entry Grid.Column="1" Placeholder="Enter Whatsapp Number" Text="{Binding WhatsappNumber}" TextColor="White" FontFamily="Times New Roman"/>
+                </Grid>
 
                 <!-- Current Address -->
-                <StackLayout Orientation="Horizontal" Margin="100,20,10,10">
-                    <Label Text="Current Address:" VerticalOptions="Center" WidthRequest="120" FontSize="15"/>
-                    <Entry Placeholder="Enter Current Address" Text="{Binding CurrentAddress}"  TextColor="White" FontFamily="Times New Roman" WidthRequest="800"/>
-                </StackLayout>
+                <Grid Margin="{StaticResource DefaultMargin}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <!--  <Label Text="Current Address: " VerticalOptions="Center" FontSize="15" FontFamily="Times New Roman" TextColor="White" /> -->
+                    <Entry Grid.Column="1" Placeholder="Enter Current Address" Text="{Binding CurrentAddress}" TextColor="White" FontFamily="Times New Roman"/>
+                </Grid>
 
                 <!-- Permanent Address -->
-                <StackLayout Orientation="Horizontal" Margin="100,20,10,10">
-                    <Label Text="Permanent Address:" VerticalOptions="Center" WidthRequest="120" FontSize="15"/>
-                    <Entry Placeholder="Enter Permanent Address" Text="{Binding PermanentAddress}"  TextColor="White" FontFamily="Times New Roman" WidthRequest="800"/>
-                </StackLayout>
+                <Grid Margin="{StaticResource DefaultMargin}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <!-- <Label Text="Permanent Address:" VerticalOptions="Center" FontSize="15" FontFamily="Times New Roman" TextColor="White"/> -->
+                    <Entry Grid.Column="1" Placeholder="Enter Permanent Address" Text="{Binding PermanentAddress}"  FontFamily="Times New Roman" TextColor="White"/>
+                </Grid>
 
-                <StackLayout Orientation="Horizontal" Margin="100,20,10,10">
-                    <Label Text="Are you legally eligible to work in this country?" VerticalOptions="Center" WidthRequest="250" />
-                    <Switch x:Name="EligibleToWorkSwitch"  IsToggled="{Binding EligibleToWork}"  WidthRequest="800"/>
-                </StackLayout>
+                <!-- Eligibility to Work -->
+                <Grid Margin="{StaticResource DefaultMargin}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Eligible to work?  " VerticalOptions="Center" FontSize="15" FontFamily="Times New Roman" TextColor="White"/>
+                    <Switch Grid.Column="1" IsToggled="{Binding EligibleToWork}" HorizontalOptions="Start" ThumbColor="White" OnColor="Grey" />
+                </Grid>
 
-                <Button Text="Next" Command="{Binding NextCommand}" TextColor="White" Margin="0,10,0,0" BackgroundColor="Orange" CornerRadius="30" WidthRequest="300"/>
+                <Button Text="Next" Command="{Binding NextCommand}" TextColor="White" Margin="0,20,0,0" BackgroundColor="Orange" CornerRadius="30" WidthRequest="300" HorizontalOptions="CenterAndExpand"/>
             </StackLayout>
         </ScrollView>
     </Grid>
 </ContentPage>
-
-

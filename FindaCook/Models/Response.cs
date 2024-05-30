@@ -41,5 +41,9 @@ namespace FindaCook.Maui.Models
         public dynamic Data { get; set; }
     }
 
-
+    public class CountApiResponse
+    {
+        public int Count { get; set; }
+        public string Message { get; set; }
+    }
 }

@@ -24,30 +24,30 @@
             </Grid.ColumnDefinitions>
 
             <!-- User name and email centered across both columns -->
-            <Label Text="Razib Arshad" FontSize="24" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Center" FontFamily="Times New Roman"/>
-            <Label Text="razib.arshad@gmail.com" FontSize="18" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Center" FontFamily="Times New Roman"/>
+            <Label Text="Razib Arshad" FontSize="24" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Center" FontFamily="Times New Roman" TextColor="White"/>
+            <Label Text="razib.arshad@gmail.com" FontSize="18" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Center" FontFamily="Times New Roman" TextColor="White"/>
 
             <!-- Buttons spread across the grid -->
             <Button Text="Register as a Cook" Clicked="RegisterCook_Button_Clicked" Grid.Row="2" Grid.Column="0" Margin="0,20,10,20"  
                     BackgroundColor="Orange" TextColor="White" FontFamily="Times New Roman" HorizontalOptions="FillAndExpand"/>
-            <Button Text="Change Password" Clicked="ResetPassword_Button_Clicked" Grid.Row="2" Grid.Column="1"  Margin="0,20,10,20"  
+            <Button Text="Favourites"  Clicked="FavouritesButton_Clicked" Grid.Row="2" Grid.Column="1"  Margin="0,20,10,20"  
                     BackgroundColor="Orange" TextColor="White" FontFamily="Times New Roman" HorizontalOptions="FillAndExpand"/>
 
-            <Button Text="Favourites" Clicked="FavouritesButton_Clicked" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+            <Button Text="Change Password" Clicked="ResetPassword_Button_Clicked" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
                     BackgroundColor="Orange" TextColor="White" FontSize="Medium" FontFamily="Times New Roman"
-                    CornerRadius="10" Padding="10" HorizontalOptions="FillAndExpand"/>
+                    CornerRadius="10" Padding="10" HorizontalOptions="FillAndExpand" Margin="0,5,0,0"/>
 
             <Button Text="Terms and Policy" Clicked="TermsPolicyButton_Clicked" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                     BackgroundColor="Orange" TextColor="White" FontSize="Medium" FontFamily="Times New Roman"
-                    CornerRadius="10" Padding="10" HorizontalOptions="FillAndExpand"/>
+                    CornerRadius="10" Padding="10" HorizontalOptions="FillAndExpand" Margin="0,5,0,0"/>
 
             <Button Text="Switch to Cook Mode" Clicked="SwitchToCook_Button_Clicked" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                     BackgroundColor="Orange" TextColor="White" FontSize="Medium" FontFamily="Times New Roman"
-                    CornerRadius="10" Padding="10" HorizontalOptions="FillAndExpand"/>
+                    CornerRadius="10" Padding="10" HorizontalOptions="FillAndExpand" Margin="0,5,0,0"/>
 
             <Button Text="Logout" Clicked="Logout_Button_Clicked" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
                     BackgroundColor="Orange" TextColor="White" FontSize="Medium" FontFamily="Times New Roman"
-                    CornerRadius="50" Padding="10" HorizontalOptions="Center" WidthRequest="150"/>
+                    CornerRadius="50" Padding="10" HorizontalOptions="Center" WidthRequest="150" Margin="0,5,0,0"/>
         </Grid>
     </ScrollView>
 </ContentPage>

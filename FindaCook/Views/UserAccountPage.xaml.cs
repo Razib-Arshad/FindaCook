@@ -41,7 +41,7 @@ namespace FindaCook.Views
 
         private async void TermsPolicyButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Favourites());
+           await Navigation.PushAsync(new TermsPolicies());
         }
 
         private async void SwitchToCook_Button_Clicked(object sender, EventArgs e)

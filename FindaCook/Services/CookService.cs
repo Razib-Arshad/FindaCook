@@ -302,7 +302,7 @@ namespace FindaCook.Services
 
 
 
-        public async Task<List<SimpleOrderDTO>> GetOrders()
+        public async Task<ICollection<SimpleOrderDTO>> GetOrders()
         {
             try
             {
@@ -319,10 +319,20 @@ namespace FindaCook.Services
                     if (response.IsSuccessStatusCode)
                     {
                         string contentString = await response.Content.ReadAsStringAsync();
-                        var apiResponse = JsonConvert.DeserializeObject<ApiResponse>(contentString);
-                        if (apiResponse != null && apiResponse.StatusCode == 200)
+                        var apiResponse = JsonConvert.DeserializeObject<orderResponseContainer>(contentString);
+                        if (apiResponse != null && apiResponse.StatusCode == 200 && apiResponse.Data != null)
                         {
-                            return apiResponse.Data;
+                            var orders = apiResponse.Data.Select(order => new SimpleOrderDTO
+                            {
+                                Desc = order.Desc ?? "No description available",
+                                Date = order.Date,
+                                SelectedService = order.selectedService ?? "No service selected",
+                                Price = order.Price,
+                                CookUserName = $"{order.Cook.FirstName ?? "Unknown"} {order.Cook.LastName ?? "Unknown"}",
+                                ServicesProvided = order.Cook.ServicesProvided ?? "No services provided"
+                            }).ToList();
+
+                            return orders;
                         }
                     }
                     return null;
@@ -335,7 +345,8 @@ namespace FindaCook.Services
                 return null;
             }
         }
-        
+
+
 
 
         public async Task<ICollection<CookProfile>> SearchCook(string SelectedFilter,string SearchText)
@@ -449,7 +460,7 @@ namespace FindaCook.Services
 
 
         //Cook interfaces implementation
-        public async Task<List<SimpleOrderDTO>> GetAllOrderRequests()
+        public async Task<ICollection<SimpleOrderDTO>> GetAllOrderRequests()
         {
             try
             {
@@ -488,19 +499,19 @@ namespace FindaCook.Services
                 return null;
             }
         }
-        public async Task<List<SimpleOrderDTO>> GetAcceptedCookOrderRequests()
+        public async Task<ICollection<SimpleOrderDTO>> GetAcceptedCookOrderRequests()
         {
             string cookId = Preferences.Get("CookInfoId", string.Empty);
             return await GetCookOrderRequestsByStatus(cookId, "Accept");
         }
 
-        public async Task<List<SimpleOrderDTO>> GetDeclinedCookOrderRequests()
+        public async Task<ICollection<SimpleOrderDTO>> GetDeclinedCookOrderRequests()
         {
             string cookId = Preferences.Get("CookInfoId", string.Empty);
             return await GetCookOrderRequestsByStatus(cookId, "Decline");
         }
 
-        private async Task<List<SimpleOrderDTO>> GetCookOrderRequestsByStatus(string cookId, string status)
+        private async Task<ICollection<SimpleOrderDTO>> GetCookOrderRequestsByStatus(string cookId, string status)
         {
             try
             {
@@ -702,12 +713,8 @@ namespace FindaCook.Services
                 throw new Exception($"An error occurred: {ex.Message}");
             }
         }
+     
 
-        private class CountApiResponse
-        {
-            public int Count { get; set; }
-            public string Message { get; set; }
-        }
 
 
 
