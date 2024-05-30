@@ -1,12 +1,69 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FindaCook.ViewModels"
              x:Class="FindaCook.Views.DashboardPage"
-             Title="Dashboard">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Dashboard"
+             Shell.NavBarIsVisible="False"
+             x:Name="dashboardPage">
+ 
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="20">
+            <Label Text="Welcome!!"
+                   FontSize="36"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Start" />
+            <Label Text="Your Statistics"
+                   FontSize="24"
+                   FontAttributes="Italic"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Start" />
+            <Frame CornerRadius="20"
+                   Padding="20"
+                   Margin="10"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="Start">
+                <VerticalStackLayout>
+                    <Label Text="Total Orders"
+                           FontAttributes="Bold"
+                           FontSize="20"
+                           HorizontalOptions="Center" />
+                    <Label Text="{Binding TotalOrders}"
+                           FontSize="18"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+            <Frame CornerRadius="20"
+                   Padding="20"
+                   Margin="10"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="Start">
+                <VerticalStackLayout>
+                    <Label Text="Orders Accepted"
+                           FontAttributes="Bold"
+                           FontSize="20"
+                           HorizontalOptions="Center" />
+                    <Label Text="{Binding OrdersAccepted}"
+                           FontSize="18"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+            <Frame CornerRadius="20"
+                   Padding="20"
+                   Margin="10"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="Start">
+                <VerticalStackLayout>
+                    <Label Text="Orders Rejected"
+                           FontAttributes="Bold"
+                           FontSize="20"
+                           HorizontalOptions="Center" />
+                    <Label Text="{Binding OrdersRejected}"
+                           FontSize="18"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -21,16 +21,17 @@ namespace FindaCook.Services
         Task<ICollection<FavouriteCookDetails>> getFavourites();
         Task<ICollection<SimpleOrderDTO>> GetOrderRequests();
      
-        Task<List<SimpleOrderDTO>> GetOrders();
+        Task<ICollection<SimpleOrderDTO>> GetOrders();
 
         Task<ICollection<CookProfile>> SearchCook(string SelectedFilter, string SearchText);
 
         Task<ICollection<CookProfile>> SearchCooks(string SearchText);
 
         //Cook interfaces
-        Task<List<SimpleOrderDTO>> GetAllOrderRequests();
-        Task<List<SimpleOrderDTO>> GetAcceptedCookOrderRequests();
-        Task<List<SimpleOrderDTO>> GetDeclinedCookOrderRequests();
+        Task<ICollection<SimpleOrderDTO>> GetAllOrderRequests();
+        Task<ICollection<SimpleOrderDTO>> GetAcceptedCookOrderRequests();
+        Task<ICollection<SimpleOrderDTO>> GetDeclinedCookOrderRequests();
+        Task<int[]> GetAllCounts();  
 
 
     }
