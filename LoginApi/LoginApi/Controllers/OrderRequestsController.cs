@@ -100,7 +100,7 @@ namespace LoginApi.Controllers
             }
         }
 
-
+        [HttpGet("request/getUserRequest/status/{id}")]
         private async Task<ActionResult> GetUserRequestsByStatus(string userId, string status)
         {
             if (_context.OrderRequest == null)
@@ -161,6 +161,7 @@ namespace LoginApi.Controllers
             }
         }
 
+        [HttpGet("request/getCookRequest/status/{id}")]
         public async Task<ActionResult> GetCookRequestByStatus(string cookId, string status)
         {
             try
@@ -198,7 +199,7 @@ namespace LoginApi.Controllers
         }
 
 
-        // GET: api/OrderRequests/user/accepted/5
+        // GET: api/OrderRequests/user/accepted/
         [HttpGet("request/getUserAcceptedRequests/{id}")]
         public async Task<ActionResult> GetUserAcceptedRequests(string id)
         {

@@ -25,7 +25,7 @@ namespace LoginApi.Models
         public int Price { get; set; }
         public string UserContact { get; set; }
         public string UserAddress { get; set; }
-        public string Status;
+        public string Status { get; set; }
 
         [ForeignKey("User")]
         public string UserId { get; set; }

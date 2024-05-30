@@ -9,53 +9,55 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = LoginApi
 build_property.RootNamespace = LoginApi
-build_property.ProjectDir = H:\FYP\FindaCook\LoginApi\LoginApi\
+build_property.ProjectDir = D:\FypBackend\FindaCook\LoginApi\LoginApi\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = H:\FYP\FindaCook\LoginApi\LoginApi
+build_property.MSBuildProjectDirectory = D:\FypBackend\FindaCook\LoginApi\LoginApi
 build_property._RazorSourceGeneratorDebug = 
 
-[H:/FYP/FindaCook/LoginApi/LoginApi/Views/Favourites/Create.cshtml]
+[D:/FypBackend/FindaCook/LoginApi/LoginApi/Views/Favourites/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmF2b3VyaXRlc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/FYP/FindaCook/LoginApi/LoginApi/Views/Favourites/Delete.cshtml]
+[D:/FypBackend/FindaCook/LoginApi/LoginApi/Views/Favourites/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmF2b3VyaXRlc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/FYP/FindaCook/LoginApi/LoginApi/Views/Favourites/Details.cshtml]
+[D:/FypBackend/FindaCook/LoginApi/LoginApi/Views/Favourites/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmF2b3VyaXRlc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/FYP/FindaCook/LoginApi/LoginApi/Views/Favourites/Edit.cshtml]
+[D:/FypBackend/FindaCook/LoginApi/LoginApi/Views/Favourites/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmF2b3VyaXRlc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/FYP/FindaCook/LoginApi/LoginApi/Views/Favourites/Index.cshtml]
+[D:/FypBackend/FindaCook/LoginApi/LoginApi/Views/Favourites/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmF2b3VyaXRlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/FYP/FindaCook/LoginApi/LoginApi/Views/OrderRequests/Create.cshtml]
+[D:/FypBackend/FindaCook/LoginApi/LoginApi/Views/OrderRequests/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJSZXF1ZXN0c1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/FYP/FindaCook/LoginApi/LoginApi/Views/OrderRequests/Delete.cshtml]
+[D:/FypBackend/FindaCook/LoginApi/LoginApi/Views/OrderRequests/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJSZXF1ZXN0c1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/FYP/FindaCook/LoginApi/LoginApi/Views/OrderRequests/Details.cshtml]
+[D:/FypBackend/FindaCook/LoginApi/LoginApi/Views/OrderRequests/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJSZXF1ZXN0c1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/FYP/FindaCook/LoginApi/LoginApi/Views/OrderRequests/Edit.cshtml]
+[D:/FypBackend/FindaCook/LoginApi/LoginApi/Views/OrderRequests/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJSZXF1ZXN0c1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/FYP/FindaCook/LoginApi/LoginApi/Views/OrderRequests/Index.cshtml]
+[D:/FypBackend/FindaCook/LoginApi/LoginApi/Views/OrderRequests/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJSZXF1ZXN0c1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/FYP/FindaCook/LoginApi/LoginApi/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/FypBackend/FindaCook/LoginApi/LoginApi/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

@@ -24,7 +24,7 @@ namespace LoginApi.Models
         [Required]
         public string UserAddress { get; set; }
 
-        public string Status;
+        public string Status { get; set; }
 
         [Required]
         public string UserId { get; set; }
