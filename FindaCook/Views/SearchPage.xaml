@@ -13,7 +13,6 @@
             </StackLayout>
             <SearchBar Placeholder="Search Items..." 
 
-
                        SearchCommand="{Binding SearchCommand}"
                        Text="{Binding SearchText}"
                        BackgroundColor="AliceBlue" 

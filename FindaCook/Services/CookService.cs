@@ -474,26 +474,20 @@ namespace FindaCook.Services
                     if (response.IsSuccessStatusCode)
                     {
                         string contentString = await response.Content.ReadAsStringAsync();
-                        var apiResponse = JsonConvert.DeserializeObject<ApiResponse>(contentString);
+                        var apiResponse = JsonConvert.DeserializeObject<orderResponseContainer>(contentString);
                         if (apiResponse != null && apiResponse.StatusCode == 200)
                         {
-                            var simpleOrderDtoList = new List<SimpleOrderDTO>();
-
-                            foreach (var order in apiResponse.Data)
+                            var orderRequests = apiResponse.Data.Select(order => new SimpleOrderDTO
                             {
-                                var simpleOrderDto = new SimpleOrderDTO
-                                {
-                                    Desc = order.OrderRequestDesc,
-                                    Date = order.OrderRequestDate.ToString("yyyy-MM-dd"),
-                                    SelectedService = order.OrderRequestService,
-                                    Price = order.OrderRequestPrice,
-                                    CookUserName = $"{order.CookInfo.FirstName} {order.CookInfo.LastName}",
-                                };
+                                Desc = order.Desc ?? "No description available",
+                                Date = order.Date,
+                                SelectedService = order.selectedService ?? "No service selected",
+                                Price = order.Price,
+                                CookUserName = $"{order.Cook?.FirstName ?? "Unknown"} {order.Cook?.LastName ?? "Unknown"}",
+                                ServicesProvided = order.Cook?.ServicesProvided ?? "No services provided"
+                            }).ToList();
 
-                                simpleOrderDtoList.Add(simpleOrderDto);
-                            }
-
-                            return simpleOrderDtoList;
+                            return orderRequests;
                         }
                     }
                     return null;
@@ -530,30 +524,27 @@ namespace FindaCook.Services
                     if (response.IsSuccessStatusCode)
                     {
                         string contentString = await response.Content.ReadAsStringAsync();
-                        var apiResponse = JsonConvert.DeserializeObject<ApiResponse>(contentString);
+                        var apiResponse = JsonConvert.DeserializeObject<orderResponseContainer>(contentString);
+
+
                         if (apiResponse != null && apiResponse.StatusCode == 200)
                         {
-                            var simpleOrderDtoList = new List<SimpleOrderDTO>();
-
-                            foreach (var order in apiResponse.Data)
+                            var orderRequests = apiResponse.Data.Select(order => new SimpleOrderDTO
                             {
-                                var simpleOrderDto = new SimpleOrderDTO
-                                {
-                                    Desc = order.OrderRequestDesc,
-                                    Date = order.OrderRequestDate.ToString("yyyy-MM-dd"),
-                                    SelectedService = order.OrderRequestService,
-                                    Price = order.OrderRequestPrice,
-                                    CookUserName = $"{order.CookInfo.FirstName} {order.CookInfo.LastName}",
-                                };
+                                Desc = order.Desc ?? "No description available",
+                                Date = order.Date,
+                                SelectedService = order.selectedService ?? "No service selected",
+                                Price = order.Price,
+                                CookUserName = $"{order.Cook?.FirstName ?? "Unknown"} {order.Cook?.LastName ?? "Unknown"}",
+                                ServicesProvided = order.Cook?.ServicesProvided ?? "No services provided"
+                            }).ToList();
 
-                                simpleOrderDtoList.Add(simpleOrderDto);
-                            }
-
-                            return simpleOrderDtoList;
+                            return orderRequests;
                         }
-                    }
+                    } 
                     return null;
                 }
+
             }
             catch (Exception ex)
             {
