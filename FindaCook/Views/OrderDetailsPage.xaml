@@ -12,12 +12,11 @@
     <VerticalStackLayout Padding="10">
         <Label Text="Order Details" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" />
 
-        <Label Text="{Binding SelectedOrder.CookUserName}" FontSize="Large" TextColor="Black" />
-        <Label Text="{Binding SelectedOrder.Desc}" FontSize="Medium" TextColor="Black" />
-        <Label Text="{Binding SelectedOrder.SelectedService}" FontSize="Small" TextColor="Black" FontAttributes="Italic" />
-        <Label Text="{Binding SelectedOrder.Date, StringFormat='{0:dd MMM yyyy}'}" FontSize="Small" TextColor="Black" />
-        <Label Text="{Binding SelectedOrder.Time, StringFormat='{0:hh\\:mm}'}" FontSize="Small" TextColor="Black" />
-        <Label Text="{Binding SelectedOrder.Price, StringFormat='Price: {0:C}'}" FontSize="Small" TextColor="Black" />
+        <Label Text="{Binding SelectedOrder.CookUserName}" FontSize="Large" TextColor="White" />
+        <Label Text="{Binding SelectedOrder.Desc}" FontSize="Medium" TextColor="White" />
+        <Label Text="{Binding SelectedOrder.SelectedService}" FontSize="Small" TextColor="White" FontAttributes="Italic" />
+        <Label Text="{Binding SelectedOrder.Date, StringFormat='{0:dd MMM yyyy}'}" FontSize="Small" TextColor="White" />
+        <Label Text="{Binding SelectedOrder.Price, StringFormat='Price: {0:C}'}" FontSize="Small" TextColor="White" />
 
         <HorizontalStackLayout HorizontalOptions="Center" Padding="10" Spacing="10">
             <Button Text="Accept" Command="{Binding AcceptCommand}" BackgroundColor="Green" TextColor="White" WidthRequest="100" HeightRequest="50" />
