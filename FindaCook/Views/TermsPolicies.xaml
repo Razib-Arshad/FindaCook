@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FindaCook.Views.TermsPolicies"
+             Title="TermsPolicies"
+             BackgroundImageSource="bg1.jpg">
+    <ScrollView>
+
+
+        <Grid>
+            <BoxView Color="Black" Opacity="0.5" Margin="10,20,10,10" CornerRadius="20"  />
+            <VerticalStackLayout>
+
+            
+
+            <Label FontSize="55" FontAttributes="Bold"   TextColor="orange"  FontFamily="Times New Roman"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
+                  Margin="0,10" TextDecorations="Underline">Terms and Policies</Label>
+
+            <Label  FontFamily="Times New Roman" TextColor="White" FontSize="{OnPlatform Default=24, WinUI=24, Android=11}" Margin="15,10">
+                To use the Service Users must register or create a User account, providing all required data or information in a complete and truthful manner. Failure to do so will cause unavailability of the Service.Users are responsible for keeping their login credentials confidential and safe. For this reason, Users are also required to choose passwords that meet the highest standards of strength permitted by CookBook Co. Services.By registering, Users agree to be fully responsible for all activities that occur under their username and password.
+            </Label>
+
+            <Label TextColor="White"  FontFamily="Times New Roman" FontSize="{OnPlatform Default=24, WinUI=24, Android=11}" Margin="15,10">
+                The Owner may offer discounts or provide special offers for the purchase of Products. Any such offer or discount shall always be subject to the eligibility criteria and the terms and conditions set out in the corresponding section of CookBook Co. Services.Offers and discounts are always granted at the Owner’s sole discretion.Repeated or recurring offers or discounts create no claim/title or right that Users may enforce in the future.Depending on the case, discounts or offers shall be valid for a limited time only or while stocks last. If an offer or discount is limited by time, the time indications refer to the time zone of the Owner, as indicated in the Owner’s location details in this document, unless otherwise specified.
+            </Label>
+
+            <Label  FontFamily="Times New Roman" TextColor="White" FontSize="{OnPlatform Default=24, WinUI=24, Android=11}" Margin="15,10">
+                Information related to accepted payment methods are made available during the purchasing process.Some payment methods may only be available subject to additional conditions or fees. In such cases related information can be found in the dedicated section of CookBook Co. Services.All payments are independently processed through third-party services. Therefore, CookBook Co. Services does not collect any payment information – such as credit card details – but only receives a notification once the payment has been successfully completed. If a payment through the available methods fails or is refused by the payment service provider, the Owner shall be under no obligation to fulfill the purchase order. If a payment fails or is refused, the Owner reserves the right to claim any related expenses or damages from the User.
+            </Label>
+        </VerticalStackLayout>
+            </Grid>
+    </ScrollView>
+</ContentPage>

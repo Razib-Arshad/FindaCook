@@ -22,11 +22,11 @@
                                TextColor="FloralWhite"
                                FontSize="24"
                                HorizontalOptions="Center"
-                               VerticalOptions="CenterAndExpand"/>
+                               VerticalOptions="Center"/>
                        
                         <Label Text="Discover the joy of cooking with our Cook app. Whether you are a Seasoned Chef or a User, our app provides a seamless cooking experience with a variety of recipes and helpful features."
                                TextColor="White"
-                               FontSize="11"
+                               FontSize="{OnPlatform Default=24, WinUI=24, Android=11}"
                                HorizontalOptions="Center"
                                VerticalOptions="Center"
                                />
